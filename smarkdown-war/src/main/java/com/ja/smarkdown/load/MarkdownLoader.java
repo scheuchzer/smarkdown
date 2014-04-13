@@ -15,7 +15,7 @@ import com.ja.smarkdown.model.MarkdownDocument;
 @ApplicationScoped
 public class MarkdownLoader {
 
-	private List<String> locations = new ArrayList<>();
+	private final List<String> locations = new ArrayList<>();
 	@Inject
 	private Event<LoadEvent> loadEvent;
 
@@ -26,18 +26,18 @@ public class MarkdownLoader {
 				System.getProperty("user.home")));
 	}
 
-	private void addLocation(String location) {
+	private void addLocation(final String location) {
 		log.info("Adding location={}", location);
 		locations.add(location);
 	}
 
-	public MarkdownDocument loadDocument(String document) {
+	public MarkdownDocument loadDocument(final String document) {
 		log.info("loading document={}", document);
-		
-		for (String location : locations) {
-			String url = location + document;
+
+		for (final String location : locations) {
+			final String url = location + document;
 			log.info("Loading document from url={}", url);
-			LoadEvent event = new LoadEvent(url);
+			final LoadEvent event = new LoadEvent(url);
 			loadEvent.fire(event);
 			log.info("Document loaded. results={}", event.getResults().size());
 			if (!event.getResults().isEmpty()) {

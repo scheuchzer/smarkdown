@@ -11,11 +11,11 @@ import com.ja.smarkdown.model.MarkdownDocument;
 public class LoadEvent {
 
 	private final List<MarkdownDocument> results = new ArrayList<>();
-	
+
 	private final String documentUrl;
-	
-	public void addResult(MarkdownDocument document) {
+
+	public void addResult(final MarkdownDocument document) {
 		results.add(document);
 	}
-	
+
 }

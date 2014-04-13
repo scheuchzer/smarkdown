@@ -15,12 +15,12 @@ public class ClasspathHandler extends URLStreamHandler {
 		this.classLoader = getClass().getClassLoader();
 	}
 
-	public ClasspathHandler(ClassLoader classLoader) {
+	public ClasspathHandler(final ClassLoader classLoader) {
 		this.classLoader = classLoader;
 	}
 
 	@Override
-	protected URLConnection openConnection(URL u) throws IOException {
+	protected URLConnection openConnection(final URL u) throws IOException {
 		final URL resourceUrl = classLoader.getResource(u.getPath());
 		return resourceUrl.openConnection();
 	}

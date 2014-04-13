@@ -15,9 +15,9 @@ public class DataMarkdownComponent extends UIComponentBase {
 	}
 
 	@Override
-	public void encodeBegin(FacesContext context) throws IOException {
-		String value = (String) getAttributes().get("value");
-		PrintWriter out = new PrintWriter(context.getResponseWriter());
+	public void encodeBegin(final FacesContext context) throws IOException {
+		final String value = (String) getAttributes().get("value");
+		final PrintWriter out = new PrintWriter(context.getResponseWriter());
 		out.println("<section data-markdown data-separator=\"^\\n\\n\\n\" data-vertical=\"^\\n\\n\" data-notes=\"^Note:\">");
 		out.println("<script type=\"text/template\">");
 		out.println(value);

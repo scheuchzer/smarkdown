@@ -16,19 +16,19 @@ import com.ja.smarkdown.model.MarkdownDocument;
 @Slf4j
 public class UrlMarkdownProvider {
 
-	public void onEvent(@Observes LoadEvent event) {
+	public void onEvent(@Observes final LoadEvent event) {
 		log.info("Event received. {}", event);
 		try {
-			URL url = new URL(event.getDocumentUrl());
+			final URL url = new URL(event.getDocumentUrl());
 			log.info("Resolved url={}", url);
 			try (InputStream in = url.openStream()) {
-				String content = IOUtils.toString(in);
+				final String content = IOUtils.toString(in);
 				log.info("File read. Content={}", ContentToString.of(content));
 				if (content != null) {
 					event.addResult(new MarkdownDocument(content));
 				}
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			log.info("Can't process this url={}", event.getDocumentUrl());
 		}
 	}

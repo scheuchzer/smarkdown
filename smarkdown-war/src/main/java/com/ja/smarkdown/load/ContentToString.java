@@ -8,7 +8,7 @@ public class ContentToString {
 
 	private final String content;
 
-	public ContentToString(String content) {
+	public ContentToString(final String content) {
 		this.content = content;
 	}
 
@@ -17,7 +17,7 @@ public class ContentToString {
 		return StringUtils.abbreviate(content, MAX_WIDTH);
 	}
 
-	public static ContentToString of(String content) {
+	public static ContentToString of(final String content) {
 		return new ContentToString(content);
 	}
 

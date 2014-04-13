@@ -22,13 +22,13 @@ public class Index {
 	private String page = "index";
 
 	public String getContent() {
-		MarkdownDocument doc = loader.loadDocument(getPageName() + ".md");
+		final MarkdownDocument doc = loader.loadDocument(getPageName() + ".md");
 		if (doc == null) {
 			return "Page not found.";
 		}
 		return doc.getContent();
 	}
-	
+
 	public String getPageName() {
 		return StringUtils.removeEnd(page, ".html");
 	}
