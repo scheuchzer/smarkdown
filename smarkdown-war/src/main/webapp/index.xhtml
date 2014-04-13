@@ -17,8 +17,8 @@
 				<li class="active"><a class="brand" href="#">#{app.name} - #{index.pageName}</a></li>
 			</ul>
 			<ul class="nav pull-right">
-				<li><a href="about.html">About</a></li>
-				<li><a href="slides/#{index.page}.html">Slideshow</a></li>
+				<li><a href="#{request.contextPath}/about.html">About</a></li>
+				<li><a href="#{request.contextPath}/slides/#{index.pageName}.html">Slideshow</a></li>
 			</ul>
 		</div>
 	</div>
@@ -27,6 +27,6 @@
 <h:outputText escape="false" value="#{index.content}" /> 
 </xmp>
 
-<script src="js/strapdown/0.2/strapdown.js"></script>
+<script src="#{request.contextPath}/js/strapdown/0.2/strapdown.js"></script>
 </h:body>
 </html>

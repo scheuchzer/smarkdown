@@ -16,24 +16,24 @@
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-	<link rel="stylesheet" href="../js/revealjs/2.6.1/css/reveal.min.css" />
-	<link rel="stylesheet" href="../js/revealjs/2.6.1/css/theme/#{app.slidesTheme}.css"
+	<link rel="stylesheet" href="#{request.contextPath}/js/revealjs/2.6.1/css/reveal.min.css" />
+	<link rel="stylesheet" href="#{request.contextPath}/js/revealjs/2.6.1/css/theme/#{app.slidesTheme}.css"
 		id="theme" />
 
 	<!-- For syntax highlighting -->
-	<link rel="stylesheet" href="../js/revealjs/2.6.1/lib/css/zenburn.css" />
+	<link rel="stylesheet" href="#{request.contextPath}/js/revealjs/2.6.1/lib/css/zenburn.css" />
 
 	<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 	<script>
 		document
-				.write('<link rel="stylesheet" href="../js/revealjs/2.6.1/css/print/'
+				.write('<link rel="stylesheet" href="#{request.contextPath}/js/revealjs/2.6.1/css/print/'
 						+ (window.location.search.match(/print-pdf/gi) ? 'pdf'
 								: 'paper')
 						+ '.css" type="text/css" media="print" />');
 	</script>
 
 	<!--[if lt IE 9]>
-		<script src="../js/revealjs/2.6.1/lib/js/html5shiv.js"></script>
+		<script src="#{request.contextPath}/js/revealjs/2.6.1/lib/js/html5shiv.js"></script>
 		<![endif]-->
 </h:head>
 
@@ -44,8 +44,8 @@
 		</div>
 	</div>
 
-	<script src="../js/revealjs/2.6.1/lib/js/head.min.js"></script>
-	<script src="../js/revealjs/2.6.1/js/reveal.min.js"></script>
+	<script src="#{request.contextPath}/js/revealjs/2.6.1/lib/js/head.min.js"></script>
+	<script src="#{request.contextPath}/js/revealjs/2.6.1/js/reveal.min.js"></script>
 
 	<script>
 		// Full list of configuration options available here:
@@ -65,34 +65,34 @@
 
 			// Optional libraries used to extend on reveal.js
 			dependencies : [ {
-				src : '../js/revealjs/2.6.1/lib/js/classList.js',
+				src : '#{request.contextPath}/js/revealjs/2.6.1/lib/js/classList.js',
 				condition : function() {
 					return !document.body.classList;
 				}
 			}, {
-				src : '../js/revealjs/2.6.1/plugin/markdown/marked.js',
+				src : '#{request.contextPath}/js/revealjs/2.6.1/plugin/markdown/marked.js',
 				condition : function() {
 					return !!document.querySelector('[data-markdown]');
 				}
 			}, {
-				src : '../js/revealjs/2.6.1/plugin/markdown/markdown.js',
+				src : '#{request.contextPath}/js/revealjs/2.6.1/plugin/markdown/markdown.js',
 				condition : function() {
 					return !!document.querySelector('[data-markdown]');
 				}
 			}, {
-				src : '../js/revealjs/2.6.1/plugin/highlight/highlight.js',
+				src : '#{request.contextPath}/js/revealjs/2.6.1/plugin/highlight/highlight.js',
 				async : true,
 				callback : function() {
 					hljs.initHighlightingOnLoad();
 				}
 			}, {
-				src : '../js/revealjs/2.6.1/plugin/zoom-js/zoom.js',
+				src : '#{request.contextPath}/js/revealjs/2.6.1/plugin/zoom-js/zoom.js',
 				async : true,
 				condition : function() {
 					return !!document.body.classList;
 				}
 			}, {
-				src : '../js/revealjs/2.6.1/plugin/notes/notes.js',
+				src : '#{request.contextPath}/js/revealjs/2.6.1/plugin/notes/notes.js',
 				async : true,
 				condition : function() {
 					return !!document.body.classList;

@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
                       http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
 	<url-mapping id="slides">
-		<pattern value="/slides/#{slides.page}" />
+		<pattern value="/#{ /slides/.*\\.html/ index.page }" />
 		<view-id value="/slides.xhtml" />
 	</url-mapping>
 	<url-mapping id="pages">
-		<pattern value="/#{index.page}.html" />
+		<pattern value="/#{ /.*\\.html/ index.page }" />
 		<view-id value="/index.xhtml" />
 	</url-mapping>
 </pretty-config>
