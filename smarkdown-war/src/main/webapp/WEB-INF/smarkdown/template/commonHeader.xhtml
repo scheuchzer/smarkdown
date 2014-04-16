@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<body>
+	<ui:composition>
+		<h:head>
+			<title><ui:insert name="window-title">#{app.name}</ui:insert></title>
+		</h:head>
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<ui:insert name="toolbar-left">
+						<ul class="nav">
+							<li><a href="#{request.contextPath}">
+							<ui:insert name="window-title">#{app.name} -
+									#{index.pageName}</ui:insert></a></li>
+						</ul>
+					</ui:insert>
+					<ui:insert name="toolbar-right">
+						<ul class="nav pull-right">
+							<li><a href="#{request.contextPath}/about.html">About</a></li>
+							<li><a href="#{request.contextPath}/sitemap.xhtml">Sitemap</a></li>
+							<li><a
+								href="#{request.contextPath}/slides/#{index.pageName}.html">Slideshow</a></li>
+						</ul>
+					</ui:insert>
+				</div>
+			</div>
+		</div>
+
+	</ui:composition>
+</body>
+</html>
