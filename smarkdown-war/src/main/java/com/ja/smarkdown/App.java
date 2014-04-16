@@ -22,7 +22,7 @@ public class App {
 	@PostConstruct
 	public void init() {
 		name = getInitParam("smarkdown.app.name", "Smarkdown");
-		pagesTheme = getInitParam("smarkdown.pages.theme", "united");
+		pagesTheme = getInitParam("smarkdown.pages.theme", "bootstrap");
 		slidesTransition = getInitParam("smarkdown.slides.transition",
 				"default");
 		slidesTheme = getInitParam("smarkdown.slides.theme", "default");

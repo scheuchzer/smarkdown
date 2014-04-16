@@ -44,6 +44,10 @@
 			<artifactId>rewrite-config-prettyfaces</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.reflections</groupId>
+			<artifactId>reflections</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.hamcrest</groupId>
 			<artifactId>hamcrest-all</artifactId>
 			<scope>test</scope>

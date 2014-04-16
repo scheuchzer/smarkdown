@@ -14,10 +14,11 @@
 	<div class="navbar-inner">
 		<div class="container">
 			<ul class="nav">
-				<li class="active"><a class="brand" href="#">#{app.name} - #{index.pageName}</a></li>
+				<li><a href="#{request.contextPath}">#{app.name} - #{index.pageName}</a></li>
 			</ul>
 			<ul class="nav pull-right">
 				<li><a href="#{request.contextPath}/about.html">About</a></li>
+				<li><a href="#{request.contextPath}/sitemap.xhtml">Sitemap</a></li>
 				<li><a href="#{request.contextPath}/slides/#{index.pageName}.html">Slideshow</a></li>
 			</ul>
 		</div>
