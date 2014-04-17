@@ -23,7 +23,7 @@ public class Slides {
 	@Inject
 	private App app;
 
-	private String page = "index";
+	private String page;
 
 	public String getContent() {
 		final MarkdownDocument doc = loader.loadDocument(getPageName() + ".md");
@@ -34,7 +34,7 @@ public class Slides {
 	}
 
 	public String getPageName() {
-		return StringUtils.removeEnd(page, ".html");
+		return StringUtils.substringBetween(page, "slides/", ".html");
 	}
 
 	public String getTheme() {
