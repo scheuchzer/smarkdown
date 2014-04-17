@@ -35,7 +35,7 @@ public class SitemapTest {
 		assertThat(sitemap.getSections().get("foo").getPages().contains(doc),
 				is(true));
 		assertThat(sitemap.toString(),
-				is("foo\n\n  - [foo/bar](foo/bar.html)\n"));
+				is("foo\n\n  - [foo/bar](foo%2Fbar.html)\n"));
 	}
 
 	@Test
@@ -48,9 +48,9 @@ public class SitemapTest {
 		System.out.println(sitemap);
 		assertThat(sitemap.getPages(), is(notNullValue()));
 		assertThat(sitemap.toString(), is("- [tar](tar.html)\n\n" + "bar\n\n"
-				+ "  - [bar/bar](bar/bar.html)\n"
-				+ "  - [bar/bar2](bar/bar2.html)\n\n" + "foo\n\n"
-				+ "  - [foo/foo](foo/foo.html)\n"));
+				+ "  - [bar/bar](bar%2Fbar.html)\n"
+				+ "  - [bar/bar2](bar%2Fbar2.html)\n\n" + "foo\n\n"
+				+ "  - [foo/foo](foo%2Ffoo.html)\n"));
 	}
 
 	@Test

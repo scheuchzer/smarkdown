@@ -82,7 +82,7 @@ public class Sitemap {
 		for (final ListingDocument p : pages) {
 			indent(buf);
 			buf.append(String.format("- [%s](%s.html)\n", p.getTitle(),
-					p.getName()));
+					p.getUrlEncodedName()));
 		}
 		final List<String> keys = new ArrayList<>(sections.keySet());
 		Collections.sort(keys, new LowerCaseStringComparator());
