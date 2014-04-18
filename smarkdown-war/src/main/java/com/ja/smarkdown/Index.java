@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.ja.smarkdown.load.MarkdownLoader;
 import com.ja.smarkdown.model.MarkdownDocument;
+import com.ja.smarkdown.preprocessing.MarkdownPreprocessor;
 import com.ja.smarkdown.util.UrlUtils;
 
 @ManagedBean
