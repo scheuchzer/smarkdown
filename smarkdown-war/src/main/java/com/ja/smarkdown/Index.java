@@ -27,7 +27,7 @@ public class Index {
 		if (doc == null) {
 			return "Page not found.";
 		}
-		return doc.getContent();
+		return new MarkdownPreprocessor().process(doc.getContent());
 	}
 
 	public String getPageName() {
