@@ -1,33 +1,10 @@
-# Welcome to Smarkdown
-This is Smarkdown, a simple Markdown viewer application for JEE.
+# This is smarkdown!
 
+**Welcome!**
 
+To replace this content you can do one of the following:
 
-## Overview
+- remove the config entry ``classpath:``
+- create a file ``index.md`` in a location that gets read before the location ``classpath:``. For example in ``~/smarkdown``.
 
-
-### The Problem
-
-Ever had do write documentation?
- 
-- in Word?
-- in a Wiki?
-- directly in the Project structure?
-- all of them?
-
-
-**Yes? How did you feel?**
-
-
-And then there was this other guy saying: "Could you create some slides and present it on the next team meeting?"
-
-
-**Yes?** Then I think you know what I'm talking about and where this is leading.
-
-
-**Did you answer all questions with NO?**
-
-Well, lucky one! You can leave this page now and have fun with your life! Bye!
-
-
-## The Solution
+If you just didn't understand what the lines above coud mean please read the [smarkdown documentation](smarkdown/docs/configuration.md).

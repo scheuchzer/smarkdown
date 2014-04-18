@@ -39,9 +39,7 @@ public class UrlListingProvider {
 				}
 			});
 		} catch (final IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("failed", e);
 		}
-		// event.addResults(files);
 	}
 }
