@@ -42,11 +42,11 @@ public class MarkdownLoaderTest {
 	@Test
 	public void testLoadDocumentNothingFound() throws MalformedURLException {
 		doReturn(
-				Arrays.asList("classpath:", "classpath:smarkdown/", "file://"
-						+ System.getProperty("user.home") + "/smarkdown/"))
+				Arrays.asList("classpath:", "classpath:smarkdown", "file://"
+						+ System.getProperty("user.home") + "/smarkdown"))
 				.when(locations).getLocations();
 		final MarkdownDocument result = loader.loadDocument("foo.md");
-		verify(loadEvent, times(1)).fire(new LoadEvent("classpath:foo.md"));
+		verify(loadEvent, times(1)).fire(new LoadEvent("classpath:/foo.md"));
 		verify(loadEvent, times(1)).fire(
 				new LoadEvent("classpath:smarkdown/foo.md"));
 		verify(loadEvent, times(1)).fire(
