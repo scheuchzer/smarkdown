@@ -1,4 +1,4 @@
-# File locations - WEB-INF
+# File location - WEB-INF
 
 
 This file is located under the ``WEB-INF`` directory. The exact location is

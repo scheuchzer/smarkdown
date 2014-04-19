@@ -1,11 +1,9 @@
 package com.ja.smarkdown.preprocessing;
 
-import com.sun.enterprise.util.StringUtils;
-
 public class MarkdownPreprocessor {
 
 	public String process(final String content) {
-		final String result = StringUtils.replace(content, ".md)", ".html)");
+		final String result = content.replaceAll("\\.md\\)", "\\.html\\)");
 		return result;
 	}
 

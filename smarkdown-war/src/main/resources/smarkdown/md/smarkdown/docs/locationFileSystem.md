@@ -1,4 +1,4 @@
-# File locations - Webapp
+# File location - File System
 
 
 This file is located directly in the webapp (or the war-file) outside a classpath or the WEB-INF directory. The exact location is
