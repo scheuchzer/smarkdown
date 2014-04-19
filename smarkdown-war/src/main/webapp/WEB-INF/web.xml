@@ -10,7 +10,7 @@
 		<param-name>smarkdown.configuration</param-name>
 		<param-value>
 		{
-			"applicationName":"foobarApp",
+			"applicationName":"Smarkdown",
 			"pages":{
 				"theme":"bootstrap"
 			},
@@ -19,22 +19,11 @@
 				"transition":"default"
 			},
 			"locations":[
+				"file://~/smarkdown",
 				"webapp:smarkdown/md",
-				"file:///~/smarkdown",
 				"web-inf:smarkdown/md",
-				"classpath:/",
-				"classpath:smarkdown/md"
-			]
-		}
-		</param-value>
-	</context-param> -->
-	<!-- <context-param>
-		<param-name>smarkdown.configuration</param-name>
-		<param-value>
-		{
-			"applicationName":"foobarApp",
-			"locations":[
-				"classpath:smarkdown/md"
+				"classpath:smarkdown/md",
+				"classpath:"
 			]
 		}
 		</param-value>

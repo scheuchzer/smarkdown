@@ -4,7 +4,7 @@
 This file is located under the ``WEB-INF`` directory. The exact location is
 
 ```
-WEB-INF/smarkdown/md/smarkdown/docs/LocationWeb-Inf.md
+WEB-INF/smarkdown/md/smarkdown/docs/locationWeb-Inf.md
 ```
 
 
@@ -46,7 +46,7 @@ example ``listing.json``:
 
 ```json
 {"files":[
-  "smarkdown/docs/LocationWeb-Inf.md",
+  "smarkdown/docs/locationWeb-Inf.md",
   "another file"
 ]}
 ```
