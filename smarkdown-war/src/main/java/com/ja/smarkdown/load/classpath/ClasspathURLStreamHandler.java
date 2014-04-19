@@ -8,14 +8,14 @@ import java.net.URLStreamHandler;
 /**
  * A {@link URLStreamHandler} that handles resources on the classpath.
  */
-public class ClasspathHandler extends URLStreamHandler {
+public class ClasspathURLStreamHandler extends URLStreamHandler {
 	private final ClassLoader classLoader;
 
-	public ClasspathHandler() {
+	public ClasspathURLStreamHandler() {
 		this.classLoader = getClass().getClassLoader();
 	}
 
-	public ClasspathHandler(final ClassLoader classLoader) {
+	public ClasspathURLStreamHandler(final ClassLoader classLoader) {
 		this.classLoader = classLoader;
 	}
 

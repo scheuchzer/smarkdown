@@ -20,7 +20,7 @@ public class MarkdownLoader {
 		log.info("loading document={}", document);
 
 		for (final String location : locations.getLocations()) {
-			final String url = location + document;
+			final String url = String.format("%s/%s", location, document);
 			log.info("Loading document from url={}", url);
 			final LoadEvent event = new LoadEvent(url);
 			loadEvent.fire(event);

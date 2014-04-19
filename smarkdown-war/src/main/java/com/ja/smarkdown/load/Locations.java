@@ -16,11 +16,11 @@ public class Locations {
 	private final List<String> locations = new ArrayList<>();
 
 	public Locations() {
-		addLocation("web-inf:smarkdown/md/");
-		addLocation("webapp:smarkdown/md/");
+		addLocation("web-inf:smarkdown/md");
+		addLocation("webapp:smarkdown/md");
 		addLocation("classpath:");
-		addLocation("classpath:smarkdown/");
-		addLocation(String.format("file://%s/smarkdown/",
+		addLocation("classpath:smarkdown");
+		addLocation(String.format("file://%s/smarkdown",
 				System.getProperty("user.home")));
 	}
 

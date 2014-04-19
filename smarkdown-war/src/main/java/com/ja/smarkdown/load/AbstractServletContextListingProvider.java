@@ -1,0 +1,65 @@
+package com.ja.smarkdown.load;
+
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URL;
+import java.util.Set;
+
+import javax.enterprise.event.Observes;
+import javax.inject.Inject;
+import javax.servlet.ServletContext;
+
+import lombok.extern.slf4j.Slf4j;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.ja.smarkdown.json.ListingParser;
+
+@Slf4j
+public abstract class AbstractServletContextListingProvider {
+
+	private final String urlPrefix;
+	private final String resourcePrefix;
+
+	@Inject
+	private ServletContext servletContext;
+
+	@Inject
+	private ListingParser parser;
+
+	protected AbstractServletContextListingProvider(final String urlPrefix,
+			final String resourcePrefix) {
+		this.urlPrefix = urlPrefix;
+		this.resourcePrefix = resourcePrefix;
+	}
+
+	public void onEvent(@Observes final ListEvent event) throws Exception {
+		log.debug("Event received. {}", event);
+		if (event.getBaseLocation().startsWith(urlPrefix)) {
+			readListingFile(event, StringUtils.substringAfter(
+					event.getBaseLocation(), urlPrefix));
+		}
+	}
+
+	private void readListingFile(final ListEvent event, final String root) {
+		try {
+			final String listingResource = String.format("%s/%s/listing.json",
+					resourcePrefix, root);
+
+			log.debug("Reading listing from: {}", listingResource);
+			final URL url = servletContext.getResource(listingResource);
+			if (url == null) {
+				return;
+			}
+
+			try (Reader in = new InputStreamReader(url.openStream())) {
+				final Set<String> files = parser.parse(in);
+				event.addResults(files);
+			}
+		} catch (final Exception e) {
+			log.info("Failed to read listing.", e);
+		}
+
+	}
+
+}
