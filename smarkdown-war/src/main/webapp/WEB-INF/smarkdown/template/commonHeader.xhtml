@@ -7,7 +7,7 @@
 <body>
 	<ui:composition>
 		<h:head>
-			<title><ui:insert name="window-title">#{app.name}</ui:insert></title>
+			<title><ui:insert name="window-title">#{app.config.applicationName}</ui:insert></title>
 		</h:head>
 		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
@@ -15,7 +15,7 @@
 					<ui:insert name="toolbar-left">
 						<ul class="nav">
 							<li><a href="#{request.contextPath}">
-							<ui:insert name="window-title">#{app.name} -
+							<ui:insert name="window-title">#{app.config.applicationName} -
 									#{index.pageName}</ui:insert></a></li>
 						</ul>
 					</ui:insert>

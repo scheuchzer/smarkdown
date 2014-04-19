@@ -14,23 +14,24 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import com.ja.smarkdown.model.ListingDocument;
+import com.ja.smarkdown.model.config.SmarkdownConfiguration;
 import com.ja.smarkdown.util.LowerCaseStringComparator;
 
 @Slf4j
 public class DocumentScanner {
 
 	@Inject
-	private Locations locations;
+	private SmarkdownConfiguration config;
 	@Inject
 	private Event<ListEvent> listEvent;
 
 	public List<ListingDocument> getDocuments() {
-		log.info("loading listing.");
+		log.debug("loading listing.");
 		final Set<String> documents = new HashSet<>();
-		for (final String location : locations.getLocations()) {
+		for (final String location : config.getLocations()) {
 			final ListEvent event = new ListEvent(location);
 			listEvent.fire(event);
-			log.info("Documents listed. results={}", event.getResults().size());
+			log.debug("Documents listed. results={}", event.getResults().size());
 			documents.addAll(event.getResults());
 		}
 		final List<String> result = new ArrayList<>(documents);

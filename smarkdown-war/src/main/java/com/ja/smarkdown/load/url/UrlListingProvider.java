@@ -19,7 +19,7 @@ import com.ja.smarkdown.load.ListEvent;
 @Slf4j
 public class UrlListingProvider {
 	public void onEvent(@Observes final ListEvent event) {
-		log.info("Event received. {}", event);
+		log.debug("Event received. {}", event);
 		if (!event.getBaseLocation().startsWith("file")) {
 			return;
 		}

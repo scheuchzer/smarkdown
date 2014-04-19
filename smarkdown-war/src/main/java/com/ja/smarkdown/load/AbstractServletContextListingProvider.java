@@ -3,7 +3,6 @@ package com.ja.smarkdown.load;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
-import java.util.Set;
 
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
@@ -14,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import com.ja.smarkdown.json.ListingParser;
+import com.ja.smarkdown.model.Listing;
 
 @Slf4j
 public abstract class AbstractServletContextListingProvider {
@@ -53,11 +53,11 @@ public abstract class AbstractServletContextListingProvider {
 			}
 
 			try (Reader in = new InputStreamReader(url.openStream())) {
-				final Set<String> files = parser.parse(in);
-				event.addResults(files);
+				final Listing listing = parser.parse(in);
+				event.addResults(listing.getFiles());
 			}
 		} catch (final Exception e) {
-			log.info("Failed to read listing.", e);
+			log.debug("Failed to read listing.", e);
 		}
 
 	}

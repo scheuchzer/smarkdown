@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.ja.smarkdown.model.MarkdownDocument;
+import com.ja.smarkdown.model.config.SmarkdownConfiguration;
 
 import de.akquinet.jbosscc.needle.annotation.ObjectUnderTest;
 import de.akquinet.jbosscc.needle.junit.NeedleRule;
@@ -31,7 +32,7 @@ public class MarkdownLoaderTest {
 	private Event<LoadEvent> loadEvent;
 
 	@Inject
-	private Locations locations;
+	private SmarkdownConfiguration config;
 
 	@Rule
 	public NeedleRule needleRule = new NeedleRule();
@@ -44,7 +45,7 @@ public class MarkdownLoaderTest {
 		doReturn(
 				Arrays.asList("classpath:", "classpath:smarkdown", "file://"
 						+ System.getProperty("user.home") + "/smarkdown"))
-				.when(locations).getLocations();
+				.when(config).getLocations();
 		final MarkdownDocument result = loader.loadDocument("foo.md");
 		verify(loadEvent, times(1)).fire(new LoadEvent("classpath:/foo.md"));
 		verify(loadEvent, times(1)).fire(

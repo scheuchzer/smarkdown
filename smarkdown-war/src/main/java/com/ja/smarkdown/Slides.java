@@ -40,7 +40,8 @@ public class Slides {
 	public String getTheme() {
 		final String requestedTheme = FacesContext.getCurrentInstance()
 				.getExternalContext().getRequestParameterMap().get("theme");
-		return requestedTheme != null ? requestedTheme : app.getSlidesTheme();
+		return requestedTheme != null ? requestedTheme : app.getConfig()
+				.getSlides().getTheme();
 	}
 
 	public String getTransition() {
@@ -48,6 +49,6 @@ public class Slides {
 				.getExternalContext().getRequestParameterMap()
 				.get("transition");
 		return requestedTransition != null ? requestedTransition : app
-				.getSlidesTransition();
+				.getConfig().getSlides().getTransition();
 	}
 }

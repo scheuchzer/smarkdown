@@ -17,19 +17,19 @@ import com.ja.smarkdown.model.MarkdownDocument;
 public class UrlMarkdownProvider {
 
 	public void onEvent(@Observes final LoadEvent event) {
-		log.info("Event received. {}", event);
+		log.debug("Event received. {}", event);
 		try {
 			final URL url = new URL(event.getDocumentUrl());
-			log.info("Resolved url={}", url);
+			log.debug("Resolved url={}", url);
 			try (InputStream in = url.openStream()) {
 				final String content = IOUtils.toString(in);
-				log.info("File read. Content={}", ContentToString.of(content));
+				log.debug("File read. Content={}", ContentToString.of(content));
 				if (content != null) {
 					event.addResult(new MarkdownDocument(content));
 				}
 			}
 		} catch (final Exception e) {
-			log.info("Can't process this url={}", event.getDocumentUrl());
+			log.debug("Can't process this url={}", event.getDocumentUrl());
 		}
 	}
 

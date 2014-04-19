@@ -19,15 +19,23 @@ import com.ja.smarkdown.load.ListEvent;
 public class ClasspathListingProvider {
 
 	public void onEvent(@Observes final ListEvent event) {
-		log.info("Event received. {}", event);
-		final String pkg = StringUtils.replace(StringUtils.substringAfter(
-				event.getBaseLocation(), "classpath:"), "/", ".");
+		log.debug("Event received. {}", event);
+		final String subDir = StringUtils.substringAfter(
+				event.getBaseLocation(), "classpath:");
+		final String pkg = StringUtils.replace(subDir, "/", ".");
 		final Reflections r = new Reflections(new ConfigurationBuilder()
 				.addUrls(ClasspathHelper.forPackage(pkg)).addScanners(
 						new ResourcesScanner()));
 
 		final Set<String> files = r.getResources(Pattern.compile(".*\\.md"));
-		event.addResults(files);
-	}
 
+		final String exclude = "smarkdown/md";
+		for (final String file : files) {
+			String name = StringUtils.substringAfter(file, subDir);
+			name = StringUtils.stripStart(name, "/");
+			if (StringUtils.isNotEmpty(name) && !name.startsWith(exclude)) {
+				event.addResult(name);
+			}
+		}
+	}
 }
