@@ -28,7 +28,7 @@ web-inf:smarkdown/md
 ``` 
 is what's needed to be configured to see this page at url
 ```
-http://{host}:{port}/{context-root}/smarkdown/docs/LocationWeb-Inf.md
+http://{host}:{port}/{context-root}/smarkdown/docs/LocationWeb-Inf.html
 ```
 
 

@@ -28,7 +28,7 @@ webapp:smarkdown/md
 ``` 
 is what's needed to be configured to see this pageat url
 ```
-http://{host}:{port}/{context-root}/smarkdown/docs/LocationWebapp.md
+http://{host}:{port}/{context-root}/smarkdown/docs/LocationWebapp.html
 ```
 
 
