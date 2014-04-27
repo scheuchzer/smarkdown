@@ -17,7 +17,7 @@ public class ProcessingContext {
 			final ServletContext servletContext) {
 		String directory = "";
 		if (path.contains("/")) {
-			directory = StringUtils.substringBefore(path, "/");
+			directory = "/" + StringUtils.substringBefore(path, "/");
 		}
 		return new ProcessingContext(path, directory,
 				servletContext.getContextPath());

@@ -45,7 +45,7 @@ public class MarkdownPreprocessor {
 		while (m.find()) {
 			final String match = m.group(1);
 			toBeReplaced.add(String.format("(%s)", match));
-			replacement.add(String.format("(%s/raw/%s/%s)", ctx.getBaseUrl(),
+			replacement.add(String.format("(%s/raw%s/%s)", ctx.getBaseUrl(),
 					ctx.getDirectory(), match));
 		}
 		return StringUtils.replaceEach(content,

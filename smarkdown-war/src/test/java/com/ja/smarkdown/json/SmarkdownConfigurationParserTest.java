@@ -33,7 +33,7 @@ public class SmarkdownConfigurationParserTest {
 				.parse(in);
 		assertThat(config.getApplicationName(), is("Smarkdown"));
 		assertThat(config.getPages().getTheme(), is("bootstrap"));
-		assertThat(config.getSlides().getTheme(), is("default"));
+		assertThat(config.getSlides().getTheme(), is("sky"));
 		assertThat(config.getSlides().getTransition(), is("default"));
 		assertThat(config.getLocations().size(), is(5));
 		assertThat(config.getLocations().contains("classpath:"), is(true));
