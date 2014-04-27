@@ -47,7 +47,7 @@ If needed, Smarkdown can be configured and customized through the ``context-para
 		"theme":"bootstrap"
 	},
 	"slides":{
-		"theme":"default",
+		"theme":"sky",
 		"transition":"default"
 	},
 	"locations":[

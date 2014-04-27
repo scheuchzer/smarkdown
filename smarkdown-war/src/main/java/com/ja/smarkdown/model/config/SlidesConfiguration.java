@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class SlidesConfiguration {
 
-	private String theme = "default";
+	private String theme = "sky";
 	private String transition = "default";
 }
