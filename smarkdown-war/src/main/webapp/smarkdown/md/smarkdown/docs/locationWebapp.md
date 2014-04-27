@@ -1,9 +1,9 @@
-# File location - Webapp
+# Location - Webapp
 
 
 This file is located directly in the webapp (or the war-file) outside a classpath or the WEB-INF directory. The exact location is
 
-```
+```bash
 smarkdown/md/smarkdown/docs/locationWebapp.md
 ```
 
@@ -17,17 +17,17 @@ smarkdown/md/smarkdown/docs/locationWebapp.md
 To enable a Webapp location add an ``web-inf`` url to the configuration. 
 
 Syntax:
-```
+```bash
 webapp:{path-to-root}
 ```
 
 
 for example: 
-```
+```bash
 webapp:smarkdown/md
 ``` 
 is what's needed to be configured to see this pageat url
-```
+```bash
 http://{host}:{port}/{context-root}/smarkdown/docs/LocationWebapp.html
 ```
 

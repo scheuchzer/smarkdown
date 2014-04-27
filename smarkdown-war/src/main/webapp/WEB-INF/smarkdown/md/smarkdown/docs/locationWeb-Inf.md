@@ -1,9 +1,9 @@
-# File location - WEB-INF
+# Location - WEB-INF
 
 
 This file is located under the ``WEB-INF`` directory. The exact location is
 
-```
+```bash
 WEB-INF/smarkdown/md/smarkdown/docs/locationWeb-Inf.md
 ```
 
@@ -17,17 +17,17 @@ WEB-INF/smarkdown/md/smarkdown/docs/locationWeb-Inf.md
 To enable a WEB-INF location add a ``web-inf`` url to the configuration. 
 
 Syntax:
-```
+```bash
 web-inf:{path-to-root}
 ```
 
 
 for example:
-```
+```bash
 web-inf:smarkdown/md
 ``` 
 is what's needed to be configured to see this page at url
-```
+```bash
 http://{host}:{port}/{context-root}/smarkdown/docs/LocationWeb-Inf.html
 ```
 
