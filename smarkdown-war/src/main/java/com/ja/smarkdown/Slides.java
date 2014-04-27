@@ -9,8 +9,9 @@ import lombok.Data;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.ja.smarkdown.load.MarkdownLoader;
-import com.ja.smarkdown.model.MarkdownDocument;
+import com.ja.smarkdown.load.ResourceLoader;
+import com.ja.smarkdown.model.ResourceInfo;
+import com.ja.smarkdown.preprocessing.MarkdownPreprocessor;
 
 @ManagedBean
 @RequestScoped
@@ -18,7 +19,7 @@ import com.ja.smarkdown.model.MarkdownDocument;
 public class Slides {
 
 	@Inject
-	private MarkdownLoader loader;
+	private ResourceLoader loader;
 
 	@Inject
 	private App app;
@@ -26,11 +27,11 @@ public class Slides {
 	private String page;
 
 	public String getContent() {
-		final MarkdownDocument doc = loader.loadDocument(getPageName() + ".md");
+		final ResourceInfo doc = loader.loadResource(getPageName() + ".md");
 		if (doc == null) {
 			return "Page not found.";
 		}
-		return doc.getContent();
+		return new MarkdownPreprocessor().process(page, doc.getInputStream());
 	}
 
 	public String getPageName() {

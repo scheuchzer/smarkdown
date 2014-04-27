@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
 import com.ja.smarkdown.load.LoadEvent;
-import com.ja.smarkdown.model.MarkdownDocument;
+import com.ja.smarkdown.model.ResourceInfo;
 
 public class ClasspathMarkdownProviderTest {
 
@@ -16,7 +16,9 @@ public class ClasspathMarkdownProviderTest {
 		final ClasspathMarkdownProvider provider = new ClasspathMarkdownProvider();
 		provider.onEvent(event);
 		assertThat(event.getResults().size(), is(1));
-		assertThat(event.getResults().get(0), is(new MarkdownDocument("test1")));
+		assertThat(event.getResults().get(0), is(new ResourceInfo(
+				ClasspathMarkdownProvider.class, "classpath:ClasspathTest1.md",
+				null)));
 	}
 
 	@Test
@@ -26,7 +28,9 @@ public class ClasspathMarkdownProviderTest {
 		final ClasspathMarkdownProvider provider = new ClasspathMarkdownProvider();
 		provider.onEvent(event);
 		assertThat(event.getResults().size(), is(1));
-		assertThat(event.getResults().get(0), is(new MarkdownDocument("test2")));
+		assertThat(event.getResults().get(0), is(new ResourceInfo(
+				ClasspathMarkdownProvider.class,
+				"classpath:dir1/ClasspathTest2.md", null)));
 	}
 
 	@Test

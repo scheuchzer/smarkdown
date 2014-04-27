@@ -19,14 +19,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.ja.smarkdown.model.MarkdownDocument;
+import com.ja.smarkdown.model.ResourceInfo;
 import com.ja.smarkdown.model.config.SmarkdownConfiguration;
 
 import de.akquinet.jbosscc.needle.annotation.ObjectUnderTest;
 import de.akquinet.jbosscc.needle.junit.NeedleRule;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MarkdownLoaderTest {
+public class ResourceLoaderTest {
 
 	@Inject
 	private Event<LoadEvent> loadEvent;
@@ -38,7 +38,7 @@ public class MarkdownLoaderTest {
 	public NeedleRule needleRule = new NeedleRule();
 
 	@ObjectUnderTest
-	private MarkdownLoader loader;
+	private ResourceLoader loader;
 
 	@Test
 	public void testLoadDocumentNothingFound() throws MalformedURLException {
@@ -46,7 +46,7 @@ public class MarkdownLoaderTest {
 				Arrays.asList("classpath:", "classpath:smarkdown", "file://"
 						+ System.getProperty("user.home") + "/smarkdown"))
 				.when(config).getLocations();
-		final MarkdownDocument result = loader.loadDocument("foo.md");
+		final ResourceInfo result = loader.loadResource("foo.md");
 		verify(loadEvent, times(1)).fire(new LoadEvent("classpath:/foo.md"));
 		verify(loadEvent, times(1)).fire(
 				new LoadEvent("classpath:smarkdown/foo.md"));

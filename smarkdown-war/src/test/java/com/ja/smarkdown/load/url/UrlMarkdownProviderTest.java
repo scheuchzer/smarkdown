@@ -8,7 +8,7 @@ import java.io.File;
 import org.junit.Test;
 
 import com.ja.smarkdown.load.LoadEvent;
-import com.ja.smarkdown.model.MarkdownDocument;
+import com.ja.smarkdown.model.ResourceInfo;
 
 public class UrlMarkdownProviderTest {
 
@@ -22,7 +22,10 @@ public class UrlMarkdownProviderTest {
 		final UrlMarkdownProvider provider = new UrlMarkdownProvider();
 		provider.onEvent(event);
 		assertThat(event.getResults().size(), is(1));
-		assertThat(event.getResults().get(0), is(new MarkdownDocument("test1")));
+		assertThat(
+				event.getResults().get(0),
+				is(new ResourceInfo(UrlMarkdownProvider.class, String.format(
+						"file:%s/ClasspathTest1.md", workingDir), null)));
 	}
 
 	@Test
@@ -32,7 +35,10 @@ public class UrlMarkdownProviderTest {
 		final UrlMarkdownProvider provider = new UrlMarkdownProvider();
 		provider.onEvent(event);
 		assertThat(event.getResults().size(), is(1));
-		assertThat(event.getResults().get(0), is(new MarkdownDocument("test2")));
+		assertThat(
+				event.getResults().get(0),
+				is(new ResourceInfo(UrlMarkdownProvider.class, String.format(
+						"file:%s/dir1/ClasspathTest2.md", workingDir), null)));
 	}
 
 	@Test
