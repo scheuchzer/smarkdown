@@ -19,6 +19,8 @@ import com.ja.smarkdown.util.UrlUtils;
 public class Index {
 
 	@Inject
+	private MarkdownPreprocessor preprocessor;
+	@Inject
 	private ResourceLoader loader;
 
 	private String page = "index";
@@ -28,7 +30,7 @@ public class Index {
 		if (doc == null) {
 			return "Page not found.";
 		}
-		return new MarkdownPreprocessor().process(page, doc.getInputStream());
+		return preprocessor.process(page, doc.getInputStream());
 	}
 
 	public String getPageName() {

@@ -7,16 +7,25 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.servlet.ServletContext;
+
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 @Slf4j
+@ApplicationScoped
 public class MarkdownPreprocessor {
 
+	@Inject
+	private ServletContext servletContext;
+
 	public String process(final String path, final String content) {
-		final ProcessingContext ctx = ProcessingContext.create(path);
+		final ProcessingContext ctx = ProcessingContext.create(path,
+				servletContext);
 		String result = content.replaceAll("\\.md\\)", "\\.html\\)");
 		result = handleImages(ctx, result);
 		return result;
@@ -36,8 +45,8 @@ public class MarkdownPreprocessor {
 		while (m.find()) {
 			final String match = m.group(1);
 			toBeReplaced.add(String.format("(%s)", match));
-			replacement.add(String.format("(raw/%s/%s)", ctx.getDirectory(),
-					match));
+			replacement.add(String.format("(%s/raw/%s/%s)", ctx.getBaseUrl(),
+					ctx.getDirectory(), match));
 		}
 		return StringUtils.replaceEach(content,
 				toBeReplaced.toArray(new String[0]),

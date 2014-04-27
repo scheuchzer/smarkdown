@@ -20,7 +20,8 @@ public class Slides {
 
 	@Inject
 	private ResourceLoader loader;
-
+	@Inject
+	private MarkdownPreprocessor preprocessor;
 	@Inject
 	private App app;
 
@@ -31,7 +32,7 @@ public class Slides {
 		if (doc == null) {
 			return "Page not found.";
 		}
-		return new MarkdownPreprocessor().process(page, doc.getInputStream());
+		return preprocessor.process(getPageName(), doc.getInputStream());
 	}
 
 	public String getPageName() {
