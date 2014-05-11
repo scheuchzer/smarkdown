@@ -1,5 +1,7 @@
 package com.ja.smarkdown.model.config;
 
+import static com.ja.smarkdown.model.config.Location.create;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -17,15 +19,15 @@ public class SmarkdownConfiguration {
 
 	private SlidesConfiguration slides = new SlidesConfiguration();
 
-	private Collection<String> locations = new ArrayList<>();
+	private Collection<Location> locations = new ArrayList<>();
 
 	public SmarkdownConfiguration() {
-		locations.add(String.format("file://%s/smarkdown",
-				System.getProperty("user.home")));
-		locations.add("web-inf:smarkdown/md");
-		locations.add("webapp:smarkdown/md");
-		locations.add("classpath:");
-		locations.add("classpath:smarkdown/md");
+		locations.add(create(String.format("file://%s/smarkdown",
+				System.getProperty("user.home"))));
+		locations.add(create("web-inf:smarkdown/md"));
+		locations.add(create("webapp:smarkdown/md"));
+		locations.add(create("classpath:"));
+		locations.add(create("classpath:smarkdown/md"));
 	}
 
 }

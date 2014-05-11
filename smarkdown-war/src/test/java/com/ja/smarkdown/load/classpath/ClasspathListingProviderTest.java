@@ -7,12 +7,14 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import com.ja.smarkdown.load.ListEvent;
+import com.ja.smarkdown.model.config.Location;
 
 public class ClasspathListingProviderTest {
 
 	@Test
 	public void onEventSubDir() {
-		final ListEvent event = new ListEvent("classpath:dir1");
+		final Location location = Location.create("classpath:dir1");
+		final ListEvent event = new ListEvent(location);
 
 		final ClasspathListingProvider provider = new ClasspathListingProvider();
 		provider.onEvent(event);
@@ -23,7 +25,9 @@ public class ClasspathListingProviderTest {
 
 	@Test
 	public void onEvent() {
-		final ListEvent event = new ListEvent("classpath:");
+		final Location location = new Location();
+		location.setUrl("classpath:");
+		final ListEvent event = new ListEvent(location);
 
 		final ClasspathListingProvider provider = new ClasspathListingProvider();
 		provider.onEvent(event);

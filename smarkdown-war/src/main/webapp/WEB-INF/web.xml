@@ -13,17 +13,23 @@
 			"applicationName":"Smarkdown",
 			"pages":{
 				"theme":"bootstrap"
-			},
+				},
 			"slides":{
-				"theme":"default",
+				"theme":"sky",
 				"transition":"default"
-			},
+				},
 			"locations":[
-				"file://~/smarkdown",
-				"webapp:smarkdown/md",
-				"web-inf:smarkdown/md",
-				"classpath:smarkdown/md",
-				"classpath:"
+				{
+					"url":"file:///home/celli/smarkdown"
+				},{
+					"url":"web-inf:smarkdown/md"
+				},{
+					"url":"webapp:smarkdown/md"
+				},{
+					"url":"classpath:"
+				},{
+					"url":"classpath:smarkdown/md"
+				}
 			]
 		}
 		</param-value>

@@ -20,12 +20,12 @@ import com.ja.smarkdown.load.ListEvent;
 public class UrlListingProvider {
 	public void onEvent(@Observes final ListEvent event) {
 		log.debug("Event received. {}", event);
-		if (!event.getBaseLocation().startsWith("file")) {
+		if (!event.getLocation().getUrl().startsWith("file")) {
 			return;
 		}
 		try {
-			final String base = StringUtils.removeStart(
-					event.getBaseLocation(), "file://");
+			final String base = StringUtils.removeStart(event.getLocation()
+					.getUrl(), "file://");
 			Files.walkFileTree(Paths.get(base), new SimpleFileVisitor<Path>() {
 
 				@Override

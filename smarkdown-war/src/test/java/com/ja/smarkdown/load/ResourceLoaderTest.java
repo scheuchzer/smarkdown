@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.ja.smarkdown.model.ResourceInfo;
+import com.ja.smarkdown.model.config.Location;
 import com.ja.smarkdown.model.config.SmarkdownConfiguration;
 
 import de.akquinet.jbosscc.needle.annotation.ObjectUnderTest;
@@ -42,19 +43,14 @@ public class ResourceLoaderTest {
 
 	@Test
 	public void testLoadDocumentNothingFound() throws MalformedURLException {
-		doReturn(
-				Arrays.asList("classpath:", "classpath:smarkdown", "file://"
-						+ System.getProperty("user.home") + "/smarkdown"))
-				.when(config).getLocations();
+		final Location cpLoc = Location.create("classpath:");
+		final Location fileLoc = Location.create("file:///var/tmp");
+		doReturn(Arrays.asList(cpLoc, fileLoc)).when(config).getLocations();
 		final ResourceInfo result = loader.loadResource("foo.md");
 		verify(loadEvent, times(1)).fire(new LoadEvent("classpath:/foo.md"));
 		verify(loadEvent, times(1)).fire(
-				new LoadEvent("classpath:smarkdown/foo.md"));
-		verify(loadEvent, times(1)).fire(
-				new LoadEvent("file://" + System.getProperty("user.home")
-						+ "/smarkdown/foo.md"));
+				new LoadEvent("file:///var/tmp/foo.md"));
 		assertThat(result, is(nullValue()));
 		verifyNoMoreInteractions(loadEvent);
 	}
-
 }

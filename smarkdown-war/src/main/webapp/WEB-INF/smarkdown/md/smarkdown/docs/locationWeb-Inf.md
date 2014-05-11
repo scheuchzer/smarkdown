@@ -23,8 +23,8 @@ web-inf:{path-to-root}
 
 
 for example:
-```bash
-web-inf:smarkdown/md
+```json
+{"url": "web-inf:smarkdown/md"}
 ``` 
 is what's needed to be configured to see this page at url
 ```bash

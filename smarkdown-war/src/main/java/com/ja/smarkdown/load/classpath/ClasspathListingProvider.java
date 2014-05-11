@@ -20,8 +20,8 @@ public class ClasspathListingProvider {
 
 	public void onEvent(@Observes final ListEvent event) {
 		log.debug("Event received. {}", event);
-		final String subDir = StringUtils.substringAfter(
-				event.getBaseLocation(), "classpath:");
+		final String subDir = StringUtils.substringAfter(event.getLocation()
+				.getUrl(), "classpath:");
 		final String pkg = StringUtils.replace(subDir, "/", ".");
 		final Reflections r = new Reflections(new ConfigurationBuilder()
 				.addUrls(ClasspathHelper.forPackage(pkg)).addScanners(

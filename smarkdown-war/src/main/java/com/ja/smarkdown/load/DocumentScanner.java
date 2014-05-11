@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import com.ja.smarkdown.model.ListingDocument;
+import com.ja.smarkdown.model.config.Location;
 import com.ja.smarkdown.model.config.SmarkdownConfiguration;
 import com.ja.smarkdown.util.LowerCaseStringComparator;
 
@@ -28,7 +29,7 @@ public class DocumentScanner {
 	public List<ListingDocument> getDocuments() {
 		log.debug("loading listing.");
 		final Set<String> documents = new HashSet<>();
-		for (final String location : config.getLocations()) {
+		for (final Location location : config.getLocations()) {
 			final ListEvent event = new ListEvent(location);
 			listEvent.fire(event);
 			log.debug("Documents listed. results={}", event.getResults().size());

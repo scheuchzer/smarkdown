@@ -20,8 +20,8 @@ classpath:{path-to-root}
 
 
 for example: 
-```bash
-classpath:smarkdown/md
+```json
+{"url": "classpath:smarkdown/md"}
 ``` 
 is what's needed to be configured to see this file 
 at url

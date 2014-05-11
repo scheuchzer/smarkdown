@@ -35,9 +35,9 @@ public abstract class AbstractServletContextListingProvider {
 
 	public void onEvent(@Observes final ListEvent event) throws Exception {
 		log.debug("Event received. {}", event);
-		if (event.getBaseLocation().startsWith(urlPrefix)) {
-			readListingFile(event, StringUtils.substringAfter(
-					event.getBaseLocation(), urlPrefix));
+		if (event.getLocation().getUrl().startsWith(urlPrefix)) {
+			readListingFile(event, StringUtils.substringAfter(event
+					.getLocation().getUrl(), urlPrefix));
 		}
 	}
 

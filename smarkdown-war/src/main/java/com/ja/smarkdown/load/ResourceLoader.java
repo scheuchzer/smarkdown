@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 
 import com.ja.smarkdown.model.ResourceInfo;
+import com.ja.smarkdown.model.config.Location;
 import com.ja.smarkdown.model.config.SmarkdownConfiguration;
 
 @Slf4j
@@ -25,8 +26,9 @@ public class ResourceLoader {
 		log.debug("loading resource={}", resource);
 		ResourceInfo result = null;
 
-		for (final String location : config.getLocations()) {
-			final String url = String.format("%s/%s", location, resource);
+		for (final Location location : config.getLocations()) {
+			final String url = String.format("%s/%s", location.getUrl(),
+					resource);
 			log.debug("Loading resource from url={}", url);
 			final LoadEvent event = new LoadEvent(url);
 			loadEvent.fire(event);

@@ -5,9 +5,11 @@ import static org.junit.Assert.assertThat;
 
 import java.io.ByteArrayOutputStream;
 import java.io.StringReader;
+import java.util.Iterator;
 
 import org.junit.Test;
 
+import com.ja.smarkdown.model.config.Location;
 import com.ja.smarkdown.model.config.SmarkdownConfiguration;
 
 public class SmarkdownConfigurationParserTest {
@@ -15,15 +17,22 @@ public class SmarkdownConfigurationParserTest {
 	@Test
 	public void testRead() {
 		final StringReader in = new StringReader(
-				"{\"applicationName\":\"foobarApp\",\"slides\":{\"theme\":\"barTheme\"},\"locations\":[\"classpath:/\"]}");
+				"{\"applicationName\":\"foobarApp\",\"slides\":{\"theme\":\"barTheme\"},\"locations\":[{\"url\":\"classpath:/\"},{\"url\":\"file:///\",\"config\":{\"mountPoint\":\"test\"}}]}");
 		final SmarkdownConfiguration config = new SmarkdownConfigurationParser()
 				.parse(in);
 		assertThat(config.getApplicationName(), is("foobarApp"));
 		assertThat(config.getPages().getTheme(), is("bootstrap"));
 		assertThat(config.getSlides().getTheme(), is("barTheme"));
 		assertThat(config.getSlides().getTransition(), is("default"));
-		assertThat(config.getLocations().size(), is(1));
-		assertThat(config.getLocations().iterator().next(), is("classpath:/"));
+		assertThat(config.getLocations().size(), is(2));
+		final Iterator<Location> it = config.getLocations().iterator();
+		Location loc = it.next();
+		assertThat(loc.getUrl(), is("classpath:/"));
+		assertThat(loc.getConfig().isEmpty(), is(true));
+		loc = it.next();
+		assertThat(loc.getUrl(), is("file:///"));
+		assertThat(loc.getConfig().isEmpty(), is(false));
+		assertThat(loc.getConfig().get("mountPoint"), is("test"));
 	}
 
 	@Test
@@ -36,12 +45,14 @@ public class SmarkdownConfigurationParserTest {
 		assertThat(config.getSlides().getTheme(), is("sky"));
 		assertThat(config.getSlides().getTransition(), is("default"));
 		assertThat(config.getLocations().size(), is(5));
-		assertThat(config.getLocations().contains("classpath:"), is(true));
+
+		final Location loc = new Location();
+		loc.setUrl("classpath:");
+		assertThat(config.getLocations().contains(loc), is(true));
 	}
 
 	@Test
 	public void testWrite() throws Exception {
-
 		final ByteArrayOutputStream out = new ByteArrayOutputStream();
 		final SmarkdownConfigurationParser parser = new SmarkdownConfigurationParser();
 
@@ -49,8 +60,21 @@ public class SmarkdownConfigurationParserTest {
 		config.setApplicationName("foobarApp");
 		config.getPages().setTheme("fooTheme");
 		config.getSlides().setTheme("barTheme");
-		config.getLocations().add("classpath:/");
+		config.getLocations().add(Location.create("classpath:/"));
+		final Location loc2 = Location.create("file:///");
+		loc2.getConfig().put("mountPoint", "test");
+		config.getLocations().add(loc2);
 
+		parser.write(config, out);
+		final String result = out.toString();
+		System.out.println(result);
+	}
+
+	@Test
+	public void testWriteDefault() throws Exception {
+		final ByteArrayOutputStream out = new ByteArrayOutputStream();
+		final SmarkdownConfigurationParser parser = new SmarkdownConfigurationParser();
+		final SmarkdownConfiguration config = new SmarkdownConfiguration();
 		parser.write(config, out);
 		final String result = out.toString();
 		System.out.println(result);

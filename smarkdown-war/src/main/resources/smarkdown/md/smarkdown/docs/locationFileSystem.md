@@ -24,8 +24,8 @@ three slashes in a row.
 
 
 for example: 
-```bash
-file:///var/lib/smarkdown
+```json
+{"url": "file:///var/lib/smarkdown"}
 ``` 
 is what's needed to be configured to see the file 
 

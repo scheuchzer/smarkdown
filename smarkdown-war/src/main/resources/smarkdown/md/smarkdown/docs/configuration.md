@@ -51,11 +51,11 @@ If needed, Smarkdown can be configured and customized through the ``context-para
 		"transition":"default"
 	},
 	"locations":[
-		"file://~/smarkdown",
-		"webapp:smarkdown/md",
-		"web-inf:smarkdown/md",
-		"classpath:smarkdown/md",
-		"classpath:"
+		{"url":"file:///home/celli/smarkdown"},
+		{"url":"web-inf:smarkdown/md"},
+		{"url":"webapp:smarkdown/md"},
+		{"url":"classpath:"},
+		{"url":"classpath:smarkdown/md"}
 	]
 }
 ```
@@ -149,6 +149,9 @@ Currently the following location types are supported:
 - [Webapp](locationWebapp.md)
 - [File-System](locationFileSystem.md)
 
+**Element:** ``locations/url``
+
+The base url of a location. The format depends on the location type.
 
 
 ## Ways to modify web.xml

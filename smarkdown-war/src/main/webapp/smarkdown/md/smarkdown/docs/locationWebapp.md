@@ -23,8 +23,8 @@ webapp:{path-to-root}
 
 
 for example: 
-```bash
-webapp:smarkdown/md
+```json
+{"url": "webapp:smarkdown/md"}
 ``` 
 is what's needed to be configured to see this pageat url
 ```bash
