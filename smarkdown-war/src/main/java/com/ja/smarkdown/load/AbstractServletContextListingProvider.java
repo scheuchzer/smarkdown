@@ -39,6 +39,7 @@ public abstract class AbstractServletContextListingProvider {
 			readListingFile(event, StringUtils.substringAfter(event
 					.getLocation().getUrl(), urlPrefix));
 		}
+		log.debug("End event.");
 	}
 
 	private void readListingFile(final ListEvent event, final String root) {
@@ -54,12 +55,14 @@ public abstract class AbstractServletContextListingProvider {
 
 			try (Reader in = new InputStreamReader(url.openStream())) {
 				final Listing listing = parser.parse(in);
-				event.addResults(listing.getFiles());
+				for (final String file : listing.getFiles()) {
+					event.addResult(MountPointUtil.apply(event.getLocation(),
+							file));
+				}
 			}
 		} catch (final Exception e) {
 			log.debug("Failed to read listing.", e);
 		}
 
 	}
-
 }

@@ -14,12 +14,16 @@ import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 
 import com.ja.smarkdown.load.ListEvent;
+import com.ja.smarkdown.load.MountPointUtil;
 
 @Slf4j
 public class ClasspathListingProvider {
 
 	public void onEvent(@Observes final ListEvent event) {
 		log.debug("Event received. {}", event);
+		if (!event.getLocation().getUrl().startsWith("classpath")) {
+			return;
+		}
 		final String subDir = StringUtils.substringAfter(event.getLocation()
 				.getUrl(), "classpath:");
 		final String pkg = StringUtils.replace(subDir, "/", ".");
@@ -34,8 +38,9 @@ public class ClasspathListingProvider {
 			String name = StringUtils.substringAfter(file, subDir);
 			name = StringUtils.stripStart(name, "/");
 			if (StringUtils.isNotEmpty(name) && !name.startsWith(exclude)) {
-				event.addResult(name);
+				event.addResult(MountPointUtil.apply(event.getLocation(), name));
 			}
 		}
+		log.debug("End event.");
 	}
 }

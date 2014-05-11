@@ -32,7 +32,7 @@ public class Raw extends HttpServlet {
 			final HttpServletResponse resp) throws ServletException,
 			IOException {
 		final String path = StringUtils.removeStart(req.getPathInfo(), "/");
-		log.info("path={}", path);
+		log.debug("path={}", path);
 		final InputStream in = load(path);
 		if (in != null) {
 			try (InputStream i = in) {
@@ -80,9 +80,9 @@ public class Raw extends HttpServlet {
 	private InputStream load(final String path) {
 		final ResourceInfo resource = resourceLoader.loadResource(path);
 		if (resource != null) {
-			log.info("Resource found.");
+			log.debug("Resource found.");
 		} else {
-			log.info("{} not found.", path);
+			log.debug("{} not found.", path);
 		}
 		return resource.getInputStream();
 	}

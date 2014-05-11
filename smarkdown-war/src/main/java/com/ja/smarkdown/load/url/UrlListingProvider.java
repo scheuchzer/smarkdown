@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import com.ja.smarkdown.load.ListEvent;
+import com.ja.smarkdown.load.MountPointUtil;
 
 @Slf4j
 public class UrlListingProvider {
@@ -31,9 +32,12 @@ public class UrlListingProvider {
 				@Override
 				public FileVisitResult visitFile(final Path file,
 						final BasicFileAttributes attrs) throws IOException {
+					log.debug("Visiting {}", file);
 					if (file.toString().endsWith(".md")) {
-						event.addResult(StringUtils.removeStart(
-								file.toString(), base));
+						log.debug("accepting file={}", file);
+						event.addResult(MountPointUtil.apply(
+								event.getLocation(),
+								StringUtils.removeStart(file.toString(), base)));
 					}
 					return super.visitFile(file, attrs);
 				}
@@ -41,5 +45,6 @@ public class UrlListingProvider {
 		} catch (final IOException e) {
 			log.error("failed", e);
 		}
+		log.debug("End event.");
 	}
 }

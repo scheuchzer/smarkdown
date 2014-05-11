@@ -25,8 +25,7 @@ public class ClasspathListingProviderTest {
 
 	@Test
 	public void onEvent() {
-		final Location location = new Location();
-		location.setUrl("classpath:");
+		final Location location = Location.create("classpath:");
 		final ListEvent event = new ListEvent(location);
 
 		final ClasspathListingProvider provider = new ClasspathListingProvider();
@@ -34,5 +33,20 @@ public class ClasspathListingProviderTest {
 		System.out.println(event.getResults());
 		assertTrue(event.getResults().contains("ClasspathTest1.md"));
 		assertTrue(event.getResults().contains("dir1/ClasspathTest2.md"));
+	}
+
+	@Test
+	public void onEventWithMountPoint() {
+		final Location location = Location.create("classpath:");
+		location.getConfig().put(Location.Properties.mountPoint.toString(),
+				"test/foo");
+		final ListEvent event = new ListEvent(location);
+
+		final ClasspathListingProvider provider = new ClasspathListingProvider();
+		provider.onEvent(event);
+		System.out.println(event.getResults());
+		assertTrue(event.getResults().contains("test/foo/ClasspathTest1.md"));
+		assertTrue(event.getResults().contains(
+				"test/foo/dir1/ClasspathTest2.md"));
 	}
 }

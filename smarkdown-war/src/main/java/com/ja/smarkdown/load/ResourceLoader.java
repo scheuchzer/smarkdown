@@ -27,8 +27,10 @@ public class ResourceLoader {
 		ResourceInfo result = null;
 
 		for (final Location location : config.getLocations()) {
-			final String url = String.format("%s/%s", location.getUrl(),
+			final String strippedResource = MountPointUtil.remove(location,
 					resource);
+			final String url = String.format("%s/%s", location.getUrl(),
+					strippedResource);
 			log.debug("Loading resource from url={}", url);
 			final LoadEvent event = new LoadEvent(url);
 			loadEvent.fire(event);

@@ -53,4 +53,16 @@ public class ResourceLoaderTest {
 		assertThat(result, is(nullValue()));
 		verifyNoMoreInteractions(loadEvent);
 	}
+
+	@Test
+	public void testLoadDocumentMountPoint() throws MalformedURLException {
+		final Location fileLoc = Location.create("file:///var/tmp");
+		fileLoc.setMountPoint("foo/bar");
+		doReturn(Arrays.asList(fileLoc)).when(config).getLocations();
+		final ResourceInfo result = loader.loadResource("foo/bar/foo.md");
+		verify(loadEvent, times(1)).fire(
+				new LoadEvent("file:///var/tmp/foo.md"));
+		assertThat(result, is(nullValue()));
+		verifyNoMoreInteractions(loadEvent);
+	}
 }

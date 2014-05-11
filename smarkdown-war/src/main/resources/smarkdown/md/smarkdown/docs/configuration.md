@@ -149,9 +149,32 @@ Currently the following location types are supported:
 - [Webapp](locationWebapp.md)
 - [File-System](locationFileSystem.md)
 
+
 **Element:** ``locations/url``
 
 The base url of a location. The format depends on the location type.
+
+
+**Element:** ``locations/mountPoint``
+
+Locations can be mounted into the smarkdown file hierarchy. By default they just get added to the root.
+
+
+Example:
+```json
+{
+	"url": "file///var/tmp",
+	"mountPoint": "foo/bar"
+} 
+```
+In this example, all markdown files located under ``/var/tmp`` will be made available
+at ``foo/bar``
+
+
+Say, file ``/var/tmp/test.md`` will be available at
+```url
+http://localhost:8080/smarkdown/foo/bar/test.html
+```
 
 
 ## Ways to modify web.xml
