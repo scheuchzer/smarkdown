@@ -14,7 +14,7 @@ public class GitHubLocationTest {
 		final GitHubLocation loc = new GitHubLocation(
 				Location.create("github:foo/bar"));
 		assertThat(loc.getRepoName(), is("foo/bar"));
-		assertThat(loc.getPath(), is("/"));
+		assertThat(loc.getPath(), is(""));
 	}
 
 	@Test

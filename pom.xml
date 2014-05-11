@@ -98,9 +98,9 @@
 				<version>0.11</version>
 			</dependency>
 			<dependency>
-				<groupId>com.jcabi</groupId>
-				<artifactId>jcabi-github</artifactId>
-				<version>1.6.1</version>
+				<groupId>org.kohsuke</groupId>
+				<artifactId>github-api</artifactId>
+				<version>1.53</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

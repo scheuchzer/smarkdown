@@ -14,7 +14,7 @@ public class GitHubLocation extends Location {
 
 	private static final String PREFIX = "github:";
 
-	private enum Properties {
+	public enum Properties {
 		authToken, branch
 	}
 
@@ -29,7 +29,17 @@ public class GitHubLocation extends Location {
 	}
 
 	public String getRepoName() {
-		return StringUtils.substringAfter(getUrl(), PREFIX);
+		final String tmp = StringUtils.substringAfter(getUrl(), PREFIX);
+		if (StringUtils.contains(tmp, ":")) {
+			return StringUtils.substringBefore(tmp, ":");
+		} else {
+			return tmp;
+		}
+	}
+
+	public String getPath() {
+		return StringUtils.trimToEmpty(StringUtils.substringAfter(getUrl(),
+				getRepoName() + ":"));
 	}
 
 	public String getBranch() {

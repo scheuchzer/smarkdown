@@ -14,6 +14,7 @@ import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
 
 import com.ja.smarkdown.load.ListEvent;
+import com.ja.smarkdown.load.MountPointUtil;
 
 @Slf4j
 public class GitListingProvider {
@@ -30,7 +31,7 @@ public class GitListingProvider {
 					.getRepoName());
 			final GHBranch master = repo.getBranches()
 					.get(location.getBranch());
-			listRepo(repo, master, "/");
+			listRepo(event, location, repo, master, location.getPath());
 
 		} catch (final Exception e) {
 			log.error("failed", e);
@@ -38,17 +39,18 @@ public class GitListingProvider {
 		log.debug("End event.");
 	}
 
-	private void listRepo(final GHRepository repo, final GHBranch branch,
-			final String path) throws IOException {
+	private void listRepo(final ListEvent event, final GitHubLocation location,
+			final GHRepository repo, final GHBranch branch, final String path)
+			throws IOException {
 		final List<GHContent> content = repo.getDirectoryContent(path,
 				branch.getName());
 		for (final GHContent c : content) {
 			switch (c.getType()) {
 			case "file":
-				handleFile(c);
+				handleFile(event, location, c);
 				break;
 			case "dir":
-				handleDir(repo, branch, c);
+				handleDir(event, location, repo, branch, c);
 				break;
 			default:
 				log.info("ignoring {}", c.getName());
@@ -56,17 +58,22 @@ public class GitListingProvider {
 		}
 	}
 
-	private void handleDir(final GHRepository repo, final GHBranch branch,
-			final GHContent c) throws IOException {
+	private void handleDir(final ListEvent event,
+			final GitHubLocation location, final GHRepository repo,
+			final GHBranch branch, final GHContent c) throws IOException {
 		log.info("handle dir={}", c.getPath());
-		listRepo(repo, branch, c.getPath());
+		listRepo(event, location, repo, branch, c.getPath());
 
 	}
 
-	private void handleFile(final GHContent c) {
+	private void handleFile(final ListEvent event,
+			final GitHubLocation location, final GHContent c) {
 		log.debug("handle file={}", c.getPath());
 		if (StringUtils.endsWith(c.getName(), "md")) {
-			System.out.println(c.getPath());
+			final String name = StringUtils.substringAfter(c.getPath(),
+					location.getPath());
+			final String listingName = MountPointUtil.apply(location, name);
+			event.addResult(listingName);
 		}
 
 	}

@@ -80,14 +80,8 @@
 			<artifactId>boon</artifactId>
 		</dependency>
 		<dependency>
-    <groupId>org.kohsuke</groupId>
-    <artifactId>github-api</artifactId>
-    <version>1.53</version>
-</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.4</version>
+			<groupId>org.kohsuke</groupId>
+			<artifactId>github-api</artifactId>
 		</dependency>
 	</dependencies>
 	<build>
