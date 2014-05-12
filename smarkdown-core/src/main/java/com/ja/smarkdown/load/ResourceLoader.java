@@ -2,8 +2,8 @@ package com.ja.smarkdown.load;
 
 import java.util.Iterator;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Event;
-import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
 
 import lombok.extern.slf4j.Slf4j;
