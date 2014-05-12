@@ -4,7 +4,7 @@
 	<groupId>com.java-adventures.smarkdown</groupId>
 	<artifactId>smarkdown-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Smarkdown Parent</name>
+	<name>Smarkdown - Parent</name>
 	<packaging>pom</packaging>
 
 	<properties>
