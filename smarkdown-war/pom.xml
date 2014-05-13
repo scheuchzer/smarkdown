@@ -18,6 +18,10 @@
 			<artifactId>smarkdown-core</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.java-adventures.smarkdown</groupId>
+			<artifactId>smarkdown-github</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
 			<scope>provided</scope>
