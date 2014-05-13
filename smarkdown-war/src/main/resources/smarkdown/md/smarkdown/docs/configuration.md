@@ -148,6 +148,7 @@ Currently the following location types are supported:
 - [WEB-INF](locationWeb-Inf.md)
 - [Webapp](locationWebapp.md)
 - [File-System](locationFileSystem.md)
+- [GitHub](locationGitHub.md)
 
 
 **Element:** ``locations/url``

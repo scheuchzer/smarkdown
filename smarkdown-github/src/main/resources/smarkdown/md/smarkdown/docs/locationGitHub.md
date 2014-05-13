@@ -21,7 +21,33 @@ for example:
 {"url": "github:scheuchzer/smarkdown"}
 ``` 
 
-TODO
+### Additional Properties
+
+####branch
+
+Selects the [GitHub](https://github.com) branch. The default is ``master``.
+
+for example: 
+```json
+{
+  "url": "github:scheuchzer/smarkdown",
+  "branch": "master"
+}
+``` 
+
+####authToken
+
+Sets the [GitHub](https://github.com) Authentication Token for accessing the repository. When working without the ``authToken`` you will [only be able 
+to send 60 requests to GitHub](https://developer.github.com/v3/#rate-limiting) what might not be enough to read the complete listing 
+or accessing your documents frequently.
+
+for example: 
+```json
+{
+  "url": "github:scheuchzer/smarkdown",
+  "autToken": "16f20b0923454f3e6e23432456d766d05aa06bdfc0"
+}
+``` 
 
 
 
