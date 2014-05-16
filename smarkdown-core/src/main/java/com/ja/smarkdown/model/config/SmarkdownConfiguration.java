@@ -9,6 +9,8 @@ import javax.enterprise.inject.Alternative;
 
 import lombok.Data;
 
+import com.ja.smarkdown.model.LocationHandler;
+
 @Data
 @Alternative
 public class SmarkdownConfiguration {
@@ -20,6 +22,8 @@ public class SmarkdownConfiguration {
 	private SlidesConfiguration slides = new SlidesConfiguration();
 
 	private Collection<Location> locations = new ArrayList<>();
+
+	private Collection<LocationHandler> locationHandlers = new ArrayList<>();
 
 	public SmarkdownConfiguration() {
 		locations.add(create(String.format("file://%s/smarkdown",

@@ -34,6 +34,44 @@
 		}
 		</param-value>
 	</context-param> -->
+	
+	<context-param>
+		<param-name>smarkdown.configuration</param-name>
+		<param-value>
+		{
+			"applicationName":"Smarkdown",
+			"pages":{
+				"theme":"bootstrap"
+				},
+			"slides":{
+				"theme":"sky",
+				"transition":"default"
+				},
+			"locations":[
+				{
+					"url":"webapp:smarkdown/md"
+				}
+				<!-- ,{
+					"url":"github:scheuchzer/smarkdown:smarkdown-github/src/test",
+					"config": {
+						"authToken":"16f20b8f8af4f3e6e9f84706d766d05aa06bdfc0"
+					}
+				},{
+					"url":"github:scheuchzer/smarkdown:smarkdown-github/src/test/resources",
+					"config": {
+						"authToken":"16f20b8f8af4f3e6e9f84706d766d05aa06bdfc0"
+					}
+				},{
+					"url":"github:scheuchzer/smarkdown:smarkdown-github/src/test",
+					"config": {
+						"mountPoint":"mounted",
+						"authToken":"16f20b8f8af4f3e6e9f84706d766d05aa06bdfc0"
+					}
+				} -->
+			]
+		}
+		</param-value>
+	</context-param>
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

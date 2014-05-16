@@ -24,7 +24,12 @@
 			</dependency>
 			<dependency>
 				<groupId>com.java-adventures.smarkdown</groupId>
-				<artifactId>smarkdown-github</artifactId>
+				<artifactId>smarkdown-location-github</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.java-adventures.smarkdown</groupId>
+				<artifactId>smarkdown-location-webapp</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
@@ -202,8 +207,9 @@
 
 	<modules>
 		<module>smarkdown-core</module>
-		<module>smarkdown-github</module>
+		<module>smarkdown-location-github</module>
 		<module>smarkdown-war</module>
+		<module>smarkdown-location-webapp</module>
 	</modules>
 
 	<developers>

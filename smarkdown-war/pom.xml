@@ -19,7 +19,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.java-adventures.smarkdown</groupId>
-			<artifactId>smarkdown-github</artifactId>
+			<artifactId>smarkdown-location-webapp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.java-adventures.smarkdown</groupId>
+			<artifactId>smarkdown-location-github</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.enterprise</groupId>

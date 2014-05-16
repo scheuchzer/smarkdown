@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import com.ja.smarkdown.model.ListingDocument;
-import com.ja.smarkdown.model.config.Location;
+import com.ja.smarkdown.model.LocationHandler;
 import com.ja.smarkdown.model.config.SmarkdownConfiguration;
 import com.ja.smarkdown.util.LowerCaseStringComparator;
 
@@ -23,17 +22,14 @@ public class DocumentScanner {
 
 	@Inject
 	private SmarkdownConfiguration config;
-	@Inject
-	private Event<ListEvent> listEvent;
 
 	public List<ListingDocument> getDocuments() {
 		log.debug("loading listing.");
 		final Set<String> documents = new HashSet<>();
-		for (final Location location : config.getLocations()) {
-			final ListEvent event = new ListEvent(location);
-			listEvent.fire(event);
-			log.debug("Documents listed. results={}", event.getResults().size());
-			documents.addAll(event.getResults());
+		for (final LocationHandler handler : config.getLocationHandlers()) {
+			final List<String> result = handler.listDocuments();
+			log.debug("Handler {} lists {} documents.", result.size());
+			documents.addAll(result);
 		}
 		final List<String> result = new ArrayList<>(documents);
 		Collections.sort(result, new LowerCaseStringComparator());

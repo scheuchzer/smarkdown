@@ -2,9 +2,9 @@ package com.ja.smarkdown.load.classpath;
 
 import java.net.URLStreamHandler;
 
-import com.ja.smarkdown.load.AbstractMarkdownProvider;
+import com.ja.smarkdown.load.AbstractDocumentProvider;
 
-public class ClasspathMarkdownProvider extends AbstractMarkdownProvider {
+public class ClasspathMarkdownProvider extends AbstractDocumentProvider {
 
 	private ClasspathURLStreamHandler handler = new ClasspathURLStreamHandler();
 
