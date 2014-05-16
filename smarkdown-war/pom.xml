@@ -23,6 +23,10 @@
 		</dependency>
 		<dependency>
 			<groupId>com.java-adventures.smarkdown</groupId>
+			<artifactId>smarkdown-location-classpath</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.java-adventures.smarkdown</groupId>
 			<artifactId>smarkdown-location-github</artifactId>
 		</dependency>
 		<dependency>
@@ -60,10 +64,6 @@
 		<dependency>
 			<groupId>org.ocpsoft.rewrite</groupId>
 			<artifactId>rewrite-config-prettyfaces</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.reflections</groupId>
-			<artifactId>reflections</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

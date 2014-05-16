@@ -16,7 +16,7 @@ import com.ja.smarkdown.model.config.Location;
 @AllArgsConstructor
 public abstract class AbstractDocumentProvider<LOCATION_TYPE extends Location> {
 
-	private String locationPrefix;
+	private String protocol;
 	private String resourcePrefix;
 
 	public ResourceInfo getDocument(final List<LOCATION_TYPE> locations,
@@ -52,8 +52,10 @@ public abstract class AbstractDocumentProvider<LOCATION_TYPE extends Location> {
 						strippedResource);
 			}
 			log.info("Resource path={}", path);
-			document = new ResourceInfo(this.getClass(), resource,
-					getInputStream(location, path));
+			document = new ResourceInfo(this.getClass(), getInputStream(
+					location, path));
+		} catch (final FileNotFoundException e) {
+			return null;
 		} catch (final Exception e) {
 			log.error("Can't process this url={}", resource, e);
 		}
@@ -61,7 +63,7 @@ public abstract class AbstractDocumentProvider<LOCATION_TYPE extends Location> {
 	}
 
 	protected String getRootPath(final LOCATION_TYPE location) {
-		return StringUtils.substringAfter(location.getUrl(), locationPrefix);
+		return StringUtils.substringAfter(location.getUrl(), protocol);
 	}
 
 	abstract protected InputStream getInputStream(final LOCATION_TYPE location,

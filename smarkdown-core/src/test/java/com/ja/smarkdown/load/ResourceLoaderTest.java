@@ -65,7 +65,7 @@ public class ResourceLoaderTest {
 			throws MalformedURLException {
 		doReturn(Arrays.asList(handler1, handler2)).when(config)
 				.getLocationHandlers();
-		final ResourceInfo doc = new ResourceInfo(Object.class, "foo.md",
+		final ResourceInfo doc = new ResourceInfo(Object.class,
 				new ByteArrayInputStream("".getBytes()));
 		doReturn(doc).when(handler2).loadDocument(eq("foo.md"));
 
@@ -78,7 +78,7 @@ public class ResourceLoaderTest {
 			throws MalformedURLException {
 		doReturn(Arrays.asList(handler1, handler2)).when(config)
 				.getLocationHandlers();
-		final ResourceInfo doc = new ResourceInfo(Object.class, "foo.md",
+		final ResourceInfo doc = new ResourceInfo(Object.class,
 				new ByteArrayInputStream("".getBytes()));
 		doThrow(new RuntimeException("forced")).when(handler1).loadDocument(
 				anyString());

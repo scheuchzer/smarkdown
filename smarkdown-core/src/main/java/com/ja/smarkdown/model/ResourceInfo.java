@@ -12,7 +12,6 @@ import lombok.ToString;
 public class ResourceInfo {
 
 	private final Class<?> provider;
-	private final String location;
 	private final InputStream inputStream;
 
 }
