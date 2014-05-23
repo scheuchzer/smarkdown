@@ -8,26 +8,33 @@ public class TitleParser {
 		final String shortName = StringUtils.contains(name, "/") ? StringUtils
 				.substringAfterLast(name, "/") : name;
 		boolean lastWasLowercase = false;
-		boolean forceUppercase = true;
+		boolean forceLowercase = false;
+		boolean forceUppercase = false;
 		final StringBuilder tmp = new StringBuilder();
 		for (int i = 0; i < shortName.length(); i++) {
+			if (i == 0) {
+				forceUppercase = true;
+			}
 			final char c = shortName.charAt(i);
 			switch (c) {
 			case '_':
 			case '-':
 			case '+':
 				tmp.append(' ');
-				forceUppercase = true;
 				continue;
 			default:
 			}
 
 			if (lastWasLowercase && Character.isUpperCase(c)) {
 				tmp.append(' ');
+				forceLowercase = true;
 			}
 			lastWasLowercase = Character.isLowerCase(c);
 
-			if (forceUppercase) {
+			if (forceLowercase) {
+				tmp.append(Character.toLowerCase(c));
+				forceLowercase = false;
+			} else if (forceUppercase) {
 				tmp.append(Character.toUpperCase(c));
 				forceUppercase = false;
 			} else {
