@@ -12,6 +12,7 @@ import lombok.Data;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.ja.smarkdown.load.TitleParser;
 import com.ja.smarkdown.util.LowerCaseStringComparator;
 
 @Data
@@ -49,7 +50,7 @@ public class Sitemap {
 		if (tokens.length == 1) {
 			pages.add(page);
 		} else {
-			final String sectionName = tokens[0];
+			final String sectionName = TitleParser.toTitle(tokens[0]);
 			final Sitemap section = getSection(sectionName);
 			section.add(Arrays.copyOfRange(tokens, 1, tokens.length), page);
 		}
