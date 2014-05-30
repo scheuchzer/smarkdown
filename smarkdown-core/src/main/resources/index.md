@@ -1,4 +1,4 @@
-# ![SD](smarkdown.png) This is Smarkdown!
+# ![SD](smarkdown/smarkdown.png) This is Smarkdown!
 
 
 ##Welcome!##
