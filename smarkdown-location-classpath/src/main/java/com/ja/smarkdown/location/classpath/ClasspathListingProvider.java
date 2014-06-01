@@ -1,11 +1,17 @@
 package com.ja.smarkdown.location.classpath;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.enterprise.inject.Instance;
+import javax.inject.Inject;
+import javax.servlet.ServletContext;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -68,21 +74,36 @@ public class ClasspathListingProvider extends AbstractListingProvider<Location> 
 		Vfs.setDefaultURLTypes(types);
 	}
 
+	@Inject
+	private Instance<ServletContext> servletContext;
+
 	@Override
 	protected List<String> getDocuments(final Location location) {
 		final List<String> result = new ArrayList<String>();
 		final String subDir = StringUtils.substringAfter(location.getUrl(),
 				"classpath:");
 
+		final Set<URL> classloaders = ClasspathHelper.forManifest();
+		/*
+		 * Glassfish works fine with forManifest() only but JBoss needs
+		 * forWebInfLib and forWebInfClasses.
+		 */
+		if (!servletContext.isUnsatisfied()) {
+			log.info("Including ServletContext urls.");
+			classloaders.addAll(ClasspathHelper.forWebInfLib(servletContext
+					.get()));
+			classloaders.add(ClasspathHelper.forWebInfClasses(servletContext
+					.get()));
+		}
 		final Reflections reflections = new Reflections(
-				new ConfigurationBuilder().addUrls(
-						ClasspathHelper.forManifest()).addScanners(
-						new ResourcesScanner()));
+				new ConfigurationBuilder().addUrls(filterURLs(classloaders))
+						.addScanners(new ResourcesScanner()));
 		final Set<String> files = reflections.getStore().getResources(
 				new Predicate<String>() {
 
 					@Override
 					public boolean apply(final String input) {
+						System.out.println("####" + input);
 						return input.toLowerCase().endsWith(".md");
 					}
 				});
@@ -96,6 +117,32 @@ public class ClasspathListingProvider extends AbstractListingProvider<Location> 
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * JBoss returns URLs with the vfszip and vfsfile protocol for resources,
+	 * and the org.reflections library doesn't recognize them. This is more a
+	 * bug inside the reflections library, but we can write a small workaround
+	 * for a quick fix on our side.
+	 */
+	private Set<URL> filterURLs(final Set<URL> urls) {
+		final Set<URL> results = new HashSet<URL>(urls.size());
+		for (final URL url : urls) {
+			String cleanURL = url.toString();
+			// Fix JBoss URLs
+			if (url.getProtocol().startsWith("vfszip:")) {
+				cleanURL = cleanURL.replaceFirst("vfszip:", "file:");
+			} else if (url.getProtocol().startsWith("vfsfile:")) {
+				cleanURL = cleanURL.replaceFirst("vfsfile:", "file:");
+			}
+			cleanURL = cleanURL.replaceFirst("\\.jar/", ".jar!/");
+			try {
+				results.add(new URL(cleanURL));
+			} catch (final MalformedURLException ex) {
+				// Shouldn't happen, but we can't do more to fix this URL.
+			}
+		}
+		return results;
 	}
 
 }
