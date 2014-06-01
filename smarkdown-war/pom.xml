@@ -19,11 +19,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.java-adventures.smarkdown</groupId>
-			<artifactId>smarkdown-location-webapp</artifactId>
+			<artifactId>smarkdown-location-classpath</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.java-adventures.smarkdown</groupId>
-			<artifactId>smarkdown-location-classpath</artifactId>
+			<artifactId>smarkdown-location-webapp</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.java-adventures.smarkdown</groupId>

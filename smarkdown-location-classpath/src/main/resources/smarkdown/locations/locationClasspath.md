@@ -43,5 +43,3 @@ to have them on the classpath.
 
 All Markdown files ``*.md`` in the defined directory and its sub directories 
 will be included into the [Sitemap](../../sitemap.xhtml).
-
-

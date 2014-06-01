@@ -1,11 +1,7 @@
 # Location - WEB-INF
 
 
-This file is located under the ``WEB-INF`` directory. The exact location is
-
-```bash
-WEB-INF/smarkdown/md/smarkdown/docs/locationWeb-Inf.md
-```
+Markdown files can be read from the ``WEB-INF`` directory of the webapp. 
 
 
 
@@ -24,15 +20,14 @@ web-inf:{path-to-root}
 
 for example:
 ```json
-{"url": "web-inf:smarkdown/md"}
+{"url": "web-inf:md"}
 ``` 
-is what's needed to be configured to see this page at url
-```bash
-http://{host}:{port}/{context-root}/smarkdown/docs/LocationWeb-Inf.html
-```
+This enables Markdown files inside the war file in the directory ``WEB-INF/md``. 
+
 
 
 ### Listing
+
 
 Unfortunately it's not possible (at least not easily) to list all files 
 inside a war-file and therefore the content of the WEB-INF directory.
@@ -46,7 +41,7 @@ example ``listing.json``:
 
 ```json
 {"files":[
-  "smarkdown/docs/locationWeb-Inf.md",
-  "another file"
+  "file1.md",
+  "another file.md"
 ]}
 ```

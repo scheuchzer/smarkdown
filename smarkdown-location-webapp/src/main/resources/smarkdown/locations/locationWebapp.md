@@ -1,11 +1,7 @@
 # Location - Webapp
 
 
-This file is located directly in the webapp (or the war-file) outside a classpath or the WEB-INF directory. The exact location is
-
-```bash
-smarkdown/md/smarkdown/docs/locationWebapp.md
-```
+Markdown files can be read from a webapp outside a classpath or the WEB-INF directory.
 
 
 
@@ -14,7 +10,7 @@ smarkdown/md/smarkdown/docs/locationWebapp.md
 
 ### Enable Webapp lookups
 
-To enable a Webapp location add an ``web-inf`` url to the configuration. 
+To enable a Webapp location add an ``webap`` url to the configuration. 
 
 Syntax:
 ```bash
@@ -24,15 +20,14 @@ webapp:{path-to-root}
 
 for example: 
 ```json
-{"url": "webapp:smarkdown/md"}
-``` 
-is what's needed to be configured to see this pageat url
-```bash
-http://{host}:{port}/{context-root}/smarkdown/docs/LocationWebapp.html
+{"url": "webapp:smarkdown"}
 ```
+This enables Markdown files inside the war file in the directory ``smarkdown``. 
+
 
 
 ### Listing
+
 
 Unfortunately it's not possible (at least not easily) to list all files 
 inside a war-file.
@@ -46,7 +41,7 @@ example ``listing.json``:
 
 ```json
 {"files":[
-  "smarkdown/docs/locationWebapp.md",
-  "another file"
+  "file1.md",
+  "another file.md"
 ]}
 ```

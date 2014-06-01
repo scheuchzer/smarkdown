@@ -24,4 +24,5 @@ classpath:
 ```
 
 
-If you just didn't understand what the lines above could mean please read the [Smarkdown introduction](smarkdown/smarkdown.md) and the [Smarkdown documentation](smarkdown/docs/configuration.md).
+If you just didn't understand what the lines above could mean please read 
+the [Smarkdown introduction](smarkdown/welcome.md) and the [Smarkdown documentation](smarkdown/configuration.md).

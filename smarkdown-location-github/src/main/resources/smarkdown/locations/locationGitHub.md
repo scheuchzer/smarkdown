@@ -21,6 +21,7 @@ for example:
 {"url": "github:scheuchzer/smarkdown"}
 ``` 
 
+
 ### Additional Properties
 
 ####branch
@@ -34,6 +35,7 @@ for example:
   "branch": "master"
 }
 ``` 
+
 
 ####authToken
 

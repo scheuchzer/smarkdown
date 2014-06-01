@@ -44,7 +44,7 @@ public class SmarkdownConfigurationParserTest {
 		assertThat(config.getPages().getTheme(), is("bootstrap"));
 		assertThat(config.getSlides().getTheme(), is("sky"));
 		assertThat(config.getSlides().getTransition(), is("default"));
-		assertThat(config.getLocations().size(), is(5));
+		assertThat(config.getLocations().size(), is(4));
 
 		final Location loc = new Location();
 		loc.setUrl("classpath:");

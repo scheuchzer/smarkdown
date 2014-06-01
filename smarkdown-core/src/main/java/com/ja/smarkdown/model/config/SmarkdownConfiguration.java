@@ -29,7 +29,6 @@ public class SmarkdownConfiguration {
         locations.add(create("web-inf:smarkdown/md"));
         locations.add(create("webapp:smarkdown/md"));
         locations.add(create("classpath:"));
-        locations.add(create("classpath:smarkdown/md"));
     }
 
 }

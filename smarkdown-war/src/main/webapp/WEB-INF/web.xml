@@ -20,15 +20,13 @@
 				},
 			"locations":[
 				{
-					"url":"file:///home/celli/smarkdown"
+					"url":"file:///home/{your_home_dir}/smarkdown"
 				},{
 					"url":"web-inf:smarkdown/md"
 				},{
 					"url":"webapp:smarkdown/md"
 				},{
 					"url":"classpath:"
-				},{
-					"url":"classpath:smarkdown/md"
 				}
 			]
 		}

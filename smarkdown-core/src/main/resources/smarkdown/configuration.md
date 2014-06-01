@@ -14,7 +14,7 @@ In Linux this would be the directory
 ```
 
 
-After creating some files, go to the [Sitemap](../../sitemap.xhtml) page the see them listed.
+After creating some files, go to the [Sitemap](../sitemap.xhtml) page the see them listed.
 
 
 
@@ -55,7 +55,6 @@ If needed, Smarkdown can be configured and customized through the ``context-para
 		{"url":"web-inf:smarkdown/md"},
 		{"url":"webapp:smarkdown/md"},
 		{"url":"classpath:"},
-		{"url":"classpath:smarkdown/md"}
 	]
 }
 ```
@@ -144,11 +143,11 @@ updated with a redeployment of the war file, the file-system location can be upd
 
 Currently the following location types are supported:
 
-- [Classpath](locationClasspath.md)
-- [WEB-INF](locationWeb-Inf.md)
-- [Webapp](locationWebapp.md)
-- [File-System](locationFileSystem.md)
-- [GitHub](locationGitHub.md)
+- [Classpath](locations/locationClasspath.md)
+- [WEB-INF](locations/locationWeb-Inf.md)
+- [Webapp](locations/locationWebapp.md)
+- [File-System](locations/locationFileSystem.md)
+- [GitHub](locations/locationGitHub.md)
 
 
 **Element:** ``locations/url``
@@ -180,6 +179,6 @@ http://localhost:8080/smarkdown/foo/bar/test.html
 
 ## Ways to modify web.xml
 
-
 - Clone Smarkdown
-- Deployment-Plans/-Overlays 
+- Deployment-Plans/-Overlays
+- Build your own application 
