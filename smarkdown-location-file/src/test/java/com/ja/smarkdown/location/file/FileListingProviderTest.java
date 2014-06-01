@@ -28,7 +28,7 @@ public class FileListingProviderTest {
 	}
 
 	@Test
-	public void onEventSubDir() {
+	public void getDocumentsSubDir() {
 		final Location location = Location.create(String.format(
 				"file://%s/sub", folder.getRoot().getAbsolutePath()));
 
@@ -40,7 +40,7 @@ public class FileListingProviderTest {
 	}
 
 	@Test
-	public void onEvent() {
+	public void getDocuments() {
 		final Location location = Location.create(String.format("file://%s",
 				folder.getRoot().getAbsolutePath()));
 
@@ -52,7 +52,7 @@ public class FileListingProviderTest {
 	}
 
 	@Test
-	public void onEventWithMountPoint() {
+	public void getDocumentsWithMountPoint() {
 		final Location location = Location.create(String.format("file://%s",
 				folder.getRoot().getAbsolutePath()));
 		location.getConfig().put(Location.Properties.mountPoint.toString(),

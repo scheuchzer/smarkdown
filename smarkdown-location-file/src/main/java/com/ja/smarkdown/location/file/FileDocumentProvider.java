@@ -14,13 +14,13 @@ import com.ja.smarkdown.model.config.Location;
 public class FileDocumentProvider extends AbstractDocumentProvider<Location> {
 
 	public FileDocumentProvider() {
-		super("classpath:", "");
+		super("file://", "");
 	}
 
 	@Override
 	protected InputStream getInputStream(final Location location,
 			final String path) throws FileNotFoundException {
-		final String url = String.format("%s/%s", location.getUrl(), path);
+		final String url = String.format("file://%s", path);
 		log.debug("Resolved url={}", url);
 		try {
 			final URL resourceUrl = new URL(url);
