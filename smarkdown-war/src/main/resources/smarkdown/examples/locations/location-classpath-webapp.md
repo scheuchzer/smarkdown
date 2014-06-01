@@ -1,8 +1,8 @@
-# Example - Location Classpath
+# Example - Location Classpath 
 
 
 This file is located in the classpath of a web-application.
 
 ```
-smarkdown/examples/locations/location-war-file-classpath.md
+{archive}/WEB-INF/classes/smarkdown/examples/locations/location-classpath-webapp.md
 ```

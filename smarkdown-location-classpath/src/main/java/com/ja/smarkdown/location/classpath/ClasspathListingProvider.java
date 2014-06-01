@@ -52,11 +52,13 @@ public class ClasspathListingProvider extends AbstractListingProvider<Location> 
 				return new SystemDir(tmpDir.toFile());
 			}
 		};
+		/* Fix for Glassfish */
 		final UrlType generatedDir = new UrlType() {
 
 			@Override
 			public boolean matches(final URL url) throws Exception {
 				return url.getProtocol().equals("file")
+						&& url.toExternalForm().contains("generated")
 						&& url.toExternalForm().endsWith("/");
 			}
 
@@ -88,7 +90,7 @@ public class ClasspathListingProvider extends AbstractListingProvider<Location> 
 		 * Glassfish works fine with forManifest() only but JBoss needs
 		 * forWebInfLib and forWebInfClasses.
 		 */
-		if (!servletContext.isUnsatisfied()) {
+		if (servletContext != null && !servletContext.isUnsatisfied()) {
 			log.info("Including ServletContext urls.");
 			classloaders.addAll(ClasspathHelper.forWebInfLib(servletContext
 					.get()));
@@ -103,7 +105,6 @@ public class ClasspathListingProvider extends AbstractListingProvider<Location> 
 
 					@Override
 					public boolean apply(final String input) {
-						System.out.println("####" + input);
 						return input.toLowerCase().endsWith(".md");
 					}
 				});
