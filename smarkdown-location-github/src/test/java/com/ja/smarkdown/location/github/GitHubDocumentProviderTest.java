@@ -13,8 +13,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.ja.smarkdown.location.github.GitHubDocumentProvider;
-import com.ja.smarkdown.location.github.GitHubLocation;
 import com.ja.smarkdown.model.ResourceInfo;
 import com.ja.smarkdown.model.config.Location;
 
@@ -23,14 +21,17 @@ public class GitHubDocumentProviderTest {
 
 	@Rule
 	public TemporaryFolder temp = new TemporaryFolder();
-
+	@Rule
+	public AuthTokenRule authTokenRule = new AuthTokenRule();
 	@InjectMocks
 	private GitHubDocumentProvider provider;
 
 	@Test
 	public void testGetDocumentInRoot() throws Exception {
+		authTokenRule.assumeAuthToken();
 		final Location location = Location
 				.create("github:scheuchzer/smarkdown:");
+		authTokenRule.setAuthToken(location);
 		final ResourceInfo actual = provider.getDocument(
 				Arrays.asList(new GitHubLocation(location)), "README.md");
 		assertThat(actual, is(notNullValue()));
@@ -39,23 +40,14 @@ public class GitHubDocumentProviderTest {
 
 	@Test
 	public void testGetDocumentInFolder() throws Exception {
+		authTokenRule.assumeAuthToken();
 		final Location location = Location
-				.create("github:scheuchzer/smarkdown:smarkdown-github/src/test/resources");
+				.create("github:scheuchzer/smarkdown:smarkdown-location-github/src/test/resources");
+		authTokenRule.setAuthToken(location);
 		final ResourceInfo actual = provider.getDocument(
 				Arrays.asList(new GitHubLocation(location)), "smarkdown-it.md");
 		assertThat(actual, is(notNullValue()));
 		assertThat(actual.getInputStream(), is(notNullValue()));
 	}
 
-	// @Test
-	// public void testGetDocumentInFolder() throws Exception {
-	// doReturn(temp.newFile().toURI().toURL()).when(servletContext)
-	// .getResource(eq("/md/index.md"));
-	// final Location location = Location.create("webapp:md");
-	// final ResourceInfo actual = provider.getDocument(
-	// Arrays.asList(location), "index.md");
-	// assertThat(actual, is(notNullValue()));
-	// assertThat(actual.getLocation(), is("index.md"));
-	// assertThat(actual.getInputStream(), is(notNullValue()));
-	// }
 }
