@@ -9,20 +9,22 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.ja.smarkdown.location.classpath.ClasspathListingProvider;
 import com.ja.smarkdown.model.config.Location;
 
 public class ClasspathListingProviderTest {
 
 	@Test
 	public void testGetDocumentsSubDir() {
-		final Location location = Location.create("classpath:dir1");
+		final Location location = Location
+				.create("classpath:com/ja/smarkdown/location/classpath");
 
 		final ClasspathListingProvider provider = new ClasspathListingProvider();
 		final List<String> actual = provider.getDocuments(Arrays
 				.asList(location));
-		assertTrue(actual.contains("ClasspathTest2.md"));
-		assertThat(actual.size(), is(1));
+		System.out.println(actual);
+		assertTrue(actual.contains("FileInDir.md"));
+		assertTrue(actual.contains("dir1/FileInDir1.md"));
+		assertThat(actual.size(), is(2));
 	}
 
 	@Test
@@ -32,21 +34,11 @@ public class ClasspathListingProviderTest {
 		final ClasspathListingProvider provider = new ClasspathListingProvider();
 		final List<String> actual = provider.getDocuments(Arrays
 				.asList(location));
-		assertTrue(actual.contains("ClasspathTest1.md"));
-		assertTrue(actual.contains("dir1/ClasspathTest2.md"));
-		assertThat(actual.size(), is(2));
+		assertTrue(actual.contains("FileInRoot.md"));
+		assertTrue(actual
+				.contains("com/ja/smarkdown/location/classpath/FileInDir.md"));
+		assertTrue(actual
+				.contains("com/ja/smarkdown/location/classpath/dir1/FileInDir1.md"));
 	}
 
-	@Test
-	public void onEventWithMountPoint() {
-		final Location location = Location.create("classpath:");
-		location.getConfig().put(Location.Properties.mountPoint.toString(),
-				"test/foo");
-
-		final ClasspathListingProvider provider = new ClasspathListingProvider();
-		final List<String> actual = provider.getDocuments(Arrays
-				.asList(location));
-		assertTrue(actual.contains("test/foo/ClasspathTest1.md"));
-		assertTrue(actual.contains("test/foo/dir1/ClasspathTest2.md"));
-	}
 }
