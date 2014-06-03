@@ -23,37 +23,6 @@ public class GitHubDocumentProvider extends
 		super("github:", "");
 	}
 
-	// @Override
-	// protected ResourceInfo getDocument(final GitHubLocation location,
-	// final String resource) {
-	// ResourceInfo document = null;
-	// final String strippedResource = MountPointUtil.remove(location,
-	// resource);
-	// try {
-	// final GitHub github = location.open();
-	// final GHRepository repo = github.getRepository(location
-	// .getRepoName());
-	// log.info("Using branch={}", location.getBranch());
-	// final GHBranch branch = repo.getBranches()
-	// .get(location.getBranch());
-	//
-	// final String path = String.format("%s/%s", location.getPath(),
-	// strippedResource);
-	// log.info("GitHub path={}", path);
-	// final GHContent content = repo.getFileContent(path,
-	// branch.getName());
-	// final String text = content.getContent();
-	//
-	// document = new ResourceInfo(this.getClass(), resource,
-	// new ByteArrayInputStream(text.getBytes()));
-	// } catch (final FileNotFoundException e) {
-	// log.info("This file is not in my repo. {}", e.getMessage());
-	// } catch (final Exception e) {
-	// log.error("Can't process this url={}", resource, e);
-	// }
-	// return document;
-	// }
-
 	@Override
 	protected InputStream getInputStream(final GitHubLocation location,
 			final String path) throws FileNotFoundException {

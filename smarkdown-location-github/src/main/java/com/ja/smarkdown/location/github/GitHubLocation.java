@@ -1,6 +1,7 @@
 package com.ja.smarkdown.location.github;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,6 +23,9 @@ public class GitHubLocation extends Location {
 		setConfig(location.getConfig());
 		setMountPoint(location.getMountPoint());
 		setUrl(location.getUrl());
+		if (location.getCacheDuration() == 0) {
+			setCacheDuration(TimeUnit.MINUTES.toMillis(60));
+		}
 	}
 
 	public boolean isAcceptable() {

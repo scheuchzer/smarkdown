@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.StringUtils;
@@ -17,7 +16,6 @@ import com.ja.smarkdown.load.AbstractListingProvider;
 import com.ja.smarkdown.load.MountPointUtil;
 
 @Slf4j
-@AllArgsConstructor
 public class GitHubListingProvider extends
 		AbstractListingProvider<GitHubLocation> {
 
@@ -63,8 +61,12 @@ public class GitHubListingProvider extends
 			final GitHubLocation location, final GHRepository repo,
 			final GHBranch branch, final GHContent c) throws IOException {
 		log.debug("handle dir={}", c.getPath());
-		listRepo(documents, location, repo, branch, c.getPath());
+		listRepo(documents, location, repo, branch, encode(c.getPath()));
 
+	}
+
+	private String encode(final String path) {
+		return StringUtils.replace(path, " ", "%20");
 	}
 
 	private void handleFile(final List<String> documents,

@@ -28,7 +28,12 @@ public class SmarkdownConfigurationParserTest {
 		final Iterator<Location> it = config.getLocations().iterator();
 		Location loc = it.next();
 		assertThat(loc.getUrl(), is("classpath:/"));
-		assertThat(loc.getConfig().isEmpty(), is(true));
+		assertThat(loc.getConfig().size(), is(1));
+		assertThat(
+				loc.getConfig().get(
+						Location.Properties.cacheDuration.toString()),
+				is("1 MINUTES"));
+		assertThat(loc.getCacheDuration(), is(60000L));
 		loc = it.next();
 		assertThat(loc.getUrl(), is("file:///"));
 		assertThat(loc.getConfig().isEmpty(), is(false));

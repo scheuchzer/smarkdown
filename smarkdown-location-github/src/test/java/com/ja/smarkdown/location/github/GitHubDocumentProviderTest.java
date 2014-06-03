@@ -6,6 +6,7 @@ import static org.junit.Assert.assertThat;
 
 import java.util.Arrays;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -27,6 +28,7 @@ public class GitHubDocumentProviderTest {
 	private GitHubDocumentProvider provider;
 
 	@Test
+	@Ignore("Takes a very long time")
 	public void testGetDocumentInRoot() throws Exception {
 		authTokenRule.assumeAuthToken();
 		final Location location = Location

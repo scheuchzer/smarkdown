@@ -5,15 +5,27 @@ import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
 
+import com.ja.smarkdown.model.config.Location;
+
 @Slf4j
-public abstract class AbstractListingProvider<LOCATION_TYPE> {
+public abstract class AbstractListingProvider<LOCATION_TYPE extends Location> {
+
+	private final Cache cache = new Cache();
 
 	public List<String> getDocuments(final List<LOCATION_TYPE> locations) {
 		final List<String> documents = new ArrayList<String>();
-		log.info("Starting listing from {} locations", locations.size());
+		log.debug("Starting listing from {} locations", locations.size());
 		for (final LOCATION_TYPE location : locations) {
-			log.info("Start listing documents from lcoation={}", location);
-			documents.addAll(getDocuments(location));
+			log.debug("Start listing documents from lcoation={}", location);
+
+			List<String> result = cache.get(location);
+			if (result == null) {
+				result = getDocuments(location);
+				cache.put(location, result);
+			} else {
+				log.debug("Using cached listing for location={}", location);
+			}
+			documents.addAll(result);
 		}
 		return documents;
 	}

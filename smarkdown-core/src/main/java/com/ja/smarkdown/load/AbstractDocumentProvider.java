@@ -16,8 +16,8 @@ import com.ja.smarkdown.model.config.Location;
 @AllArgsConstructor
 public abstract class AbstractDocumentProvider<LOCATION_TYPE extends Location> {
 
-	private String protocol;
-	private String resourcePrefix;
+	private final String protocol;
+	private final String resourcePrefix;
 
 	public ResourceInfo getDocument(final List<LOCATION_TYPE> locations,
 			final String resource) {

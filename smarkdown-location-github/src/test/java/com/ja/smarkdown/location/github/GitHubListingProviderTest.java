@@ -7,24 +7,37 @@ import static org.junit.Assert.assertTrue;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Assume;
+import org.junit.Rule;
 import org.junit.Test;
 
-import com.ja.smarkdown.location.github.GitHubListingProvider;
-import com.ja.smarkdown.location.github.GitHubLocation;
 import com.ja.smarkdown.model.config.Location;
 
 public class GitHubListingProviderTest {
 
-	private String authToken = System.getProperty("gitAuthToken");
+	@Rule
+	public AuthTokenRule authTokenRule = new AuthTokenRule();
 
 	@Test
-	public void testOnEvent() {
-		Assume.assumeTrue(authToken != null);
+	public void testGetDocumentsSubDir() {
+		authTokenRule.assumeAuthToken();
 		final Location location = Location
-				.create("github:scheuchzer/smarkdown:smarkdown-github/src/test/resources");
-		location.getConfig().put(
-				GitHubLocation.Properties.authToken.toString(), authToken);
+				.create("github:scheuchzer/smarkdown:smarkdown-location-github/src/test/resources");
+		authTokenRule.setAuthToken(location);
+
+		final GitHubListingProvider provider = new GitHubListingProvider();
+		final List<String> actual = provider.getDocuments(Arrays
+				.asList(new GitHubLocation(location)));
+
+		assertTrue(actual.contains("smarkdown-it.md"));
+		assertThat(actual.size(), is(1));
+	}
+
+	@Test
+	public void testGetDocuments() {
+		authTokenRule.assumeAuthToken();
+		final Location location = Location
+				.create("github:scheuchzer/smarkdown");
+		authTokenRule.setAuthToken(location);
 
 		final GitHubListingProvider provider = new GitHubListingProvider();
 		final List<String> actual = provider.getDocuments(Arrays

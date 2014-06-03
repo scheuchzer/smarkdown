@@ -1,4 +1,5 @@
-# Configuration
+#Smarkdown
+## Configuration
 
 
 - Smarkdown works out of the box without any configuration
@@ -134,7 +135,7 @@ Currently available themes are:
 
 Smarkdown can read Markdown files from several locations. This can be the classpath
 or a a sub-directory of it, a file-system or from somewhere inside your application war
-file.
+file. It's possible to implement your own location.
 
 
 Whereas war file and classpath locations represent static files that only can be
@@ -150,12 +151,31 @@ Currently the following location types are supported:
 - [GitHub](locations/locationGitHub.md)
 
 
+Every location has two configuration attributes. These are
+
+- url
+- config
+
+
 **Element:** ``locations/url``
 
-The base url of a location. The format depends on the location type.
+The base url of a location. The format depends on the location type. For the very simple
+locations like ``classpath`` or ``file`` the ``url`` attribute will be the only attribute
+to configure. For more specific configuration you'll have to add the ``config`` attribute.
 
 
-**Element:** ``locations/mountPoint``
+**Element:** ``locations/config``
+
+The configuration attribute contains a map of attributes. Locations can use this to define
+location specific configuration attributes.
+
+Config attributes that are available for all location types are:
+
+- mountPoint
+- cacheDuration
+
+
+**Element:** ``locations/config/mountPoint``
 
 Locations can be mounted into the smarkdown file hierarchy. By default they just get added to the root.
 
@@ -164,7 +184,9 @@ Example:
 ```json
 {
 	"url": "file///var/tmp",
-	"mountPoint": "foo/bar"
+	"config":{
+		"mountPoint":"foo/bar"
+	}
 } 
 ```
 In this example, all markdown files located under ``/var/tmp`` will be made available
@@ -175,6 +197,35 @@ Say, file ``/var/tmp/test.md`` will be available at
 ```url
 http://localhost:8080/smarkdown/foo/bar/test.html
 ```
+
+
+**Element:** ``location/config/cacheDuration``
+
+As loading the sitemap might take some time, the results gets cached. By default the
+cache time is one minute. The default value can be changed per location with the this attribute.
+
+
+The syntax is 
+
+```
+{number} {TimeUnit}
+```
+
+See [the Java TimeUnit class](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/TimeUnit.html) 
+for possible time units. For readability also singular and lowercase forms of the Java TimeUnits are supported.
+
+
+Example:
+```json
+{
+	"url": "file///var/tmp",
+	"config":{
+		"cacheDuration":"1 hour"
+	}
+} 
+```
+In this example we scan the ``/var/tmp`` directory only once an hour.
+
 
 
 ## Ways to modify web.xml

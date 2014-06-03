@@ -34,6 +34,7 @@ public class GitHubLocationHandler implements LocationHandler {
 		locations.add(location);
 	}
 
+	@Override
 	public void add(final Location location) {
 		add(new GitHubLocation(location));
 	}
