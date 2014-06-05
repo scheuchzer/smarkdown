@@ -303,9 +303,9 @@
 	</modules>
 
 	<scm>
-		<connection>scm:git@github.com:scheuchzer/smarkdown.git</connection>
-		<developerConnection>scm:git@github.com:scheuchzer/smarkdown.git</developerConnection>
-		<url>http://github.com/scheuchzer/smarkdown</url>
+		<connection>scm:git:git@github.com:scheuchzer/smarkdown.git</connection>
+		<developerConnection>scm:git:git@github.com:scheuchzer/smarkdown.git</developerConnection>
+		<url>git@github.com:scheuchzer/smarkdown.git</url>
 	</scm>
 
 	<issueManagement>
