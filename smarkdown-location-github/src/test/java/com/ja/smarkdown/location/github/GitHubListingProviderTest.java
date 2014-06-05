@@ -1,5 +1,6 @@
 package com.ja.smarkdown.location.github;
 
+import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -43,8 +44,7 @@ public class GitHubListingProviderTest {
 		final List<String> actual = provider.getDocuments(Arrays
 				.asList(new GitHubLocation(location)));
 
-		assertTrue(actual.contains("smarkdown-it.md"));
-		assertThat(actual.size(), is(1));
+		assertThat(actual.size(), is(greaterThan(1)));
 	}
 
 }
