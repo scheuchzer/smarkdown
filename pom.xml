@@ -7,7 +7,7 @@
 	</parent>
 	<groupId>com.java-adventures.smarkdown</groupId>
 	<artifactId>smarkdown-parent</artifactId>
-	<version>0.3-SNAPSHOT</version>
+	<version>0.2.1-SNAPSHOT</version>
 	<name>Smarkdown - Parent</name>
 	<packaging>pom</packaging>
 	<url>http://java-adventures.com</url>
