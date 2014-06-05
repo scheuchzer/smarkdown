@@ -26,7 +26,7 @@ public abstract class AbstractUrlDocumentProvider<LOCATION_TYPE extends Location
 		try {
 			final URL resourceUrl = getUrl(location, path);
 			if (resourceUrl == null) {
-				log.info("Resource not found at path={}", path);
+				log.debug("Resource not found at path={}", path);
 				throw new FileNotFoundException(path);
 			} else {
 				return resourceUrl.openStream();
@@ -34,7 +34,7 @@ public abstract class AbstractUrlDocumentProvider<LOCATION_TYPE extends Location
 		} catch (final FileNotFoundException e) {
 			throw e;
 		} catch (final IOException e) {
-			log.error("Resource not found at path={}", path, e);
+			log.debug("Resource not found at path={}", path, e);
 			throw new FileNotFoundException(path);
 		}
 	}

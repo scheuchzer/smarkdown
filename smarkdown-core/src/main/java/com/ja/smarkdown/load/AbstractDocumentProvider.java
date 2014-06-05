@@ -21,19 +21,19 @@ public abstract class AbstractDocumentProvider<LOCATION_TYPE extends Location> {
 
 	public ResourceInfo getDocument(final List<LOCATION_TYPE> locations,
 			final String resource) {
-		log.info("Start loading document from {} locations", locations.size());
+		log.debug("Start loading document from {} locations", locations.size());
 		for (final LOCATION_TYPE location : locations) {
-			log.info("Loading documents from location {}", location);
+			log.debug("Loading documents from location {}", location);
 			final ResourceInfo document = getDocument(location, resource);
 			if (document == null) {
-				log.info("Document not found, yet. LOCATION_TYPE was {}",
+				log.debug("Document not found, yet. LOCATION_TYPE was {}",
 						location);
 			} else {
-				log.info("Document found at location {}", location);
+				log.debug("Document found at location {}", location);
 				return document;
 			}
 		}
-		log.info("Document not found in any  location");
+		log.debug("Document not found in any location");
 		return null;
 	}
 
@@ -51,7 +51,7 @@ public abstract class AbstractDocumentProvider<LOCATION_TYPE extends Location> {
 				path = String.format("%s%s/%s", resourcePrefix, rootPath,
 						strippedResource);
 			}
-			log.info("Resource path={}", path);
+			log.debug("Resource path={}", path);
 			document = new ResourceInfo(this.getClass(), getInputStream(
 					location, path));
 		} catch (final FileNotFoundException e) {

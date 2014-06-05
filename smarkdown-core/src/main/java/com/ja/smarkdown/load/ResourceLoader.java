@@ -21,20 +21,20 @@ public class ResourceLoader {
 
 		for (final LocationHandler handler : config.getLocationHandlers()) {
 			try {
-				log.info("Calling handler={}", handler);
+				log.debug("Calling handler={}", handler);
 				final ResourceInfo result = handler.loadDocument(resource);
 				if (result != null) {
-					log.info("Handler {} sucessful", handler);
+					log.debug("Handler {} sucessful", handler);
 					return result;
 				}
-				log.info("Handler {} not successful", handler);
+				log.debug("Handler {} not successful", handler);
 			} catch (final Exception e) {
 				log.warn("Handler {} failed for resource {}. {}", handler,
 						resource, e);
 			}
 
 		}
-		log.info("Resource {} not found.", resource);
+		log.debug("Resource {} not found.", resource);
 		return null;
 	}
 }

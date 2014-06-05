@@ -16,7 +16,7 @@ public abstract class AbstractLocationHandlerConfigurator {
 	private final String prefix;
 
 	public void configure(@Observes final ConfigEvent event) {
-		log.info("ConfigEvent received. Location={}, {}", event.getLocation(),
+		log.debug("ConfigEvent received. Location={}, {}", event.getLocation(),
 				this);
 		final Location location = event.getLocation();
 		if (location.getUrl().startsWith(prefix)) {
@@ -25,7 +25,7 @@ public abstract class AbstractLocationHandlerConfigurator {
 			handler.add(location);
 			event.setHandler(handler);
 		} else {
-			log.info("Nope. {}", this);
+			log.debug("Nope. {}", this);
 		}
 	}
 
