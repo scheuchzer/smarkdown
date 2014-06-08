@@ -1,17 +1,17 @@
 package com.ja.smarkdown.config;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 
-import java.io.Reader;
+import java.util.Arrays;
 
 import javax.enterprise.event.Event;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
-import javax.servlet.ServletContext;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -21,7 +21,6 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
-import com.ja.smarkdown.json.SmarkdownConfigurationParser;
 import com.ja.smarkdown.model.LocationHandler;
 import com.ja.smarkdown.model.config.Location;
 import com.ja.smarkdown.model.config.SmarkdownConfiguration;
@@ -34,9 +33,11 @@ public class ConfigurationTest {
 	@Mock
 	private LocationHandler handlerMock;
 	@Inject
-	private ServletContext servletContext;
-	@Inject
-	private SmarkdownConfigurationParser parser = new SmarkdownConfigurationParser();
+	private Instance<ConfigurationProvider> configurationProviders;
+	@Mock
+	private ConfigurationProvider configurationProvider;
+	@Mock
+	private ConfigurationProvider configurationProvider2;
 	@Inject
 	private Event<ConfigEvent> events;
 	@Rule
@@ -47,13 +48,11 @@ public class ConfigurationTest {
 
 	@Test
 	public void testCreate() {
-		final String configString = "{\"locations\":[{\"url\":\"dummy:foo}]}";
-		doReturn(configString).when(servletContext).getInitParameter(
-				eq("smarkdown.configuration"));
 		final SmarkdownConfiguration config = new SmarkdownConfiguration();
 		config.getLocations().clear();
 		config.getLocations().add(Location.create("dummy:foo"));
-		doReturn(config).when(parser).parse(any(Reader.class));
+		doReturn(config).when(configurationProvider).getConfiguration();
+		doReturn(configurationProvider).when(configurationProviders).get();
 
 		doAnswer(new Answer<Void>() {
 
@@ -74,13 +73,65 @@ public class ConfigurationTest {
 	}
 
 	@Test
-	public void testCreateWithLocationWithoutHandler() {
-		final String configString = "{\"locations\":[{\"url\":\"dummy:foo}]}";
-		doReturn(configString).when(servletContext).getInitParameter(
-				eq("smarkdown.configuration"));
+	public void testCreateMultipleConfigurationProviders() {
 		final SmarkdownConfiguration config = new SmarkdownConfiguration();
+		config.getLocations().clear();
 		config.getLocations().add(Location.create("dummy:foo"));
-		doReturn(config).when(parser).parse(any(Reader.class));
+		doReturn(config).when(configurationProvider).getConfiguration();
+		doReturn(true).when(configurationProviders).isAmbiguous();
+		doReturn(
+				Arrays.asList(configurationProvider, configurationProvider2)
+						.iterator()).when(configurationProviders).iterator();
+
+		doAnswer(new Answer<Void>() {
+
+			@Override
+			public Void answer(final InvocationOnMock invocation)
+					throws Throwable {
+				final ConfigEvent event = (ConfigEvent) invocation
+						.getArguments()[0];
+				event.setHandler(handlerMock);
+				return null;
+			}
+		}).when(events).fire(any(ConfigEvent.class));
+
+		final SmarkdownConfiguration actual = configuration.create();
+		assertThat(actual.getLocationHandlers().size(), is(1));
+		assertThat(actual.getLocationHandlers().iterator().next(),
+				is(handlerMock));
+	}
+
+	@Test
+	public void testCreateNoConfigurationProviders() {
+		doReturn(true).when(configurationProviders).isUnsatisfied();
+
+		doAnswer(new Answer<Void>() {
+
+			@Override
+			public Void answer(final InvocationOnMock invocation)
+					throws Throwable {
+				final ConfigEvent event = (ConfigEvent) invocation
+						.getArguments()[0];
+				event.setHandler(handlerMock);
+				return null;
+			}
+		}).when(events).fire(any(ConfigEvent.class));
+
+		final SmarkdownConfiguration actual = configuration.create();
+		assertThat(actual.getLocationHandlers().size(), is(1));
+		assertThat(actual.getLocationHandlers().iterator().next(),
+				is(handlerMock));
+		assertThat(actual.getLocations().iterator().next().getUrl(),
+				startsWith("file:"));
+	}
+
+	@Test
+	public void testCreateWithLocationWithoutHandler() {
+		final SmarkdownConfiguration config = new SmarkdownConfiguration();
+		config.getLocations().clear();
+		config.getLocations().add(Location.create("dummy:foo"));
+		doReturn(config).when(configurationProvider).getConfiguration();
+		doReturn(configurationProvider).when(configurationProviders).get();
 
 		final SmarkdownConfiguration actual = configuration.create();
 		assertThat(actual.getLocationHandlers().size(), is(0));

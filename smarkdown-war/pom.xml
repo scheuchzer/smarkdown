@@ -18,6 +18,10 @@
 		</dependency>
 		<dependency>
 			<groupId>com.java-adventures.smarkdown</groupId>
+			<artifactId>smarkdown-configuration-web-xml</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.java-adventures.smarkdown</groupId>
 			<artifactId>smarkdown-location-classpath</artifactId>
 		</dependency>
 		<dependency>

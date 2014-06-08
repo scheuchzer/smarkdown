@@ -43,6 +43,11 @@
 			</dependency>
 			<dependency>
 				<groupId>com.java-adventures.smarkdown</groupId>
+				<artifactId>smarkdown-configuration-web-xml</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.java-adventures.smarkdown</groupId>
 				<artifactId>smarkdown-location-github</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -276,6 +281,7 @@
 	</build>
 	<modules>
 		<module>smarkdown-core</module>
+		<module>smarkdown-configuration-web-xml</module>
 		<module>smarkdown-location-classpath</module>
 		<module>smarkdown-location-webapp</module>
 		<module>smarkdown-location-github</module>

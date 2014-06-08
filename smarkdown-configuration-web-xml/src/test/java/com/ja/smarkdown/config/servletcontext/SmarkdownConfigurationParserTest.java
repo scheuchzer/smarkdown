@@ -1,4 +1,4 @@
-package com.ja.smarkdown.json;
+package com.ja.smarkdown.config.servletcontext;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -38,22 +38,6 @@ public class SmarkdownConfigurationParserTest {
 		assertThat(loc.getUrl(), is("file:///"));
 		assertThat(loc.getConfig().isEmpty(), is(false));
 		assertThat(loc.getConfig().get("mountPoint"), is("test"));
-	}
-
-	@Test
-	public void testReadDefault() {
-		final StringReader in = new StringReader("{}");
-		final SmarkdownConfiguration config = new SmarkdownConfigurationParser()
-				.parse(in);
-		assertThat(config.getApplicationName(), is("Smarkdown"));
-		assertThat(config.getPages().getTheme(), is("bootstrap"));
-		assertThat(config.getSlides().getTheme(), is("sky"));
-		assertThat(config.getSlides().getTransition(), is("default"));
-		assertThat(config.getLocations().size(), is(4));
-
-		final Location loc = new Location();
-		loc.setUrl("classpath:");
-		assertThat(config.getLocations().contains(loc), is(true));
 	}
 
 	@Test

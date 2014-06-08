@@ -1,18 +1,15 @@
 package com.ja.smarkdown.config;
 
-import java.io.StringReader;
+import java.util.Iterator;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Event;
+import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
-import javax.servlet.ServletContext;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.apache.commons.lang3.StringUtils;
-
-import com.ja.smarkdown.json.SmarkdownConfigurationParser;
 import com.ja.smarkdown.model.config.Location;
 import com.ja.smarkdown.model.config.SmarkdownConfiguration;
 
@@ -20,14 +17,10 @@ import com.ja.smarkdown.model.config.SmarkdownConfiguration;
 @Slf4j
 public class Configuration {
 
-	private static final String SMARKDOWN_CONFIGURATION = "smarkdown.configuration";
-
-	@Inject
-	private ServletContext servletContext;
 	@Inject
 	private Event<ConfigEvent> events;
 	@Inject
-	private SmarkdownConfigurationParser parser;
+	private Instance<ConfigurationProvider> configurationProviders;
 
 	private SmarkdownConfiguration config;
 
@@ -36,18 +29,8 @@ public class Configuration {
 		if (config != null) {
 			return config;
 		}
-		final String configString = servletContext
-				.getInitParameter(SMARKDOWN_CONFIGURATION);
-		log.info("Configuration from web.xml is: {}", configString);
 
-		SmarkdownConfiguration newConfig = null;
-		if (StringUtils.isEmpty(configString)) {
-			log.info("Using default configuration.");
-			newConfig = new SmarkdownConfiguration();
-		} else {
-			newConfig = parser.parse(new StringReader(configString));
-		}
-
+		final SmarkdownConfiguration newConfig = resolveConfig();
 		for (final Location location : newConfig.getLocations()) {
 			final ConfigEvent event = new ConfigEvent(newConfig, location);
 			events.fire(event);
@@ -62,6 +45,38 @@ public class Configuration {
 			}
 		}
 		config = newConfig;
+		return config;
+	}
+
+	private SmarkdownConfiguration resolveConfig() {
+		SmarkdownConfiguration config = null;
+		if (configurationProviders.isUnsatisfied()) {
+			log.warn("No {} found! Use minimalistic config.",
+					ConfigurationProvider.class.getName());
+			config = new SmarkdownConfiguration();
+			config.getLocations().add(
+					Location.create(String.format("file://%s/smarkdown",
+							System.getProperty("user.home"))));
+			return config;
+		} else if (configurationProviders.isAmbiguous()) {
+			log.warn("More than one {} configured",
+					ConfigurationProvider.class.getName());
+			final Iterator<ConfigurationProvider> it = configurationProviders
+					.iterator();
+			final ConfigurationProvider provider = it.next();
+			log.warn("Will use {}={}", ConfigurationProvider.class.getName(),
+					provider);
+			config = provider.getConfiguration();
+			while (it.hasNext()) {
+				log.warn("Skipping configuration from {}={}",
+						ConfigurationProvider.class.getName(), it.next());
+			}
+		} else {
+			final ConfigurationProvider provider = configurationProviders.get();
+			log.info("Reading configuration from {}={}",
+					ConfigurationProvider.class.getName(), provider);
+			config = provider.getConfiguration();
+		}
 		return config;
 	}
 }
