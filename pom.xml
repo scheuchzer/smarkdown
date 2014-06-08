@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -32,7 +34,6 @@
 		<java.version>1.7</java.version>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 	</properties>
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -59,6 +60,12 @@
 				<groupId>com.java-adventures.smarkdown</groupId>
 				<artifactId>smarkdown-location-classpath</artifactId>
 				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.java-adventures.smarkdown</groupId>
+				<artifactId>smarkdown-war</artifactId>
+				<version>${project.version}</version>
+				<type>war</type>
 			</dependency>
 			<dependency>
 				<groupId>javax.enterprise</groupId>
@@ -240,6 +247,16 @@
 					<artifactId>maven-release-plugin</artifactId>
 					<version>2.5</version>
 				</plugin>
+				<plugin>
+					<groupId>org.codehaus.cargo</groupId>
+					<artifactId>cargo-maven2-plugin</artifactId>
+					<version>1.4.8</version>
+				</plugin>
+				<plugin>
+					<groupId>com.smartbear.soapui</groupId>
+					<artifactId>soapui-maven-plugin</artifactId>
+					<version>4.6.1</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -257,7 +274,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
 	<modules>
 		<module>smarkdown-core</module>
 		<module>smarkdown-location-classpath</module>
@@ -265,18 +281,22 @@
 		<module>smarkdown-location-github</module>
 		<module>smarkdown-location-file</module>
 		<module>smarkdown-war</module>
+		<module>smarkdown-war-integration-test</module>
 	</modules>
-
 	<scm>
 		<connection>scm:git:git@github.com:scheuchzer/smarkdown.git</connection>
 		<developerConnection>scm:git:git@github.com:scheuchzer/smarkdown.git</developerConnection>
 		<url>git@github.com:scheuchzer/smarkdown.git</url>
-	  <tag>HEAD</tag>
-  </scm>
-
+		<tag>HEAD</tag>
+	</scm>
 	<issueManagement>
 		<system>GitHub Issues</system>
 		<url>https://github.com/scheuchzer/smarkdown/issues</url>
 	</issueManagement>
-
+	<pluginRepositories>
+		<pluginRepository>
+			<id>smartbear-sweden-plugin-repository</id>
+			<url>http://www.soapui.org/repository/maven2/</url>
+		</pluginRepository>
+	</pluginRepositories>
 </project>

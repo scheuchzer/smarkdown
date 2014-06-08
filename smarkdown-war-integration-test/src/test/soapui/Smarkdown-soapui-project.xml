@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="Smarkdown" resourceRoot="" soapui-version="5.0.0" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings>
+    <con:setting id="com.eviware.soapui.impl.wsdl.actions.iface.tools.soapui.TestRunnerAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Environment" value="Default"/>
+  <con:entry key="Global Properties" value=""/>
+  <con:entry key="TestSuite" value="IntegrationTests"/>
+  <con:entry key="Password" value=""/>
+  <con:entry key="TestRunner Path" value=""/>
+  <con:entry key="Tool Args" value=""/>
+  <con:entry key="Ignore Errors" value="false"/>
+  <con:entry key="Host:Port" value=""/>
+  <con:entry key="user-settings.xml Password" value=""/>
+  <con:entry key="WSS Password Type" value=""/>
+  <con:entry key="Save Project" value="false"/>
+  <con:entry key="Enable UI" value="false"/>
+  <con:entry key="System Properties" value=""/>
+  <con:entry key="Domain" value=""/>
+  <con:entry key="Coverage Report" value="false"/>
+  <con:entry key="Export JUnit Results" value="false"/>
+  <con:entry key="Open Report" value="false"/>
+  <con:entry key="Project Properties" value=""/>
+  <con:entry key="Export All" value="false"/>
+  <con:entry key="Project Password" value=""/>
+  <con:entry key="Report Format(s)" value=""/>
+  <con:entry key="TestCase" value="&lt;all>"/>
+  <con:entry key="Print Report" value="false"/>
+  <con:entry key="Username" value=""/>
+  <con:entry key="Root Folder" value=""/>
+  <con:entry key="Save After" value="false"/>
+  <con:entry key="Add Settings" value="false"/>
+  <con:entry key="Endpoint" value=""/>
+  <con:entry key="Select Report Type" value=""/>
+</xml-fragment>]]></con:setting>
+  </con:settings>
+  <con:testSuite name="IntegrationTests" id="62f3b25d-95bd-4143-a7ed-effebe078b40">
+    <con:settings/>
+    <con:runType>PARALLELL</con:runType>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Smarkdown" searchProperties="true">
+      <con:settings/>
+      <con:testStep type="httprequest" name="index.html" id="4124df4d-5464-4e67-9f06-deaab56b7267">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="index.html" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${#Project#smarkdown_url}/index.html</con:endpoint>
+          <con:request/>
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="f98f6220-cf00-4e85-a818-b4b15359c5f4">
+            <con:configuration>
+              <codes>200</codes>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="HTTP Download all resources" name="HTTP Download all resources" id="80679226-3ba7-43e7-9b1f-9e10024f300e"/>
+          <con:assertion type="Simple Contains" name="Contains" id="ac39b788-7589-469a-9d90-2e1edc4a46da">
+            <con:configuration>
+              <token>##Welcome!##</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="index.md">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="index.md" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${#Project#smarkdown_url}/raw/index.md</con:endpoint>
+          <con:request/>
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes">
+            <con:configuration>
+              <codes>200</codes>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="HTTP Download all resources" name="HTTP Download all resources"/>
+          <con:assertion type="Simple Contains" name="Contains">
+            <con:configuration>
+              <token>##Welcome!##</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple NotContains" name="Not Contains">
+            <con:configuration>
+              <token>html</token>
+              <ignoreCase>true</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="welcomePage" id="3939447f-923b-47cd-b7dd-758082f56454">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="welcomePage" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${#Project#smarkdown_url}</con:endpoint>
+          <con:request/>
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="adfa2338-3a13-4027-8d01-9bfaecc2ed32">
+            <con:configuration>
+              <codes>200</codes>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="HTTP Download all resources" name="HTTP Download all resources" id="68a731ba-fc0e-48e8-ae20-c74a6bd92fc3"/>
+          <con:assertion type="Simple Contains" name="Contains" id="3e7909d2-5b45-4bb8-a9aa-09b17ea51948">
+            <con:configuration>
+              <token>##Welcome!##</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Location_Classpath" id="045353a3-eafc-46fa-af88-13a743843179">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="Location_Classpath" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${#Project#smarkdown_url}/smarkdown/locations/locationClasspath.html</con:endpoint>
+          <con:request/>
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="2a6f527d-111f-4d6e-a3b3-ac1fc7a3dbf3">
+            <con:configuration>
+              <codes>200</codes>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="HTTP Download all resources" name="HTTP Download all resources" id="4ed37400-a590-4cc9-baed-411ea2544a05"/>
+          <con:assertion type="Simple Contains" name="Contains" id="e516a7f1-1212-4f6f-8bfa-b2027fc28aca">
+            <con:configuration>
+              <token>## Enable Classpath lookups</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Location_FileSystem" id="ccf37623-a1ba-4fc4-b1a3-9a3cc730852c">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="Location_FileSystem" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${#Project#smarkdown_url}/smarkdown/locations/locationFileSystem.html</con:endpoint>
+          <con:request/>
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="712e469d-7a00-48a7-912d-5d7e63b1c8be">
+            <con:configuration>
+              <codes>200</codes>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="HTTP Download all resources" name="HTTP Download all resources" id="c996e516-bfc2-460b-998b-9bbd04bd8c79"/>
+          <con:assertion type="Simple Contains" name="Contains" id="0cddb9ac-b1ae-414b-ab43-95cf2b244003">
+            <con:configuration>
+              <token>## Enable File System lookups</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Location_GitHub" id="fead07b2-1f9b-4ad2-ab0b-438f725bcd4c">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="Location_GitHub" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${#Project#smarkdown_url}/smarkdown/locations/locationGitHub.html</con:endpoint>
+          <con:request/>
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="1576f602-88bd-4fad-84eb-ed826a0cad66">
+            <con:configuration>
+              <codes>200</codes>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="HTTP Download all resources" name="HTTP Download all resources" id="459dd336-7941-424f-b04d-8e9fa908c9ea"/>
+          <con:assertion type="Simple Contains" name="Contains" id="d3b172a6-82bc-4fc8-9930-500e2284ad38">
+            <con:configuration>
+              <token>## Enable GitHub lookups</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Location_WebInf" id="d2a6385c-694c-415f-be0e-5679eced696e">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="Location_WebInf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${#Project#smarkdown_url}/smarkdown/locations/locationWeb-Inf.html</con:endpoint>
+          <con:request/>
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="282e335f-32cb-4773-bca1-6e3044003e5a">
+            <con:configuration>
+              <codes>200</codes>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="HTTP Download all resources" name="HTTP Download all resources" id="c493167d-d09d-4bb7-9633-2808bafbe6f1"/>
+          <con:assertion type="Simple Contains" name="Contains" id="ab7c164c-34e5-4cb5-802f-aa285d41526a">
+            <con:configuration>
+              <token>## Enable WEB-INF lookups</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Location_Webapp" id="c4088897-7eae-4d50-a3e7-a65cc9252a10">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="Location_Webapp" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${#Project#smarkdown_url}/smarkdown/locations/locationWebapp.html</con:endpoint>
+          <con:request/>
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="1f7f3b97-9a51-4f2f-93b5-1591d4ece2e6">
+            <con:configuration>
+              <codes>200</codes>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="HTTP Download all resources" name="HTTP Download all resources" id="bf16a69b-5962-4106-b666-e5d747a06251"/>
+          <con:assertion type="Simple Contains" name="Contains" id="a3092745-8eef-432a-b9b5-333b7f974f57">
+            <con:configuration>
+              <token>## Enable Webapp lookups</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Examples_Location_Classpath" id="a7404451-3da4-45f4-a746-cabbf9ee21ee">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="Examples_Location_Classpath" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${#Project#smarkdown_url}/smarkdown/examples/locations/location-classpath.html</con:endpoint>
+          <con:request/>
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="a723ddd9-fc26-4c89-87f5-12372687b81d">
+            <con:configuration>
+              <codes>200</codes>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="HTTP Download all resources" name="HTTP Download all resources" id="bb09f23e-5e56-4a18-83ca-f6bb142a3d48"/>
+          <con:assertion type="Simple Contains" name="Contains" id="700f3b39-1b5b-4016-9264-c2b2d146a477">
+            <con:configuration>
+              <token># Example - Location Classpath</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Examples_Location_Webapp" id="4e7f26a5-9e9c-4096-a3d0-db8bee3cbee1">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="Examples_Location_Webapp" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${#Project#smarkdown_url}/smarkdown/examples/locations/location-web-inf.html</con:endpoint>
+          <con:request/>
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="c1be747b-721e-490d-9c9e-84cda1e3c2a4">
+            <con:configuration>
+              <codes>200</codes>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="HTTP Download all resources" name="HTTP Download all resources" id="8cf721ea-3348-471c-a7c6-8640c7b8ccab"/>
+          <con:assertion type="Simple Contains" name="Contains" id="bbbfe358-35d4-4064-bd29-9fd14d2828bc">
+            <con:configuration>
+              <token># Example - Location Web-Inf</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Examples_Location_WebInf" id="9c6bafe5-c29d-40ba-89c8-5bcc4b12db84">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="Examples_Location_WebInf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${#Project#smarkdown_url}/smarkdown/examples/locations/location-weapp.html</con:endpoint>
+          <con:request/>
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="0f35b0b9-a39a-4cda-86ad-4d8c9274931b">
+            <con:configuration>
+              <codes>200</codes>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="HTTP Download all resources" name="HTTP Download all resources" id="a2dd1f06-83b9-4195-a7cf-1fdf8c47764a"/>
+          <con:assertion type="Simple Contains" name="Contains" id="8b41e0e2-0422-445e-bf74-1d1745439857">
+            <con:configuration>
+              <token># Example - Location Webapp</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Examples_Location_Classpath_Webapp" id="1934a9ba-b297-40f3-b87f-c827ab9f68b5">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="Examples_Location_Classpath_Webapp" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${#Project#smarkdown_url}/smarkdown/examples/locations/location-classpath-webapp.html</con:endpoint>
+          <con:request/>
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="76cfee00-8b12-412c-a6da-512dc4d827e7">
+            <con:configuration>
+              <codes>200</codes>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="HTTP Download all resources" name="HTTP Download all resources" id="e83588f2-5272-41b1-9126-ed54587ae57a"/>
+          <con:assertion type="Simple Contains" name="Contains" id="ad0bc45b-470a-41bd-8d2b-e461af32aceb">
+            <con:configuration>
+              <token># Example - Location Classpath</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Examples_Location_Classpath_Webapp.md">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="Examples_Location_Classpath_Webapp.md" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${#Project#smarkdown_url}/raw/smarkdown/examples/locations/location-classpath-webapp.md</con:endpoint>
+          <con:request/>
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="76cfee00-8b12-412c-a6da-512dc4d827e7">
+            <con:configuration>
+              <codes>200</codes>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="HTTP Download all resources" name="HTTP Download all resources" id="e83588f2-5272-41b1-9126-ed54587ae57a"/>
+          <con:assertion type="Simple Contains" name="Contains" id="ad0bc45b-470a-41bd-8d2b-e461af32aceb">
+            <con:configuration>
+              <token># Example - Location Classpath</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple NotContains" name="Not Contains">
+            <con:configuration>
+              <token>html</token>
+              <ignoreCase>true</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="foo.html" id="a4ef33e5-d521-4c00-93d3-b44598b6ca82">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="foo.html" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${#Project#smarkdown_url}/foo.html</con:endpoint>
+          <con:request/>
+          <con:assertion type="Simple Contains" name="Contains" id="5418c6af-180e-49c5-8b78-af252d425b43">
+            <con:configuration>
+              <token>Page not found.</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Sitemap.html" id="23a41662-bdeb-4979-88e1-8a706b01e164">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="Sitemap.html" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${#Project#smarkdown_url}/sitemap.xhtml</con:endpoint>
+          <con:request/>
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="d0ca3ff1-b5c0-4553-88a3-1ff5c74bdae7">
+            <con:configuration>
+              <codes>200</codes>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="HTTP Download all resources" name="HTTP Download all resources" id="7d4df038-7bf6-4ce5-9911-70b3d86abe76"/>
+          <con:assertion type="Simple Contains" name="Contains" id="6511de1b-7832-4d98-9ba1-c56871b30039">
+            <con:configuration>
+              <token>Smarkdown - Sitemap</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:loadTest name="LoadTest 1">
+        <con:settings/>
+        <con:threadCount>3</con:threadCount>
+        <con:startDelay>0</con:startDelay>
+        <con:sampleInterval>250</con:sampleInterval>
+        <con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed>
+        <con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange>
+        <con:historyLimit>-1</con:historyLimit>
+        <con:testLimit>60</con:testLimit>
+        <con:limitType>TIME</con:limitType>
+        <con:loadStrategy>
+          <con:type>Variance</con:type>
+          <con:config>
+            <interval>60000</interval>
+            <variance>0.5</variance>
+          </con:config>
+        </con:loadStrategy>
+        <con:assertion type="Step Status" name="Step Status"/>
+        <con:maxAssertionErrors>100</con:maxAssertionErrors>
+        <con:cancelExcessiveThreads>true</con:cancelExcessiveThreads>
+        <con:strategyInterval>500</con:strategyInterval>
+      </con:loadTest>
+      <con:properties/>
+    </con:testCase>
+    <con:properties/>
+  </con:testSuite>
+  <con:properties>
+    <con:property>
+      <con:name>smarkdown_url</con:name>
+      <con:value>http://localhost:8080/smarkdown</con:value>
+    </con:property>
+  </con:properties>
+  <con:wssContainer/>
+  <con:oAuth2ProfileContainer/>
+  <con:sensitiveInformation/>
+</con:soapui-project>
