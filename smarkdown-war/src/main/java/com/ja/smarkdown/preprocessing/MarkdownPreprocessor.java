@@ -61,7 +61,6 @@ public class MarkdownPreprocessor {
 
 	private String readContent(final ResourceInfo resource) {
 		try (InputStream in = resource.getInputStream()) {
-
 			return addDuplicateInfo(resource, IOUtils.toString(in));
 		} catch (final IOException e) {
 			log.error("Failed to read markdown from input stream.", e);

@@ -1,7 +1,10 @@
 package com.ja.smarkdown;
 
+import java.net.HttpURLConnection;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import lombok.Data;
@@ -24,13 +27,15 @@ public class Index {
 	private ResourceLoader loader;
 
 	private String page = "index";
-	
+
 	private Boolean checkDuplicates;
 
 	public String getContent() {
-		System.out.println("#############"+checkDuplicates);
-		final ResourceInfo doc = loader.loadResource(getPageName() + ".md", checkDuplicates);
+		final ResourceInfo doc = loader.loadResource(getPageName() + ".md",
+				checkDuplicates);
 		if (doc == null) {
+			FacesContext.getCurrentInstance().getExternalContext()
+					.setResponseStatus(HttpURLConnection.HTTP_NOT_FOUND);
 			return "Page not found.";
 		}
 		return preprocessor.process(page, doc);

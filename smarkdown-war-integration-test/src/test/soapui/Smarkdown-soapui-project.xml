@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project activeEnvironment="Default" name="Smarkdown" resourceRoot="" soapui-version="5.0.0" xmlns:con="http://eviware.com/soapui/config">
+<con:soapui-project activeEnvironment="Default" name="Smarkdown" resourceRoot="" soapui-version="5.0.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config">
   <con:settings>
     <con:setting id="com.eviware.soapui.impl.wsdl.actions.iface.tools.soapui.TestRunnerAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
   <con:entry key="Environment" value="Default"/>
@@ -36,7 +36,7 @@
   <con:testSuite name="IntegrationTests" id="62f3b25d-95bd-4143-a7ed-effebe078b40">
     <con:settings/>
     <con:runType>PARALLELL</con:runType>
-    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Smarkdown" searchProperties="true">
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Smarkdown" searchProperties="true" id="6160a1e8-1ff5-457c-9cf0-646f67654f0b">
       <con:settings/>
       <con:testStep type="httprequest" name="index.html" id="4124df4d-5464-4e67-9f06-deaab56b7267">
         <con:settings/>
@@ -442,6 +442,11 @@
               <token>Page not found.</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes">
+            <con:configuration>
+              <codes>404</codes>
             </con:configuration>
           </con:assertion>
           <con:credentials>
