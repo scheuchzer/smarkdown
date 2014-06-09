@@ -3,7 +3,6 @@ package com.ja.smarkdown.location.github;
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,6 +13,7 @@ import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
 
 import com.ja.smarkdown.load.AbstractDocumentProvider;
+import com.ja.smarkdown.model.ResourceInfo;
 
 @Slf4j
 public class GitHubDocumentProvider extends
@@ -24,7 +24,7 @@ public class GitHubDocumentProvider extends
 	}
 
 	@Override
-	protected InputStream getInputStream(final GitHubLocation location,
+	protected ResourceInfo getResource(final GitHubLocation location,
 			final String path) throws FileNotFoundException {
 		try {
 			final GitHub github = location.open();
@@ -38,7 +38,8 @@ public class GitHubDocumentProvider extends
 					branch.getName());
 			final String text = content.getContent();
 
-			return new ByteArrayInputStream(text.getBytes());
+			return new ResourceInfo(path, location, new ByteArrayInputStream(
+					text.getBytes()));
 		} catch (final FileNotFoundException e) {
 			throw e;
 		} catch (final IOException e) {

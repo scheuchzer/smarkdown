@@ -24,13 +24,16 @@ public class Index {
 	private ResourceLoader loader;
 
 	private String page = "index";
+	
+	private Boolean checkDuplicates;
 
 	public String getContent() {
-		final ResourceInfo doc = loader.loadResource(getPageName() + ".md");
+		System.out.println("#############"+checkDuplicates);
+		final ResourceInfo doc = loader.loadResource(getPageName() + ".md", checkDuplicates);
 		if (doc == null) {
 			return "Page not found.";
 		}
-		return preprocessor.process(page, doc.getInputStream());
+		return preprocessor.process(page, doc);
 	}
 
 	public String getPageName() {

@@ -45,7 +45,8 @@ If needed, Smarkdown can be configured and customized through the ``context-para
 {
 	"applicationName":"Smarkdown",
 	"pages":{
-		"theme":"bootstrap"
+		"theme":"bootstrap",
+		"checkForDuplicates":"false"
 	},
 	"slides":{
 		"theme":"sky",
@@ -91,6 +92,25 @@ Currently available themes are:
 - spruce
 - superhero
 - united 
+
+
+**Element:** ``pages/checkForDuplicates``
+
+Boolean value to define if Smarkdown should check all locations for a document. If 
+a document is present in several locations a message listing all locations is shown
+at the top of the document.
+
+
+- true: check all locations
+- false: (default) stop if document has been found
+
+
+This value can be overridden by the query parameter ``checkForDuplicates``.
+
+Example:
+```url
+http://localhost:8080/smarkdown/index.html?checkForDuplicates=true
+```
 
 
 **Element:** ``slides``

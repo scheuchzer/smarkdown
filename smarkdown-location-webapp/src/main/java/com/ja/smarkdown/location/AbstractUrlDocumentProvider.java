@@ -2,13 +2,13 @@ package com.ja.smarkdown.location;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import lombok.extern.slf4j.Slf4j;
 
 import com.ja.smarkdown.load.AbstractDocumentProvider;
+import com.ja.smarkdown.model.ResourceInfo;
 import com.ja.smarkdown.model.config.Location;
 
 @Slf4j
@@ -21,7 +21,7 @@ public abstract class AbstractUrlDocumentProvider<LOCATION_TYPE extends Location
 	}
 
 	@Override
-	protected InputStream getInputStream(final LOCATION_TYPE location,
+	protected ResourceInfo getResource(final LOCATION_TYPE location,
 			final String path) throws FileNotFoundException {
 		try {
 			final URL resourceUrl = getUrl(location, path);
@@ -29,7 +29,8 @@ public abstract class AbstractUrlDocumentProvider<LOCATION_TYPE extends Location
 				log.debug("Resource not found at path={}", path);
 				throw new FileNotFoundException(path);
 			} else {
-				return resourceUrl.openStream();
+				return new ResourceInfo(path, location,
+						resourceUrl.openStream());
 			}
 		} catch (final FileNotFoundException e) {
 			throw e;

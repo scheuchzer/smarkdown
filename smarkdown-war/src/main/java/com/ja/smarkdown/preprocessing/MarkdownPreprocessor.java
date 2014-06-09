@@ -16,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.ja.smarkdown.model.ResourceInfo;
+
 @Slf4j
 @ApplicationScoped
 public class MarkdownPreprocessor {
@@ -53,12 +55,35 @@ public class MarkdownPreprocessor {
 				replacement.toArray(new String[0]));
 	}
 
-	public String process(final String page, final InputStream inputStream) {
-		try (InputStream in = inputStream) {
-			return process(page, IOUtils.toString(in));
+	public String process(final String page, final ResourceInfo resource) {
+		return process(page, readContent(resource));
+	}
+
+	private String readContent(final ResourceInfo resource) {
+		try (InputStream in = resource.getInputStream()) {
+
+			return addDuplicateInfo(resource, IOUtils.toString(in));
 		} catch (final IOException e) {
 			log.error("Failed to read markdown from input stream.", e);
 		}
 		return "Internal error";
+	}
+
+	private String addDuplicateInfo(final ResourceInfo resource,
+			final String content) {
+		final StringBuilder buf = new StringBuilder();
+		if (!resource.getOverridden().isEmpty()) {
+			buf.append("<div class='alert alert-info'>");
+			buf.append("Document found in multiple locations!");
+			buf.append("<ul>");
+			for (final ResourceInfo ri : resource.getOverridden()) {
+				buf.append("<li>").append(ri.getLocation().getUrl())
+						.append(ri.getPath()).append("</li>");
+			}
+			buf.append("</ul>");
+			buf.append("</div>\n");
+		}
+		buf.append(content);
+		return buf.toString();
 	}
 }

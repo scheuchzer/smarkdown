@@ -1,7 +1,6 @@
 package com.ja.smarkdown.load;
 
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -52,8 +51,7 @@ public abstract class AbstractDocumentProvider<LOCATION_TYPE extends Location> {
 						strippedResource);
 			}
 			log.debug("Resource path={}", path);
-			document = new ResourceInfo(this.getClass(), getInputStream(
-					location, path));
+			document = getResource(location, path);
 		} catch (final FileNotFoundException e) {
 			return null;
 		} catch (final Exception e) {
@@ -66,6 +64,6 @@ public abstract class AbstractDocumentProvider<LOCATION_TYPE extends Location> {
 		return StringUtils.substringAfter(location.getUrl(), protocol);
 	}
 
-	abstract protected InputStream getInputStream(final LOCATION_TYPE location,
+	abstract protected ResourceInfo getResource(final LOCATION_TYPE location,
 			final String path) throws FileNotFoundException;
 }

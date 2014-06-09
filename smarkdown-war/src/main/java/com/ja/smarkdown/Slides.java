@@ -32,7 +32,7 @@ public class Slides {
 		if (doc == null) {
 			return "Page not found.";
 		}
-		return preprocessor.process(getPageName(), doc.getInputStream());
+		return preprocessor.process(getPageName(), doc);
 	}
 
 	public String getPageName() {

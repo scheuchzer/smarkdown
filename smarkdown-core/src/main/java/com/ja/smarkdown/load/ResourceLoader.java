@@ -1,5 +1,9 @@
 package com.ja.smarkdown.load;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
@@ -17,24 +21,60 @@ public class ResourceLoader {
 	private SmarkdownConfiguration config;
 
 	public ResourceInfo loadResource(final String resource) {
-		log.info("loading resource={}", resource);
+		return loadResource(resource, false);
+	}
 
+	public ResourceInfo loadResource(final String resource,
+			final Boolean duplicateCheckOverride) {
+		log.info("loading resource={}", resource);
+		final List<ResourceInfo> results = new ArrayList<>();
 		for (final LocationHandler handler : config.getLocationHandlers()) {
 			try {
 				log.debug("Calling handler={}", handler);
 				final ResourceInfo result = handler.loadDocument(resource);
 				if (result != null) {
 					log.debug("Handler {} sucessful", handler);
-					return result;
+					results.add(result);
+					if (!isDuplicateCheckEnabled(duplicateCheckOverride)) {
+						break;
+					}
+
+				} else {
+					log.debug("Handler {} not successful", handler);
 				}
-				log.debug("Handler {} not successful", handler);
 			} catch (final Exception e) {
 				log.warn("Handler {} failed for resource {}. {}", handler,
 						resource, e);
 			}
 
 		}
-		log.debug("Resource {} not found.", resource);
-		return null;
+
+		return merge(resource, results);
 	}
+
+	private ResourceInfo merge(final String resource,
+			final List<ResourceInfo> results) {
+		if (results.isEmpty()) {
+			log.debug("Resource {} not found.", resource);
+			return null;
+		}
+		final Iterator<ResourceInfo> it = results.iterator();
+		final ResourceInfo first = it.next();
+		while (it.hasNext()) {
+			first.getOverridden().add(it.next());
+		}
+		if (!first.getOverridden().isEmpty()) {
+			log.info("Resource {} has overrides. Selected={}", resource, first);
+
+		}
+		return first;
+
+	}
+
+	private boolean isDuplicateCheckEnabled(final Boolean duplicateCheckOverride) {
+
+		return duplicateCheckOverride == null ? config.getPages()
+				.isCheckForDuplicates() : duplicateCheckOverride;
+	}
+
 }

@@ -26,6 +26,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.ja.smarkdown.model.LocationHandler;
 import com.ja.smarkdown.model.ResourceInfo;
+import com.ja.smarkdown.model.config.Location;
 import com.ja.smarkdown.model.config.SmarkdownConfiguration;
 
 import de.akquinet.jbosscc.needle.annotation.ObjectUnderTest;
@@ -65,8 +66,9 @@ public class ResourceLoaderTest {
 			throws MalformedURLException {
 		doReturn(Arrays.asList(handler1, handler2)).when(config)
 				.getLocationHandlers();
-		final ResourceInfo doc = new ResourceInfo(Object.class,
-				new ByteArrayInputStream("".getBytes()));
+		final ResourceInfo doc = new ResourceInfo("foo.md",
+				Location.create("foo://bar"), new ByteArrayInputStream(
+						"".getBytes()));
 		doReturn(doc).when(handler2).loadDocument(eq("foo.md"));
 
 		final ResourceInfo result = loader.loadResource("foo.md");
@@ -74,12 +76,32 @@ public class ResourceLoaderTest {
 	}
 
 	@Test
+	public void testLoadDocumentBothSuccessfulDuplicateCheckEnabled()
+			throws MalformedURLException {
+		doReturn(Arrays.asList(handler1, handler2)).when(config)
+				.getLocationHandlers();
+		final ResourceInfo doc1 = new ResourceInfo("foo.md",
+				Location.create("foo://bar"), new ByteArrayInputStream(
+						"".getBytes()));
+		final ResourceInfo doc2 = new ResourceInfo("foo.md",
+				Location.create("foo://bar"), new ByteArrayInputStream(
+						"".getBytes()));
+		doReturn(doc1).when(handler1).loadDocument(eq("foo.md"));
+		doReturn(doc2).when(handler2).loadDocument(eq("foo.md"));
+
+		final ResourceInfo result = loader.loadResource("foo.md", true);
+		assertThat(result, is(notNullValue()));
+		assertThat(result.getOverridden().size(), is(1));
+	}
+
+	@Test
 	public void testLoadDocumentFirstThrowsExceptionHandler2Successful()
 			throws MalformedURLException {
 		doReturn(Arrays.asList(handler1, handler2)).when(config)
 				.getLocationHandlers();
-		final ResourceInfo doc = new ResourceInfo(Object.class,
-				new ByteArrayInputStream("".getBytes()));
+		final ResourceInfo doc = new ResourceInfo("foo.md",
+				Location.create("foo://bar"), new ByteArrayInputStream(
+						"".getBytes()));
 		doThrow(new RuntimeException("forced")).when(handler1).loadDocument(
 				anyString());
 		doReturn(doc).when(handler2).loadDocument(eq("foo.md"));
