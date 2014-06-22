@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.MediaType;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,17 +48,17 @@ public class Raw extends HttpServlet {
 				.toLowerCase();
 		switch (extension) {
 		case "md":
-			return MediaType.TEXT_PLAIN;
+			return "text/plain";
 		case "txt":
-			return MediaType.TEXT_PLAIN;
+			return "text/plain";
 		case "html":
-			return MediaType.TEXT_HTML;
+			return "text/html";
 		case "htm":
-			return MediaType.TEXT_HTML;
+			return "text/html";
 		case "xml":
-			return MediaType.TEXT_XML;
+			return "text/xml";
 		case "json":
-			return MediaType.APPLICATION_JSON;
+			return "application/json";
 		case "jpg":
 			return "image/jpeg";
 		case "jpeg":
@@ -69,11 +68,11 @@ public class Raw extends HttpServlet {
 		case "gif":
 			return "image/gif";
 		case "svg":
-			return MediaType.APPLICATION_SVG_XML;
+			return "application/svg+xml";
 		case "zip":
 			return "application/zip";
 		default:
-			return MediaType.APPLICATION_OCTET_STREAM;
+			return "application/octet-stream";
 		}
 	}
 

@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.ServletContext;
 
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.ja.smarkdown.model.ResourceInfo;
 
 @Slf4j
+@Named
 @ApplicationScoped
 public class MarkdownPreprocessor {
 

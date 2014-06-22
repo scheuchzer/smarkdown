@@ -7,6 +7,14 @@
 		<param-name>javax.faces.FACELETS_LIBRARIES</param-name>
 		<param-value>/WEB-INF/smarkdown-taglib.xml</param-value>
 	</context-param>
+	<listener>
+		<!-- Used for Tomcat7+ -->
+		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
+	</listener>
+	<listener>
+		<!-- Used for Jetty9 -->
+		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+	</listener>
 	<!-- <context-param>
 		<param-name>smarkdown.configuration</param-name>
 		<param-value>
@@ -51,4 +59,9 @@
 		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
 	
+	<resource-env-ref>
+		<!-- Used for Tomcat and Jetty -->
+		<resource-env-ref-name>BeanManager</resource-env-ref-name>
+		<resource-env-ref-type>javax.enterprise.inject.spi.BeanManager</resource-env-ref-type>
+	</resource-env-ref>
 </web-app>

@@ -2,10 +2,10 @@ package com.ja.smarkdown;
 
 import java.net.HttpURLConnection;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import lombok.Data;
 
@@ -16,7 +16,7 @@ import com.ja.smarkdown.model.ResourceInfo;
 import com.ja.smarkdown.preprocessing.MarkdownPreprocessor;
 import com.ja.smarkdown.util.UrlUtils;
 
-@ManagedBean
+@Named
 @RequestScoped
 @Data
 public class Index {

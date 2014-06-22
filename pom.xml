@@ -72,6 +72,12 @@
 				<type>war</type>
 			</dependency>
 			<dependency>
+				<groupId>com.java-adventures.smarkdown</groupId>
+				<artifactId>smarkdown-war-servlet-container</artifactId>
+				<version>${project.version}</version>
+				<type>war</type>
+			</dependency>
+			<dependency>
 				<groupId>javax.enterprise</groupId>
 				<artifactId>cdi-api</artifactId>
 				<version>1.2</version>
@@ -144,12 +150,12 @@
 			<dependency>
 				<groupId>org.ocpsoft.rewrite</groupId>
 				<artifactId>rewrite-servlet</artifactId>
-				<version>2.0.11.Final</version>
+				<version>2.0.12.Final</version>
 			</dependency>
 			<dependency>
 				<groupId>org.ocpsoft.rewrite</groupId>
 				<artifactId>rewrite-config-prettyfaces</artifactId>
-				<version>2.0.11.Final</version>
+				<version>2.0.12.Final</version>
 			</dependency>
 			<dependency>
 				<groupId>de.akquinet.jbosscc</groupId>
@@ -310,6 +316,7 @@
 		<module>smarkdown-location-github</module>
 		<module>smarkdown-location-file</module>
 		<module>smarkdown-war</module>
+		<module>smarkdown-war-servlet-container</module>
 		<module>smarkdown-war-integration-test</module>
 	</modules>
 	<scm>

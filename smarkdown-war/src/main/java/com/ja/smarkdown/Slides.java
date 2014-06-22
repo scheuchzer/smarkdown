@@ -1,9 +1,9 @@
 package com.ja.smarkdown;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import lombok.Data;
 
@@ -13,7 +13,7 @@ import com.ja.smarkdown.load.ResourceLoader;
 import com.ja.smarkdown.model.ResourceInfo;
 import com.ja.smarkdown.preprocessing.MarkdownPreprocessor;
 
-@ManagedBean
+@Named
 @RequestScoped
 @Data
 public class Slides {
