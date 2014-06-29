@@ -18,7 +18,12 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>smarkdown-war-servlet-container</artifactId>
+			<artifactId>smarkdown-war-tomcat</artifactId>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>smarkdown-war-jetty</artifactId>
 			<type>war</type>
 		</dependency>
 	</dependencies>
@@ -191,7 +196,7 @@
 							<deployables>
 								<deployable>
 									<groupId>${project.groupId}</groupId>
-									<artifactId>smarkdown-war-servlet-container</artifactId>
+									<artifactId>smarkdown-war-tomcat</artifactId>
 									<type>war</type>
 									<pingURL>http://localhost:8080/smarkdown/index.html</pingURL>
 									<properties>
@@ -221,7 +226,7 @@
 							<deployables>
 								<deployable>
 									<groupId>${project.groupId}</groupId>
-									<artifactId>smarkdown-war-servlet-container</artifactId>
+									<artifactId>smarkdown-war-tomcat</artifactId>
 									<type>war</type>
 									<pingURL>http://localhost:8080/smarkdown/index.html</pingURL>
 									<properties>

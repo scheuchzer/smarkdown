@@ -73,7 +73,13 @@
 			</dependency>
 			<dependency>
 				<groupId>com.java-adventures.smarkdown</groupId>
-				<artifactId>smarkdown-war-servlet-container</artifactId>
+				<artifactId>smarkdown-war-tomcat</artifactId>
+				<version>${project.version}</version>
+				<type>war</type>
+			</dependency>
+			<dependency>
+				<groupId>com.java-adventures.smarkdown</groupId>
+				<artifactId>smarkdown-war-jetty</artifactId>
 				<version>${project.version}</version>
 				<type>war</type>
 			</dependency>
@@ -316,7 +322,8 @@
 		<module>smarkdown-location-github</module>
 		<module>smarkdown-location-file</module>
 		<module>smarkdown-war</module>
-		<module>smarkdown-war-servlet-container</module>
+		<module>smarkdown-war-tomcat</module>
+		<module>smarkdown-war-jetty</module>
 		<module>smarkdown-war-integration-test</module>
 	</modules>
 	<scm>
