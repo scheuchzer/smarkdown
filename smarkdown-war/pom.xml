@@ -38,6 +38,10 @@
 			<artifactId>smarkdown-location-github</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.java-adventures.smarkdown</groupId>
+			<artifactId>smarkdown-jsf</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 		</dependency>

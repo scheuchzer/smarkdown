@@ -67,6 +67,11 @@
 			</dependency>
 			<dependency>
 				<groupId>com.java-adventures.smarkdown</groupId>
+				<artifactId>smarkdown-jsf</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.java-adventures.smarkdown</groupId>
 				<artifactId>smarkdown-war</artifactId>
 				<version>${project.version}</version>
 				<type>war</type>
@@ -325,6 +330,7 @@
 		<module>smarkdown-war-tomcat</module>
 		<module>smarkdown-war-jetty</module>
 		<module>smarkdown-war-integration-test</module>
+		<module>smarkdown-jsf</module>
 	</modules>
 	<scm>
 		<connection>scm:git:git@github.com:scheuchzer/smarkdown.git</connection>
