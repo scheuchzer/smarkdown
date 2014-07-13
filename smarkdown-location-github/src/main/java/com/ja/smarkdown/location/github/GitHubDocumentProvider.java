@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.StringUtils;
 import org.kohsuke.github.GHBranch;
 import org.kohsuke.github.GHContent;
@@ -36,10 +37,10 @@ public class GitHubDocumentProvider extends
 
 			final GHContent content = repo.getFileContent(path,
 					branch.getName());
-			final String text = content.getContent();
-
+			final byte[] data = Base64.decodeBase64(content.getEncodedContent()
+					.getBytes());
 			return new ResourceInfo(path, location, new ByteArrayInputStream(
-					text.getBytes()));
+					data));
 		} catch (final FileNotFoundException e) {
 			throw e;
 		} catch (final IOException e) {

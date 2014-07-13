@@ -4,8 +4,10 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
+import java.io.FileOutputStream;
 import java.util.Arrays;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -50,6 +52,19 @@ public class GitHubDocumentProviderTest {
 				Arrays.asList(new GitHubLocation(location)), "smarkdown-it.md");
 		assertThat(actual, is(notNullValue()));
 		assertThat(actual.getInputStream(), is(notNullValue()));
+	}
+
+	@Test
+	public void testGetImageDocumentInFolder() throws Exception {
+		authTokenRule.assumeAuthToken();
+		final Location location = Location
+				.create("github:scheuchzer/hands-on-vagrant-puppet:");
+		authTokenRule.setAuthToken(location);
+		final ResourceInfo actual = provider.getDocument(
+				Arrays.asList(new GitHubLocation(location)), "vagrant.png");
+		assertThat(actual, is(notNullValue()));
+		assertThat(actual.getInputStream(), is(notNullValue()));
+		IOUtils.copy(actual.getInputStream(), new FileOutputStream("v.png"));
 	}
 
 }
