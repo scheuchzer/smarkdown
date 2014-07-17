@@ -3,9 +3,11 @@ package com.ja.smarkdown.preprocessing;
 import javax.servlet.ServletContext;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.StringUtils;
 
+@Slf4j
 @Data
 public class ProcessingContext {
 
@@ -17,9 +19,11 @@ public class ProcessingContext {
 			final ServletContext servletContext) {
 		String directory = "";
 		if (path.contains("/")) {
-			directory = "/" + StringUtils.substringBefore(path, "/");
+			directory = "/" + StringUtils.substringBeforeLast(path, "/");
 		}
-		return new ProcessingContext(path, directory,
+		ProcessingContext pc = new ProcessingContext(path, directory,
 				servletContext.getContextPath());
+		log.info("processingContext={}", pc);
+		return pc;
 	}
 }

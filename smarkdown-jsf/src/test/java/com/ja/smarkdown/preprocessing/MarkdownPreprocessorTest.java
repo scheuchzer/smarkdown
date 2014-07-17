@@ -58,6 +58,17 @@ public class MarkdownPreprocessorTest {
 	}
 
 	@Test
+	public void testProcessSingleImageInDirectory() {
+		doReturn("smarkdown").when(servletContext).getContextPath();
+		final String actual = processor
+				.process(
+						"presentations/hands-on-vagrant-puppet/Untitled+Folder/index.html",
+						"lorem ipsum ![alt](test1.jpg)");
+		assertThat(actual,
+				is("lorem ipsum ![alt](smarkdown/raw/foo/test1.jpg)"));
+	}
+
+	@Test
 	public void testProcessSameImageTwice() {
 		doReturn("smarkdown").when(servletContext).getContextPath();
 		final String actual = processor.process("foo/index.html",

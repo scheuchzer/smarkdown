@@ -48,9 +48,12 @@ public class MarkdownPreprocessor {
 		final List<String> replacement = new ArrayList<>();
 		while (m.find()) {
 			final String match = m.group(1);
-			toBeReplaced.add(String.format("(%s)", match));
-			replacement.add(String.format("(%s/raw%s/%s)", ctx.getBaseUrl(),
-					ctx.getDirectory(), match));
+			String from = String.format("(%s)", match);
+			String to = String.format("(%s/raw%s/%s)", ctx.getBaseUrl(),
+					ctx.getDirectory(), match);
+			log.info("Replacing from={}, to={}", from, to);
+			toBeReplaced.add(from);
+			replacement.add(to);
 		}
 		return StringUtils.replaceEach(content,
 				toBeReplaced.toArray(new String[0]),

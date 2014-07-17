@@ -31,4 +31,12 @@ public class ProcessingContextTest {
 		assertThat(actual.getPath(), is("foo/index.html"));
 		assertThat(actual.getDirectory(), is("/foo"));
 	}
+
+	@Test
+	public void testCreateDeepDir() {
+		final ProcessingContext actual = ProcessingContext.create(
+				"foo/bar/index.html", servletContext);
+		assertThat(actual.getPath(), is("foo/bar/index.html"));
+		assertThat(actual.getDirectory(), is("/foo/bar"));
+	}
 }
