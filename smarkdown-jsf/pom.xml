@@ -35,5 +35,5 @@
 			<artifactId>lombok</artifactId>
 		</dependency>
 	</dependencies>
-	<name>Smakrdown - JSF comonents</name>
+	<name>Smakrdown - JSF components</name>
 </project>
