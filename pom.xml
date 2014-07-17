@@ -8,7 +8,7 @@
 	</parent>
 	<groupId>com.java-adventures.smarkdown</groupId>
 	<artifactId>smarkdown-parent</artifactId>
-	<version>0.4.3</version>
+	<version>0.4.4-SNAPSHOT</version>
 	<name>Smarkdown - Parent</name>
 	<packaging>pom</packaging>
 	<url>http://java-adventures.com</url>
@@ -336,7 +336,7 @@
 		<connection>scm:git:git@github.com:scheuchzer/smarkdown.git</connection>
 		<developerConnection>scm:git:git@github.com:scheuchzer/smarkdown.git</developerConnection>
 		<url>git@github.com:scheuchzer/smarkdown.git</url>
-		<tag>smarkdown-parent-0.4.3</tag>
+		<tag>HEAD</tag>
 	</scm>
 	<issueManagement>
 		<system>GitHub Issues</system>
