@@ -30,5 +30,20 @@ public abstract class AbstractListingProvider<LOCATION_TYPE extends Location> {
 		return documents;
 	}
 
-	abstract protected List<String> getDocuments(final LOCATION_TYPE location);
+	protected List<String> getDocuments(final LOCATION_TYPE location) {
+
+		List<String> documents = new ArrayList<String>();
+		readDocumentsFromListingFile(location, documents, "listing.json");
+		if (documents.isEmpty()) {
+			readDocuments(location, documents);
+		}
+		return documents;
+	}
+
+	abstract protected void readDocumentsFromListingFile(
+			final LOCATION_TYPE location, final List<String> documents,
+			final String listingFileName);
+
+	abstract protected void readDocuments(final LOCATION_TYPE location,
+			final List<String> documents);
 }

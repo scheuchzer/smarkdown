@@ -1,42 +1,34 @@
 package com.ja.smarkdown.location.github;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.kohsuke.github.GHBranch;
 import org.kohsuke.github.GHContent;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
 
+import com.ja.smarkdown.json.ListingParser;
 import com.ja.smarkdown.load.AbstractListingProvider;
 import com.ja.smarkdown.load.MountPointUtil;
+import com.ja.smarkdown.model.Listing;
 
 @Slf4j
 public class GitHubListingProvider extends
 		AbstractListingProvider<GitHubLocation> {
 
-	@Override
-	protected List<String> getDocuments(final GitHubLocation location) {
-		final List<String> documents = new ArrayList<String>();
-		try {
-			final GitHub github = location.open();
-			final GHRepository repo = github.getRepository(location
-					.getRepoName());
-			log.info("Using branch={}", location.getBranch());
-			final GHBranch master = repo.getBranches()
-					.get(location.getBranch());
-			listRepo(documents, location, repo, master, location.getPath());
-
-		} catch (final Exception e) {
-			log.error("failed", e);
-		}
-		log.info("End listing. Found {} documents.", documents.size());
-		return documents;
-	}
+	@Inject
+	private ListingParser parser;
 
 	private void listRepo(final List<String> documents,
 			final GitHubLocation location, final GHRepository repo,
@@ -79,5 +71,63 @@ public class GitHubListingProvider extends
 			documents.add(listingName);
 		}
 
+	}
+
+	@Override
+	protected void readDocumentsFromListingFile(GitHubLocation location,
+			List<String> documents, String listingFileName) {
+		try {
+			final GHRepository repo = openRepo(location);
+			final GHBranch branch = selectBranch(location, repo);
+			final GHContent content = repo.getFileContent(listingFileName,
+					branch.getName());
+			final byte[] data = Base64.decodeBase64(content.getEncodedContent()
+					.getBytes());
+			try {
+				try (Reader in = new InputStreamReader(
+						new ByteArrayInputStream(data))) {
+					final Listing listing = parser.parse(in);
+					for (final String file : listing.getFiles()) {
+						documents.add(MountPointUtil.apply(location, file));
+					}
+				}
+			} catch (Exception e) {
+				log.debug(
+						"Could not read listing file. That's propably ok if it's missing. msg={}, file={}",
+						e.getMessage(), listingFileName);
+			}
+
+		} catch (final Exception e) {
+			log.error("failed", e);
+		}
+
+	}
+
+	@Override
+	protected void readDocuments(GitHubLocation location, List<String> documents) {
+		final List<String> result = new ArrayList<String>();
+		try {
+			final GHRepository repo = openRepo(location);
+			final GHBranch branch = selectBranch(location, repo);
+			listRepo(result, location, repo, branch, location.getPath());
+
+		} catch (final Exception e) {
+			log.error("failed", e);
+		}
+		log.info("End listing. Found {} documents.", result.size());
+		documents.addAll(result);
+	}
+
+	private GHBranch selectBranch(GitHubLocation location,
+			final GHRepository repo) throws IOException {
+		log.info("Using branch={}", location.getBranch());
+		final GHBranch branch = repo.getBranches().get(location.getBranch());
+		return branch;
+	}
+
+	private GHRepository openRepo(GitHubLocation location) throws IOException {
+		final GitHub github = location.open();
+		final GHRepository repo = github.getRepository(location.getRepoName());
+		return repo;
 	}
 }

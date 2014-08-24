@@ -79,8 +79,42 @@ public class ClasspathListingProvider extends AbstractListingProvider<Location> 
 	@Inject
 	private Instance<ServletContext> servletContext;
 
+	/**
+	 * JBoss returns URLs with the vfszip and vfsfile protocol for resources,
+	 * and the org.reflections library doesn't recognize them. This is more a
+	 * bug inside the reflections library, but we can write a small workaround
+	 * for a quick fix on our side.
+	 */
+	private Set<URL> filterURLs(final Set<URL> urls) {
+		final Set<URL> results = new HashSet<URL>(urls.size());
+		for (final URL url : urls) {
+			String cleanURL = url.toString();
+			// Fix JBoss URLs
+			if (url.getProtocol().startsWith("vfszip:")) {
+				cleanURL = cleanURL.replaceFirst("vfszip:", "file:");
+			} else if (url.getProtocol().startsWith("vfsfile:")) {
+				cleanURL = cleanURL.replaceFirst("vfsfile:", "file:");
+			}
+			cleanURL = cleanURL.replaceFirst("\\.jar/", ".jar!/");
+			try {
+				results.add(new URL(cleanURL));
+			} catch (final MalformedURLException ex) {
+				// Shouldn't happen, but we can't do more to fix this URL.
+			}
+		}
+		return results;
+	}
+
 	@Override
-	protected List<String> getDocuments(final Location location) {
+	protected void readDocumentsFromListingFile(Location location,
+			List<String> documents, String listingFileName) {
+		// not supported. Too complicated if we have some jar with listing file
+		// and some without.
+
+	}
+
+	@Override
+	protected void readDocuments(Location location, List<String> documents) {
 		final List<String> result = new ArrayList<String>();
 		final String subDir = StringUtils.substringAfter(location.getUrl(),
 				"classpath:");
@@ -117,33 +151,7 @@ public class ClasspathListingProvider extends AbstractListingProvider<Location> 
 				result.add(MountPointUtil.apply(location, name));
 			}
 		}
-		return result;
-	}
-
-	/**
-	 * JBoss returns URLs with the vfszip and vfsfile protocol for resources,
-	 * and the org.reflections library doesn't recognize them. This is more a
-	 * bug inside the reflections library, but we can write a small workaround
-	 * for a quick fix on our side.
-	 */
-	private Set<URL> filterURLs(final Set<URL> urls) {
-		final Set<URL> results = new HashSet<URL>(urls.size());
-		for (final URL url : urls) {
-			String cleanURL = url.toString();
-			// Fix JBoss URLs
-			if (url.getProtocol().startsWith("vfszip:")) {
-				cleanURL = cleanURL.replaceFirst("vfszip:", "file:");
-			} else if (url.getProtocol().startsWith("vfsfile:")) {
-				cleanURL = cleanURL.replaceFirst("vfsfile:", "file:");
-			}
-			cleanURL = cleanURL.replaceFirst("\\.jar/", ".jar!/");
-			try {
-				results.add(new URL(cleanURL));
-			} catch (final MalformedURLException ex) {
-				// Shouldn't happen, but we can't do more to fix this URL.
-			}
-		}
-		return results;
+		documents.addAll(result);
 	}
 
 }

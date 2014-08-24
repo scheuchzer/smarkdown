@@ -3,7 +3,6 @@ package com.ja.smarkdown.location;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -39,18 +38,14 @@ public abstract class AbstractServletContextListingProvider extends
 	}
 
 	@Override
-	protected List<String> getDocuments(final Location location) {
-		final List<String> documents = new ArrayList<>();
-		readListingFile(location, documents,
-				StringUtils.substringAfter(location.getUrl(), urlPrefix));
-		return documents;
-	}
-
-	private void readListingFile(final Location location,
-			final List<String> documents, final String root) {
+	protected void readDocumentsFromListingFile(final Location location,
+			final List<String> documents, final String listingFileName) {
 		try {
-			final String listingResource = String.format("%s/%s/listing.json",
-					resourcePrefix, root);
+
+			final String listingResource = String.format("%s/%s/%s",
+					resourcePrefix,
+					StringUtils.substringAfter(location.getUrl(), urlPrefix),
+					listingFileName);
 
 			log.debug("Reading listing from: {}", listingResource);
 			final URL url = servletContext.getResource(listingResource);
@@ -67,6 +62,11 @@ public abstract class AbstractServletContextListingProvider extends
 		} catch (final Exception e) {
 			log.debug("Failed to read listing.", e);
 		}
+	}
 
+	@Override
+	protected void readDocuments(Location location, final List<String> documents) {
+		// Nothing to do as we can't scan the ServletContext. We read the files
+		// from the listing file.
 	}
 }
