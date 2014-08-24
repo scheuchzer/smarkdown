@@ -16,13 +16,6 @@
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-	<link rel="stylesheet" href="#{request.contextPath}/js/revealjs/2.6.1/css/reveal.min.css" />
-	<link rel="stylesheet" href="#{request.contextPath}/js/revealjs/2.6.1/css/theme/#{app.config.slides.theme}.css"
-		id="theme" />
-
-	<!-- For syntax highlighting -->
-	<link rel="stylesheet" href="#{request.contextPath}/js/revealjs/2.6.1/lib/css/zenburn.css" />
-
 	<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 	<script>
 		document
@@ -38,6 +31,13 @@
 </h:head>
 
 <h:body>
+	<h:outputStylesheet library="js/revealjs/2.6.1" name="css/reveal.min.css" />
+	<h:outputStylesheet library="js/revealjs/2.6.1" name="css/theme/#{app.config.slides.theme}.css" id="theme"/>
+	<!-- For syntax highlighting -->
+	<h:outputStylesheet library="js/revealjs/2.6.1" name="lib/css/zenburn.css" />
+	
+
+	<h:outputStylesheet library="css" name="smarkdown.css" />
 	<div class="reveal">
 		<div class="slides">
 			<sd:data-markdown value="#{slides.content}"/>
