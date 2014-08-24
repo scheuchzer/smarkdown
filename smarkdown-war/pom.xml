@@ -38,6 +38,10 @@
 		</dependency>
 		<dependency>
 			<groupId>com.java-adventures.smarkdown</groupId>
+			<artifactId>smarkdown-location-http</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.java-adventures.smarkdown</groupId>
 			<artifactId>smarkdown-jsf</artifactId>
 		</dependency>
 		<dependency>

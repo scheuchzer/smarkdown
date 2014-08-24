@@ -68,6 +68,11 @@
 			</dependency>
 			<dependency>
 				<groupId>com.java-adventures.smarkdown</groupId>
+				<artifactId>smarkdown-location-http</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.java-adventures.smarkdown</groupId>
 				<artifactId>smarkdown-jsf</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -339,6 +344,7 @@
 		<module>smarkdown-location-webapp</module>
 		<module>smarkdown-location-github</module>
 		<module>smarkdown-location-file</module>
+		<module>smarkdown-location-http</module>
 		<module>smarkdown-jsf</module>
 		<module>smarkdown-war</module>
 		<module>smarkdown-war-tomcat</module>

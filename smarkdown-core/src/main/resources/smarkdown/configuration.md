@@ -169,6 +169,7 @@ Currently the following location types are supported:
 - [Webapp](locations/locationWebapp.md)
 - [File-System](locations/locationFileSystem.md)
 - [GitHub](locations/locationGitHub.md)
+- [HTTP/HTTPS](locations/locationHttp.md)
 
 
 Every location has two configuration attributes. These are
