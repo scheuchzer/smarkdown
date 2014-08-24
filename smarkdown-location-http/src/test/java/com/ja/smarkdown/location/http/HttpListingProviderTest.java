@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -61,6 +62,7 @@ public class HttpListingProviderTest {
 		assertTrue(actual.contains("httptest/test1.md"));
 	}
 
+	@Ignore
 	@Test
 	public void testGetDocumentsHttps() {
 		final Location location = Location

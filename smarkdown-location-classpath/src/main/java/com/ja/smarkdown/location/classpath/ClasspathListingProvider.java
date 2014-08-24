@@ -161,8 +161,10 @@ public class ClasspathListingProvider extends AbstractListingProvider<Location> 
 	}
 
 	private boolean accept(String name, Set<String> excludes) {
+		if (name == null) {
+			return false;
+		}
 		for (String exclude : excludes) {
-			System.out.println(exclude + "    " + name);
 			if (name.contains(exclude)) {
 				return false;
 			}
