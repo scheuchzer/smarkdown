@@ -115,10 +115,15 @@ public class ClasspathListingProvider extends AbstractListingProvider<Location> 
 
 	@Override
 	protected void readDocuments(Location location, List<String> documents) {
+		// Do this better if more or more complex excludes
+		// are required. Reading from location config would be another
+		// enhancement.
+		final Set<String> excludes = new HashSet<String>();
+		excludes.add("META-INF");
+
 		final List<String> result = new ArrayList<String>();
 		final String subDir = StringUtils.substringAfter(location.getUrl(),
 				"classpath:");
-
 		final Set<URL> classloaders = ClasspathHelper.forManifest();
 		/*
 		 * Glassfish works fine with forManifest() only but JBoss needs
@@ -146,12 +151,23 @@ public class ClasspathListingProvider extends AbstractListingProvider<Location> 
 		for (final String file : files) {
 			String name = StringUtils.substringAfter(file, subDir);
 			name = StringUtils.trimToNull(StringUtils.stripStart(name, "/"));
-			if (name != null) {
+			if (accept(name, excludes)) {
 				log.debug("accepting file={}", name);
 				result.add(MountPointUtil.apply(location, name));
 			}
 		}
+
 		documents.addAll(result);
+	}
+
+	private boolean accept(String name, Set<String> excludes) {
+		for (String exclude : excludes) {
+			System.out.println(exclude + "    " + name);
+			if (name.contains(exclude)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 }
