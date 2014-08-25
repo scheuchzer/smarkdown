@@ -79,11 +79,11 @@ public class GitHubListingProvider extends
 		try {
 			final GHRepository repo = openRepo(location);
 			final GHBranch branch = selectBranch(location, repo);
-			final GHContent content = repo.getFileContent(listingFileName,
-					branch.getName());
-			final byte[] data = Base64.decodeBase64(content.getEncodedContent()
-					.getBytes());
 			try {
+				final GHContent content = repo.getFileContent(listingFileName,
+						branch.getName());
+				final byte[] data = Base64.decodeBase64(content
+						.getEncodedContent().getBytes());
 				try (Reader in = new InputStreamReader(
 						new ByteArrayInputStream(data))) {
 					final Listing listing = parser.parse(in);
