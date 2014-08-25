@@ -4,10 +4,8 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-import java.io.FileOutputStream;
 import java.util.Arrays;
 
-import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -64,7 +62,7 @@ public class GitHubDocumentProviderTest {
 				Arrays.asList(new GitHubLocation(location)), "vagrant.png");
 		assertThat(actual, is(notNullValue()));
 		assertThat(actual.getInputStream(), is(notNullValue()));
-		IOUtils.copy(actual.getInputStream(), new FileOutputStream("v.png"));
+		// IOUtils.copy(actual.getInputStream(), new FileOutputStream("v.png"));
 	}
 
 }
