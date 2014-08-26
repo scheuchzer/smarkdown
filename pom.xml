@@ -353,15 +353,8 @@
 		<module>smarkdown-war</module>
 		<module>smarkdown-war-tomcat</module>
 		<module>smarkdown-war-jetty</module>
+		<module>smarkdown-war-integration-test</module>
 	</modules>
-	<profiles>
-		<profile>
-			<id>it</id>
-			<modules>
-				<module>smarkdown-war-integration-test</module>
-			</modules>
-		</profile>
-	</profiles>
 	<scm>
 		<connection>scm:git:git@github.com:scheuchzer/smarkdown.git</connection>
 		<developerConnection>scm:git:git@github.com:scheuchzer/smarkdown.git</developerConnection>
