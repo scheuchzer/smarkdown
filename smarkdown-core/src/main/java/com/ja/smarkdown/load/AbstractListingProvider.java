@@ -12,6 +12,8 @@ public abstract class AbstractListingProvider<LOCATION_TYPE extends Location> {
 
 	private final Cache cache = new Cache();
 
+	private final DocumentFilter documentFilter = new DocumentFilter();
+
 	public List<String> getDocuments(final List<LOCATION_TYPE> locations) {
 		final List<String> documents = new ArrayList<String>();
 		log.debug("Starting listing from {} locations", locations.size());
@@ -37,7 +39,7 @@ public abstract class AbstractListingProvider<LOCATION_TYPE extends Location> {
 		if (documents.isEmpty()) {
 			readDocuments(location, documents);
 		}
-		return documents;
+		return documentFilter.filter(documents, location);
 	}
 
 	abstract protected void readDocumentsFromListingFile(

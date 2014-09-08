@@ -175,6 +175,8 @@ Currently the following location types are supported:
 Every location has two configuration attributes. These are
 
 - url
+- includes
+- excludes
 - config
 
 
@@ -183,6 +185,40 @@ Every location has two configuration attributes. These are
 The base url of a location. The format depends on the location type. For the very simple
 locations like ``classpath`` or ``file`` the ``url`` attribute will be the only attribute
 to configure. For more specific configuration you'll have to add the ``config`` attribute.
+
+
+**Element:** ``locations/includes``
+
+Documents in a location can be filtered by adding includes and excludes. By 
+default every document get's included. The default include regex is ``.*``.
+
+Example: 
+
+```
+{
+	"url":"file:///home/{your_home_dir}/smarkdown",
+	"includes": [
+		"directory1/.*",
+		"directory2/.*"
+	]
+}
+```
+
+
+**Element:** ``locations/excludes``
+
+By default no document get's excluded. 
+
+Example: 
+
+```
+{
+	"url":"file:///home/{your_home_dir}/smarkdown",
+	"excludes": [
+		"directory2/.*"
+	]
+}
+```
 
 
 **Element:** ``locations/config``

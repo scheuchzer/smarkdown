@@ -115,12 +115,6 @@ public class ClasspathListingProvider extends AbstractListingProvider<Location> 
 
 	@Override
 	protected void readDocuments(Location location, List<String> documents) {
-		// Do this better if more or more complex excludes
-		// are required. Reading from location config would be another
-		// enhancement.
-		final Set<String> excludes = new HashSet<String>();
-		excludes.add("META-INF");
-
 		final List<String> result = new ArrayList<String>();
 		final String subDir = StringUtils.substringAfter(location.getUrl(),
 				"classpath:");
@@ -151,25 +145,12 @@ public class ClasspathListingProvider extends AbstractListingProvider<Location> 
 		for (final String file : files) {
 			String name = StringUtils.substringAfter(file, subDir);
 			name = StringUtils.trimToNull(StringUtils.stripStart(name, "/"));
-			if (accept(name, excludes)) {
-				log.debug("accepting file={}", name);
+			if (name != null) {
 				result.add(MountPointUtil.apply(location, name));
 			}
 		}
 
 		documents.addAll(result);
-	}
-
-	private boolean accept(String name, Set<String> excludes) {
-		if (name == null) {
-			return false;
-		}
-		for (String exclude : excludes) {
-			if (name.contains(exclude)) {
-				return false;
-			}
-		}
-		return true;
 	}
 
 }
