@@ -114,7 +114,7 @@ Markdown rendering when browsing the source code. We think this is cool!
 
 See this file directly on GitHub: 
 
-https://github.com/scheuchzer/smarkdown/tree/master/smarkdown-war/src/main/resources/smarkdown/md/smarkdown/smarkdown.md 
+https://github.com/scheuchzer/smarkdown/tree/master/smarkdown-core/src/main/resources/smarkdown/welcome.md 
 
 
 Documents can be referenced from Markdown file to Markdown file. Such a link will
