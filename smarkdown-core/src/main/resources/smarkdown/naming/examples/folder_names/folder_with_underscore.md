@@ -3,5 +3,5 @@
 This file is located in a folder with '_' in its name.
 
 ```
-smarkdown/examples/names/folder_names/folder_with_underscore.md
+smarkdown/naming/examples/folder_names/folder_with_underscore.md
 ```

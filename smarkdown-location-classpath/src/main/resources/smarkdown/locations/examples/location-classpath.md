@@ -4,5 +4,5 @@
 This file is located in the classpath of a the ``smarkdown-location-classpath.jar`` file.
 
 ```
-smarkdown/examples/locations/location-classpath.md
+smarkdown/locations/examples/location-classpath.md
 ```

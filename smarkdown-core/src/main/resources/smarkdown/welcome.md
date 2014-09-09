@@ -98,6 +98,7 @@ And yes, **Smarkdown** of course! At least for the JEE world.
 link in the navigation bar.
 
 
+
 #### Why markdown?
 
 - it's simple
@@ -132,6 +133,10 @@ even a positive aspect of Markdown!
 
 Don't waste your time with formatting your document. Word templates will change once a
 year anyway. 
+
+
+Smarkdown provides some [additional features for Markdown](markdown.md) to counteract
+some limitations.
 
 
 #### But I need a Word file!
@@ -202,7 +207,7 @@ you should remember following three points:
 - two empty lines will add a vertical slide
 
 
-[Example](examples/slides/fooBarExample.md):
+Example:
 ```
 # Topic Foo\n
 \n
