@@ -8,7 +8,7 @@ A simple JEE webapp that renders Markdown files as HTML or HTML slideshow.
 See a [live demo](http://smarkdown.java-adventures.com) at [http://smarkdown.java-adventures.com](http://smarkdown.java-adventures.com)!
 
 The [live demo](http://smarkdown.java-adventures.com) runs the smarkdown war file out of the box (or out of the maven repo) deployed
-on a [Openshift](https://www.openshift.com/) [Wildfly8](http://wildfly.org/) instance.
+on an [Openshift](https://www.openshift.com/) instance running [Wildfly8](http://wildfly.org/).
 
 
 ## Documentation
