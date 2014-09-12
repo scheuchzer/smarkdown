@@ -32,7 +32,7 @@ import com.ja.smarkdown.model.Listing;
 import com.ja.smarkdown.model.config.Location;
 
 @RunWith(MockitoJUnitRunner.class)
-public class HttpListingProviderTest extends AbstractWiremockTest {
+public class SmarkdownHttpListingProviderTest extends AbstractWiremockTest {
 	@Rule
 	public WireMockRule wireMockRule = new WireMockRule(wireMockConfig()
 			.port(getHttpPort()).httpsPort(getHttpsPort())
@@ -41,7 +41,7 @@ public class HttpListingProviderTest extends AbstractWiremockTest {
 	@Mock
 	private ListingParser parser;
 	@InjectMocks
-	private HttpListingProvider provider = new HttpListingProvider();
+	private SmarkdownHttpListingProvider provider = new SmarkdownHttpListingProvider();
 
 	@Test
 	public void testGetDocuments() {
@@ -54,7 +54,7 @@ public class HttpListingProviderTest extends AbstractWiremockTest {
 										+ "\"httptest/test2.md\"\n" + "]}")));
 
 		final Location location = Location.create(String.format(
-				"http://localhost:%s/test", getHttpPort()));
+				"smarkdown:http://localhost:%s/test", getHttpPort()));
 		final Listing listing = new Listing();
 		when(parser.parse(any(Reader.class))).thenAnswer(new Answer<Listing>() {
 
@@ -92,7 +92,7 @@ public class HttpListingProviderTest extends AbstractWiremockTest {
 										+ "\"httptest/test2.md\"\n" + "]}")));
 
 		final Location location = Location.create(String.format(
-				"https://localhost:%s/test", getHttpsPort()));
+				"smarkdown:https://localhost:%s/test", getHttpsPort()));
 		final Listing listing = new Listing();
 		when(parser.parse(any(Reader.class))).thenAnswer(new Answer<Listing>() {
 

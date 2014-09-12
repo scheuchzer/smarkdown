@@ -5,14 +5,14 @@ import javax.inject.Inject;
 import com.ja.smarkdown.load.AbstractLocationHandlerConfigurator;
 import com.ja.smarkdown.model.LocationHandler;
 
-public class HttpsLocationHandlerConfigurator extends
+public class SmarkdownHttpLocationHandlerConfigurator extends
 		AbstractLocationHandlerConfigurator {
-	public HttpsLocationHandlerConfigurator() {
-		super("https://");
+	public SmarkdownHttpLocationHandlerConfigurator() {
+		super("smarkdown:http://");
 	}
 
 	@Inject
-	private HttpsLocationHandler handler;
+	private SmarkdownHttpLocationHandler handler;
 
 	@Override
 	protected LocationHandler getHandler() {

@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.StringUtils;
@@ -15,7 +16,9 @@ import com.ja.smarkdown.model.config.Location;
 @AllArgsConstructor
 public abstract class AbstractDocumentProvider<LOCATION_TYPE extends Location> {
 
+	@Getter
 	private final String protocol;
+	@Getter
 	private final String resourcePrefix;
 
 	public ResourceInfo getDocument(final List<LOCATION_TYPE> locations,

@@ -2,6 +2,7 @@ package com.ja.smarkdown;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -10,13 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import lombok.extern.slf4j.Slf4j;
-
 import com.ja.smarkdown.load.DocumentScanner;
 import com.ja.smarkdown.model.ListingDocument;
 
 @WebServlet(urlPatterns = { "/listing.json" })
-@Slf4j
 public class Listing extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -30,10 +28,17 @@ public class Listing extends HttpServlet {
 		resp.setContentType("application/json");
 		PrintWriter writer = resp.getWriter();
 		writer.println("{\"files\":[");
-		for (ListingDocument ld : scanner.getDocuments()) {
-			writer.println(String.format("  \"%s.md\",", ld.getUrlEncodedName()));
+		final List<ListingDocument> documents = scanner.getDocuments();
+		for (int i = 0; i < documents.size(); i++) {
+			final ListingDocument ld = documents.get(i);
+			if (i > 0) {
+				writer.println(",");
+			}
+			writer.print(String.format("  \"raw/%s.md\"",
+					ld.getUrlEncodedName()));
+
 		}
-		writer.println("]}");
+		writer.print("]}");
 	}
 
 }

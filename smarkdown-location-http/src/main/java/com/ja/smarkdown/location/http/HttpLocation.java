@@ -8,21 +8,24 @@ public class HttpLocation extends Location {
 
 	private static final String PREFIX = "http";
 
-	public enum Properties {
-		authToken, branch
-	}
+	private final String prefix;
 
 	public HttpLocation(final Location location) {
+		this(location, PREFIX);
+	}
+
+	protected HttpLocation(final Location location, final String prefix) {
+		this.prefix = prefix;
 		setConfig(location.getConfig());
 		setMountPoint(location.getMountPoint());
 		setUrl(location.getUrl());
 		if (location.getCacheDuration() == 0) {
-			setCacheDuration(TimeUnit.MINUTES.toMillis(60));
+			setCacheDuration(TimeUnit.MINUTES.toMillis(1));
 		}
 	}
 
 	public boolean isAcceptable() {
-		return getUrl().startsWith(PREFIX);
+		return getUrl().startsWith(prefix);
 	}
 
 }

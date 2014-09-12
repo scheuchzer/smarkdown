@@ -24,24 +24,26 @@ import com.ja.smarkdown.model.ResourceInfo;
 import com.ja.smarkdown.model.config.Location;
 
 @RunWith(MockitoJUnitRunner.class)
-public class HttpDocumentProviderTest extends AbstractWiremockTest {
+public class SmarkdownHttpDocumentProviderTest extends AbstractWiremockTest {
+
 	@Rule
-	public WireMockRule wireMockRule = new WireMockRule(wireMockConfig().port(
-			getHttpPort()).notifier(getNotifier()));
+	public WireMockRule wireMockRule = new WireMockRule(wireMockConfig()
+			.port(getHttpPort()).httpsPort(getHttpsPort())
+			.notifier(getNotifier()));
 	@Rule
 	public TemporaryFolder temp = new TemporaryFolder();
 	@InjectMocks
-	private HttpDocumentProvider provider;
+	private SmarkdownHttpDocumentProvider provider;
 
 	@Test
 	public void testGetDocumentInFolder() throws Exception {
-		stubFor(get(urlEqualTo("/test/httptest/test1.md")).willReturn(
+		stubFor(get(urlEqualTo("/test/raw/httptest/test1.md")).willReturn(
 				aResponse().withStatus(200)
 						.withHeader("Content-Type", "text/plain")
 						.withBody("#test1\n")));
 
 		final Location location = Location.create(String.format(
-				"http://localhost:%s/test", getHttpPort()));
+				"smarkdown:http://localhost:%s/test", getHttpPort()));
 		final ResourceInfo actual = provider.getDocument(
 				Arrays.asList(new HttpLocation(location)), "httptest/test1.md");
 		assertThat(actual, is(notNullValue()));
