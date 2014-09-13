@@ -166,6 +166,7 @@ Currently the following location types are supported:
 - [File-System](locations/locationFileSystem.md)
 - [GitHub](locations/locationGitHub.md)
 - [HTTP/HTTPS](locations/locationHttp.md)
+- [other Smarkdown installations](locations/locationSmarkdown.md)
 
 
 See [Locations](locations/location.md) for more details about the location configuration.

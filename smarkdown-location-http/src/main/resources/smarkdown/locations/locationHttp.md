@@ -1,9 +1,9 @@
-# Location - WEB-INF
+# Location - Http/Https
 
 
 Markdown files can be read from any web location using HTTP(S). The only
-requirement is that the is a ``listing.json`` present on the server that
-known what documents are available. 
+requirement is that there is a ``listing.json`` present on the server that
+knowns what documents are available. 
 
 
 
@@ -12,7 +12,7 @@ known what documents are available.
 
 ### Enable HTTP(S) lookups
 
-To enable a HTTP and HTTPS location add a ``http`` or ``https`` url to the configuration. 
+To enable a HTTP and HTTPS locations add a ``http`` or ``https`` url to the configuration. 
 
 Syntax:
 ```bash

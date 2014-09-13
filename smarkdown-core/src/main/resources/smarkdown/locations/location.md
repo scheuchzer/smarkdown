@@ -21,6 +21,7 @@ Currently the following location types are supported:
 - [File-System](locationFileSystem.md)
 - [GitHub](locationGitHub.md)
 - [HTTP/HTTPS](locationHttp.md)
+- [other Smarkdown installations](locationSmarkdown.md)
 
 
 Every location has four configuration attributes. These are
