@@ -23,6 +23,8 @@ public class GitHubLocation extends Location {
 		setConfig(location.getConfig());
 		setMountPoint(location.getMountPoint());
 		setUrl(location.getUrl());
+		setIncludes(location.getIncludes());
+		setExcludes(location.getExcludes());
 		if (location.getCacheDuration() == 0) {
 			setCacheDuration(TimeUnit.MINUTES.toMillis(60));
 		}
