@@ -283,7 +283,7 @@
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
-          <con:endpoint>${#Project#smarkdown_url}/smarkdown/examples/locations/location-classpath.html</con:endpoint>
+          <con:endpoint>${#Project#smarkdown_url}/smarkdown/locations/examples/location-classpath.html</con:endpoint>
           <con:request/>
           <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="a723ddd9-fc26-4c89-87f5-12372687b81d">
             <con:configuration>
@@ -312,7 +312,7 @@
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
-          <con:endpoint>${#Project#smarkdown_url}/smarkdown/examples/locations/location-web-inf.html</con:endpoint>
+          <con:endpoint>${#Project#smarkdown_url}/smarkdown/locations/examples/location-web-inf.html</con:endpoint>
           <con:request/>
           <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="c1be747b-721e-490d-9c9e-84cda1e3c2a4">
             <con:configuration>
@@ -341,7 +341,7 @@
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
-          <con:endpoint>${#Project#smarkdown_url}/smarkdown/examples/locations/location-weapp.html</con:endpoint>
+          <con:endpoint>${#Project#smarkdown_url}/smarkdown/locations/examples/location-web-inf.html</con:endpoint>
           <con:request/>
           <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="0f35b0b9-a39a-4cda-86ad-4d8c9274931b">
             <con:configuration>
@@ -351,7 +351,7 @@
           <con:assertion type="HTTP Download all resources" name="HTTP Download all resources" id="a2dd1f06-83b9-4195-a7cf-1fdf8c47764a"/>
           <con:assertion type="Simple Contains" name="Contains" id="8b41e0e2-0422-445e-bf74-1d1745439857">
             <con:configuration>
-              <token># Example - Location Webapp</token>
+              <token># Example - Location Web-Inf</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
@@ -370,7 +370,7 @@
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
-          <con:endpoint>${#Project#smarkdown_url}/smarkdown/examples/locations/location-classpath-webapp.html</con:endpoint>
+          <con:endpoint>${#Project#smarkdown_url}/smarkdown/locations/examples/location-classpath-webapp.html</con:endpoint>
           <con:request/>
           <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="76cfee00-8b12-412c-a6da-512dc4d827e7">
             <con:configuration>
@@ -399,7 +399,7 @@
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
-          <con:endpoint>${#Project#smarkdown_url}/raw/smarkdown/examples/locations/location-classpath-webapp.md</con:endpoint>
+          <con:endpoint>${#Project#smarkdown_url}/raw/smarkdown/locations/examples/location-classpath-webapp.md</con:endpoint>
           <con:request/>
           <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="76cfee00-8b12-412c-a6da-512dc4d827e7">
             <con:configuration>

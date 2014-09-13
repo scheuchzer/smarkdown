@@ -33,7 +33,7 @@ public class SmarkdownHttpDocumentProviderTest extends AbstractWiremockTest {
 	@Rule
 	public TemporaryFolder temp = new TemporaryFolder();
 	@InjectMocks
-	private SmarkdownHttpDocumentProvider provider;
+	private SmarkdownHttpDocumentProvider provider = new SmarkdownHttpDocumentProvider();
 
 	@Test
 	public void testGetDocumentInFolder() throws Exception {

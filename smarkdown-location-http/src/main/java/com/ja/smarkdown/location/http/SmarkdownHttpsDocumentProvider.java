@@ -1,7 +1,7 @@
 package com.ja.smarkdown.location.http;
 
 public class SmarkdownHttpsDocumentProvider extends
-		SmarkdownHttpDocumentProvider {
+		AbstractHttpDocumentProvider {
 
 	public SmarkdownHttpsDocumentProvider() {
 		super("smarkdown:https://", "https://");
@@ -11,5 +11,4 @@ public class SmarkdownHttpsDocumentProvider extends
 	protected String getRootPath(HttpLocation location) {
 		return String.format("%s/raw", super.getRootPath(location));
 	}
-
 }

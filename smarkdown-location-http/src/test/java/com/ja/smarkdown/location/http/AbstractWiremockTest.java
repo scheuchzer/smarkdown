@@ -19,10 +19,10 @@ public abstract class AbstractWiremockTest {
 
 	@Getter
 	private final int httpPort = Integer.parseInt(System.getProperty(
-			"wiremock.port.http", "49152"));
+			"wiremock.port.http", "50152"));
 	@Getter
 	private final int httpsPort = Integer.parseInt(System.getProperty(
-			"wiremock.port.https", "49154"));
+			"wiremock.port.https", "50154"));
 
 	@Getter
 	private final Notifier notifier = new Slf4JNotifier();

@@ -33,7 +33,7 @@ public class SmarkdownHttpsDocumentProviderTest extends AbstractWiremockTest {
 	@Rule
 	public TemporaryFolder temp = new TemporaryFolder();
 	@InjectMocks
-	private SmarkdownHttpsDocumentProvider provider;
+	private SmarkdownHttpsDocumentProvider provider = new SmarkdownHttpsDocumentProvider();
 
 	@Test
 	public void testGetDocumentInFolder() throws Exception {
@@ -43,7 +43,7 @@ public class SmarkdownHttpsDocumentProviderTest extends AbstractWiremockTest {
 						.withBody("#test1\n")));
 
 		final Location location = Location.create(String.format(
-				"smarkdown:https://localhost:%s/test", getHttpPort()));
+				"smarkdown:https://localhost:%s/test", getHttpsPort()));
 		final ResourceInfo actual = provider.getDocument(
 				Arrays.asList(new HttpLocation(location)), "httptest/test1.md");
 		assertThat(actual, is(notNullValue()));

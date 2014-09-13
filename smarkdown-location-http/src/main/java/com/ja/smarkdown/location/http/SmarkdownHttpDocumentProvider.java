@@ -3,12 +3,7 @@ package com.ja.smarkdown.location.http;
 public class SmarkdownHttpDocumentProvider extends AbstractHttpDocumentProvider {
 
 	public SmarkdownHttpDocumentProvider() {
-		this("smarkdown:http://", "http://");
-	}
-
-	protected SmarkdownHttpDocumentProvider(final String protocol,
-			final String realProtocol) {
-		super(protocol, realProtocol);
+		super("smarkdown:http://", "http://");
 	}
 
 	@Override
