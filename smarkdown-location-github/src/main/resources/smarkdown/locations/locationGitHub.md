@@ -32,7 +32,9 @@ for example:
 ```json
 {
   "url": "github:scheuchzer/smarkdown",
-  "branch": "master"
+  "config":{
+  	"branch": "master"
+  }
 }
 ``` 
 
@@ -47,7 +49,9 @@ for example:
 ```json
 {
   "url": "github:scheuchzer/smarkdown",
-  "autToken": "16f20b0923454f3e6e23432456d766d05aa06bdfc0"
+  "config":{
+  	"autToken": "16f20b0923454f3e6e23432456d766d05aa06bdfc0"
+  }
 }
 ``` 
 
