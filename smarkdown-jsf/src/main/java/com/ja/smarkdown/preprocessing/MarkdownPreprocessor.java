@@ -80,6 +80,7 @@ public class MarkdownPreprocessor {
 			buf.append("<div class='alert alert-info'>");
 			buf.append("Document found in multiple locations!");
 			buf.append("<ul>");
+			buf.append("<li>").append(resource.getLocation().getUrl()).append("</li>");
 			for (final ResourceInfo ri : resource.getOverridden()) {
 				buf.append("<li>").append(ri.getLocation().getUrl())
 						.append(ri.getPath()).append("</li>");
