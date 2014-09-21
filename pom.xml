@@ -100,6 +100,11 @@
 				<type>war</type>
 			</dependency>
 			<dependency>
+				<groupId>com.java-adventures.smarkdown</groupId>
+				<artifactId>smarkdown-jekyll</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>com.java-adventures.yuml</groupId>
 				<artifactId>yuml-remote-renderer</artifactId>
 				<version>0.1.0</version>
@@ -362,6 +367,7 @@
 		<module>smarkdown-location-http</module>
 		<module>smarkdown-jsf</module>
 		<module>smarkdown-yuml</module>
+		<module>smarkdown-jekyll</module>
 		<module>smarkdown-war</module>
 	</modules>
 	<profiles>

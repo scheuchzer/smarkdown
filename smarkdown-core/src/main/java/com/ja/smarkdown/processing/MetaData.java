@@ -1,6 +1,7 @@
 package com.ja.smarkdown.processing;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,8 @@ public class MetaData {
 	}
 
 	public List<Object> get(String key) {
-		return data.get(key);
+		List<Object> values = data.get(key);
+		return values == null ? Collections.emptyList() : values;
 	}
 
 }
