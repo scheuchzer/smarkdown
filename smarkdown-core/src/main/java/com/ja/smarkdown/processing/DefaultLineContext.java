@@ -3,25 +3,25 @@ package com.ja.smarkdown.processing;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ja.smarkdown.util.ToString;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.ja.smarkdown.util.ToString;
+
 @RequiredArgsConstructor
 @Slf4j
-public class DefaultLineContext<T> implements LineContext {
+public class DefaultLineContext implements LineContext {
 
 	private final String line;
 	private final MetaData metaData;
 	@Setter
-	private T currentOwner;
+	private Object currentOwner;
 	private final List<Action> actions = new ArrayList<>();
 
-	String applyActions() {
+	public String applyActions() {
 		logActions();
 		String newline = line;
 		for (final Action action : actions) {
@@ -49,9 +49,12 @@ public class DefaultLineContext<T> implements LineContext {
 		actions.add(new Action(currentOwner, ActionType.remove, null) {
 
 			@Override
-			String apply(final String result, final MetaData md) {
-				return null;
-
+			public String apply(final String result, final MetaData md) {
+				String tmp = StringUtils.remove(result, line + "\n");
+				if (tmp.equals(result)) {
+					return StringUtils.trimToNull(StringUtils.remove(result, line));
+				}
+				return tmp;
 			}
 		});
 	}
@@ -61,7 +64,7 @@ public class DefaultLineContext<T> implements LineContext {
 		actions.add(new Action(currentOwner, ActionType.dontCare, null) {
 
 			@Override
-			String apply(final String result, final MetaData md) {
+			public String apply(final String result, final MetaData md) {
 				return result;
 			}
 		});
@@ -72,26 +75,39 @@ public class DefaultLineContext<T> implements LineContext {
 		actions.add(new Action(currentOwner, ActionType.addMetaData,
 				new ToString("%s=%s", key, value)) {
 			@Override
-			String apply(final String result, final MetaData md) {
+			public String apply(final String result, final MetaData md) {
 				md.add(key, value);
 				return result;
 			}
 		});
 	}
 
-	private enum ActionType {
-		remove, dontCare, addMetaData;
-	};
+	@Override
+	public void insertBefore(final String content) {
+		actions.add(new Action(currentOwner, ActionType.insertBefore, null) {
 
-	@Data
-	@AllArgsConstructor
-	@RequiredArgsConstructor
-	abstract class Action {
-		private final T owner;
-		private final ActionType type;
-		private Object comment;
+			@Override
+			public String apply(final String result, final MetaData md) {
+				return String.format("%s\n%s", content, result);
+			}
+		});
+	}
 
-		abstract String apply(final String line, final MetaData md);
+	@Override
+	public void insertAfter(final String content) {
+		actions.add(new Action(currentOwner, ActionType.insertAfter, null) {
+
+			@Override
+			public String apply(final String result, final MetaData md) {
+				return String.format("%s\n%s", result, content);
+			}
+		});
+	}
+
+	@Override
+	public void custom(Action action) {
+		actions.add(action);
+
 	}
 
 }

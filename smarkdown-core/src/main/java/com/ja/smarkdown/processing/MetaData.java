@@ -5,9 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MetaData {
+import lombok.Data;
 
-	private Map<String, List<Object>> data = new HashMap<>();
+import com.ja.smarkdown.model.ResourceInfo;
+
+@Data
+public class MetaData {
+	private final ResourceInfo resource;
+	private final String originalContent;
+	private final RequestInfo requestInfo;
+	
+	private final Map<String, List<Object>> data = new HashMap<>();
 
 	public void add(String key, Object value) {
 		List<Object> values = data.get(key);

@@ -1,4 +1,4 @@
-package com.ja.smarkdown.preprocessing;
+package com.ja.smarkdown;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -11,14 +11,14 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ProcessingContextTest {
+public class ServletRequestInfoTest {
 
 	@Mock
 	private ServletContext servletContext;
 
 	@Test
 	public void testCreateNoDir() {
-		final ProcessingContext actual = ProcessingContext.create("index.html",
+		final ServletRequestInfo actual = ServletRequestInfo.create("index.html",
 				servletContext);
 		assertThat(actual.getPath(), is("index.html"));
 		assertThat(actual.getDirectory(), is(""));
@@ -26,7 +26,7 @@ public class ProcessingContextTest {
 
 	@Test
 	public void testCreateDir() {
-		final ProcessingContext actual = ProcessingContext.create(
+		final ServletRequestInfo actual = ServletRequestInfo.create(
 				"foo/index.html", servletContext);
 		assertThat(actual.getPath(), is("foo/index.html"));
 		assertThat(actual.getDirectory(), is("/foo"));
@@ -34,7 +34,7 @@ public class ProcessingContextTest {
 
 	@Test
 	public void testCreateDeepDir() {
-		final ProcessingContext actual = ProcessingContext.create(
+		final ServletRequestInfo actual = ServletRequestInfo.create(
 				"foo/bar/index.html", servletContext);
 		assertThat(actual.getPath(), is("foo/bar/index.html"));
 		assertThat(actual.getDirectory(), is("/foo/bar"));

@@ -10,6 +10,10 @@ import java.util.List;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
+import org.apache.commons.io.IOUtils;
+
+import com.ja.smarkdown.model.ResourceInfo;
+
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,15 +27,16 @@ public class ContentProcessor {
 	@Setter
 	private Instance<ContentDataProcessor> contentDataProcessors;
 
-	public String process(String content) throws ProcessingException {
+	public String process(ResourceInfo resourceInfo, RequestInfo requestInfo) throws ProcessingException {
 		try {
-			MetaData metaData = new MetaData();
+			String originalContent = IOUtils.toString(resourceInfo.getInputStream());
+			MetaData metaData = new MetaData(resourceInfo, originalContent, requestInfo);
 			List<MetaDataProcessor> metaDataExecutionList = createExecutionOrder(metaDataProcessors
 					.iterator());
 
 			startMetaDataProcessing(metaData, metaDataExecutionList);
 			StringBuilder contentAfterMetaDataProcessing = processLines(
-					content, metaData, metaDataExecutionList);
+					originalContent, metaData, metaDataExecutionList);
 			endMetaDataProcessing(metaData, metaDataExecutionList);
 
 			List<ContentDataProcessor> contentDataExecutionList = createExecutionOrder(contentDataProcessors
@@ -71,7 +76,7 @@ public class ContentProcessor {
 	private <T extends LineProcessor> StringBuilder processLines(
 			String content, MetaData metaData, List<T> executionList)
 			throws IOException {
-		final List<DefaultLineContext<T>> dataConfiguration = new ArrayList<>();
+		final List<DefaultLineContext> dataConfiguration = new ArrayList<>();
 
 		final BufferedReader dataReader = new BufferedReader(new StringReader(
 				content));
@@ -81,7 +86,7 @@ public class ContentProcessor {
 		}
 
 		StringBuilder contentAfterDataProcessing = new StringBuilder();
-		for (DefaultLineContext<T> config : dataConfiguration) {
+		for (DefaultLineContext config : dataConfiguration) {
 			String newline = config.applyActions();
 			if (newline != null) {
 				contentAfterDataProcessing.append(newline).append('\n');
@@ -104,9 +109,9 @@ public class ContentProcessor {
 		}
 	}
 
-	private <T extends LineProcessor> DefaultLineContext<T> processLine(
+	private <T extends LineProcessor> DefaultLineContext processLine(
 			String line, List<T> executionList, MetaData metaData) {
-		DefaultLineContext<T> ctx = new DefaultLineContext<>(line, metaData);
+		DefaultLineContext ctx = new DefaultLineContext(line, metaData);
 		for (T processor : executionList) {
 			ctx.setCurrentOwner(processor);
 			processor.processLine(line, ctx);

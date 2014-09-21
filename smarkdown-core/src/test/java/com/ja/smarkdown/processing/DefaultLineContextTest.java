@@ -33,8 +33,8 @@ public class DefaultLineContextTest {
 		};
 
 		final String line = "abcdef";
-		final DefaultLineContext<MetaDataProcessor> ctx = new DefaultLineContext<MetaDataProcessor>(
-				line, new MetaData());
+		final DefaultLineContext ctx = new DefaultLineContext(
+				line, createTestingMetaData());
 		ctx.setCurrentOwner(donothing1);
 		donothing1.processLine(line, ctx);
 		ctx.setCurrentOwner(donothing2);
@@ -42,6 +42,10 @@ public class DefaultLineContextTest {
 
 		final String actual = ctx.applyActions();
 		assertThat(actual, is(line));
+	}
+
+	private MetaData createTestingMetaData() {
+		return new MetaData(null, null, new DummyRequestInfo());
 	}
 
 	@Test
@@ -65,8 +69,8 @@ public class DefaultLineContextTest {
 		};
 
 		final String line = "abcdef";
-		final DefaultLineContext<MetaDataProcessor> ctx = new DefaultLineContext<MetaDataProcessor>(
-				line, new MetaData());
+		final DefaultLineContext ctx = new DefaultLineContext(
+				line, createTestingMetaData());
 		ctx.setCurrentOwner(donothing1);
 		donothing1.processLine(line, ctx);
 		ctx.setCurrentOwner(remove);
@@ -74,6 +78,122 @@ public class DefaultLineContextTest {
 
 		final String actual = ctx.applyActions();
 		assertThat(actual, isEmptyOrNullString());
+	}
+
+	@Test
+	public void testApplyInsertBefore() {
+
+		final MetaDataProcessor before = new AbstractMetaDataProcessor() {
+
+			@Override
+			public void processLine(final String line, final LineContext ctx) {
+				ctx.insertBefore("inserted");
+			}
+
+		};
+
+		final String line = "abcdef";
+		final DefaultLineContext ctx = new DefaultLineContext(
+				line, createTestingMetaData());
+		ctx.setCurrentOwner(before);
+		before.processLine(line, ctx);
+
+		final String actual = ctx.applyActions();
+		assertThat(actual, is("inserted\nabcdef"));
+	}
+
+	@Test
+	public void testApplyInsertAfter() {
+
+		final MetaDataProcessor after = new AbstractMetaDataProcessor() {
+
+			@Override
+			public void processLine(final String line, final LineContext ctx) {
+				ctx.insertAfter("inserted");
+			}
+
+		};
+
+		final String line = "abcdef";
+		final DefaultLineContext ctx = new DefaultLineContext(
+				line, createTestingMetaData());
+		ctx.setCurrentOwner(after);
+		after.processLine(line, ctx);
+
+		final String actual = ctx.applyActions();
+		assertThat(actual, is("abcdef\ninserted"));
+	}
+
+	@Test
+	public void testApplyInsertBeforeAfter() {
+		final MetaDataProcessor before = new AbstractMetaDataProcessor() {
+
+			@Override
+			public void processLine(final String line, final LineContext ctx) {
+				ctx.insertBefore("inserted");
+			}
+
+		};
+		final MetaDataProcessor after = new AbstractMetaDataProcessor() {
+
+			@Override
+			public void processLine(final String line, final LineContext ctx) {
+				ctx.insertAfter("inserted");
+			}
+
+		};
+
+		final String line = "abcdef";
+		final DefaultLineContext ctx = new DefaultLineContext(
+				line, createTestingMetaData());
+		ctx.setCurrentOwner(before);
+		before.processLine(line, ctx);
+		ctx.setCurrentOwner(after);
+		after.processLine(line, ctx);
+
+		final String actual = ctx.applyActions();
+		assertThat(actual, is("inserted\nabcdef\ninserted"));
+	}
+
+	@Test
+	public void testApplyInsertBeforeRemoveAfter() {
+		final MetaDataProcessor before = new AbstractMetaDataProcessor() {
+
+			@Override
+			public void processLine(final String line, final LineContext ctx) {
+				ctx.insertBefore("inserted");
+			}
+
+		};
+		final MetaDataProcessor after = new AbstractMetaDataProcessor() {
+
+			@Override
+			public void processLine(final String line, final LineContext ctx) {
+				ctx.insertAfter("inserted");
+			}
+
+		};
+		final MetaDataProcessor remove = new AbstractMetaDataProcessor() {
+
+			@Override
+			public void processLine(final String line, final LineContext ctx) {
+				ctx.remove();
+			}
+
+		};
+
+		final String line = "abcdef";
+		final DefaultLineContext ctx = new DefaultLineContext(
+				line, createTestingMetaData());
+		ctx.setCurrentOwner(before);
+		before.processLine(line, ctx);
+		ctx.setCurrentOwner(after);
+		after.processLine(line, ctx);
+		ctx.setCurrentOwner(remove);
+		remove.processLine(line, ctx);
+
+		final String actual = ctx.applyActions();
+		assertThat(actual, is("inserted\ninserted"));
 	}
 
 	@Test
@@ -90,8 +210,8 @@ public class DefaultLineContextTest {
 		};
 
 		final String line = "abcdef";
-		final MetaData metaData = new MetaData();
-		final DefaultLineContext<MetaDataProcessor> ctx = new DefaultLineContext<MetaDataProcessor>(
+		final MetaData metaData = createTestingMetaData();
+		final DefaultLineContext ctx = new DefaultLineContext(
 				line, metaData);
 		ctx.setCurrentOwner(processor);
 		processor.processLine(line, ctx);

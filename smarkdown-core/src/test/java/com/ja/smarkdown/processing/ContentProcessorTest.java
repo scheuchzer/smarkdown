@@ -4,6 +4,8 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.doReturn;
 
+import java.io.ByteArrayInputStream;
+import java.io.StringReader;
 import java.util.Arrays;
 
 import javax.enterprise.inject.Instance;
@@ -14,6 +16,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import com.ja.smarkdown.model.ResourceInfo;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ContentProcessorTest {
@@ -71,7 +75,8 @@ public class ContentProcessorTest {
 
 		String document = "# test\n" + "---\n" + "test=foo\n" + "---\n"
 				+ "the content\n";
-		String actual = processor.process(document);
+		ResourceInfo resource = new ResourceInfo(null, null, new ByteArrayInputStream(document.getBytes()));
+		String actual = processor.process(resource, new DummyRequestInfo());
 		assertThat(actual, is("# test\nthe content\ntag=foo"));
 
 	}

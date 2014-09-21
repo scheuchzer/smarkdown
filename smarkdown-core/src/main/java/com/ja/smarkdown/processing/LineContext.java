@@ -7,7 +7,10 @@ public interface LineContext {
 	void remove();
 
 	void dontCare();
-	// void insertBefore(String content);
-	// void insertAfter(String content);
-	// void insertAround(String content);
+
+	void insertBefore(String content);
+
+	void insertAfter(String content);
+
+	void custom(Action action);
 }
