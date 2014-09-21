@@ -4,6 +4,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.ServletContext;
 
 import lombok.Data;
 
@@ -11,7 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.ja.smarkdown.load.ResourceLoader;
 import com.ja.smarkdown.model.ResourceInfo;
-import com.ja.smarkdown.preprocessing.MarkdownPreprocessor;
+import com.ja.smarkdown.processing.ContentProcessor;
+import com.ja.smarkdown.processing.ProcessingException;
 
 @Named
 @RequestScoped
@@ -21,7 +23,9 @@ public class Slides {
 	@Inject
 	private ResourceLoader loader;
 	@Inject
-	private MarkdownPreprocessor preprocessor;
+	private ContentProcessor contentProcessor;
+	@Inject
+	private ServletContext servletContext;
 	@Inject
 	private App app;
 
@@ -32,7 +36,12 @@ public class Slides {
 		if (doc == null) {
 			return "Page not found.";
 		}
-		return preprocessor.process(getPageName(), doc);
+		try {
+			return contentProcessor.process(doc,
+					ServletRequestInfo.create(page, servletContext));
+		} catch (ProcessingException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public String getPageName() {
