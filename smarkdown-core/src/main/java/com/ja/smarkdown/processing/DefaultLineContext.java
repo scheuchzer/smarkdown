@@ -88,6 +88,9 @@ public class DefaultLineContext implements LineContext {
 
 			@Override
 			public String apply(final String result, final MetaData md) {
+				if (result == null) {
+					return content;
+				}
 				return String.format("%s\n%s", content, result);
 			}
 		});
@@ -99,6 +102,9 @@ public class DefaultLineContext implements LineContext {
 
 			@Override
 			public String apply(final String result, final MetaData md) {
+				if (result == null) {
+					return content;
+				}
 				return String.format("%s\n%s", result, content);
 			}
 		});

@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -77,6 +78,11 @@
 			</dependency>
 			<dependency>
 				<groupId>com.java-adventures.smarkdown</groupId>
+				<artifactId>smarkdown-yuml</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.java-adventures.smarkdown</groupId>
 				<artifactId>smarkdown-war</artifactId>
 				<version>${project.version}</version>
 				<type>war</type>
@@ -92,6 +98,11 @@
 				<artifactId>smarkdown-war-jetty</artifactId>
 				<version>${project.version}</version>
 				<type>war</type>
+			</dependency>
+			<dependency>
+				<groupId>com.java-adventures.yuml</groupId>
+				<artifactId>yuml-remote-renderer</artifactId>
+				<version>0.1.0</version>
 			</dependency>
 			<dependency>
 				<groupId>javax.enterprise</groupId>
@@ -350,6 +361,7 @@
 		<module>smarkdown-location-file</module>
 		<module>smarkdown-location-http</module>
 		<module>smarkdown-jsf</module>
+		<module>smarkdown-yuml</module>
 		<module>smarkdown-war</module>
 	</modules>
 	<profiles>
