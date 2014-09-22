@@ -216,13 +216,13 @@ public class DefaultLineContextTest {
 		ctx.setCurrentOwner(processor);
 		processor.processLine(line, ctx);
 		List<Object> values = metaData.get("foo");
-		assertThat(values, is(nullValue()));
+		assertThat(values.isEmpty(), is(true));
 		ctx.applyActions();
 		values = metaData.get("foo");
 		assertThat(values.size(), is(2));
 		assertTrue(values.contains("bar"));
 		assertTrue(values.contains("tar"));
 		values = metaData.get("zar");
-		assertThat(values, is(nullValue()));
+		assertThat(values.isEmpty(), is(true));
 	}
 }
