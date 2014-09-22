@@ -7,10 +7,10 @@ code into images.
 
 Example:
 
-<pre><code>&#096;&#096;&#096;yuml
-[foo]^-[bar]
-[foo]^-[tar]
-&#096;&#096;&#096;</code></pre>
+	```yuml
+	[foo]^-[bar]
+	[foo]^-[tar]
+	```
 
 will be rendered as
 
@@ -36,10 +36,10 @@ Choose your Yuml style:
 
 Example:
 
-<pre><code>&#096;&#096;&#096;yuml
-## style=boring
-[foo]^-[bar]
-&#096;&#096;&#096;</code></pre>
+	```;yuml
+	## style=boring
+	[foo]^-[bar]
+	```
 
 ```yuml
 ## style=boring
@@ -58,14 +58,26 @@ Choose the layout direction:
 
 Example:
 
-<pre><code>&#096;&#096;&#096;yuml
-## direction=leftToRight
-## style=plain
-[foo{bg:orange}]^-[bar{bg:green}]
-&#096;&#096;&#096;</code></pre>
+	```yuml
+	## direction=leftToRight
+	## style=plain
+	[foo{bg:orange}]^-[bar{bg:green}]
+	```
 
 ```yuml
 ## direction=leftToRight
 ## style=plain
 [foo{bg:orange}]^-[bar{bg:green}]
+```
+
+
+### Maven
+
+Activate this extension by adding following dependency:
+
+```xml
+<dependency>
+    <groupId>com.java-adventures.smarkdown</groupId>
+    <artifactId>smarkdown-yuml</artifactId>
+</dependency>
 ```
