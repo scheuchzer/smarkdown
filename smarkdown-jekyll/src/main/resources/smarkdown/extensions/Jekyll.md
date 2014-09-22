@@ -19,7 +19,7 @@ The extensions reads the Jekyll config section that is located at the beginning 
 
 In the example above the attribute title will be inserted as title at the beginning of the Markdown document.
 The ``category`` will be rendered next to the title as a ``label``. The ``tags`` are rendered
-right below the title.
+right below the title. [See this example.](examples/Jekyll.md)
 
 
 ## Code highlighting
