@@ -5,6 +5,7 @@ The Jekyll extension enables propper rendering of [Jekyll](http://jekyllrb.com/)
 
 The extensions reads the Jekyll config section that is located at the beginning of a document
 
+
 ## Headers 
 
 	---
