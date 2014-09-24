@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.ja.smarkdown.processing.AbstractContentDataProcessor;
 import com.ja.smarkdown.processing.LineContext;
+import com.ja.yuml.render.remote.DiagramType;
 import com.ja.yuml.render.remote.Direction;
 import com.ja.yuml.render.remote.Style;
 import com.ja.yuml.render.remote.YumlRemoteRenderer;
@@ -20,9 +21,10 @@ public class YumlContentDataProcessor extends AbstractContentDataProcessor {
 
 	private Style style = Style.scruffy;
 	private Direction direction = Direction.topDown;
+	private DiagramType diagramType = null;
 	private List<String> errors = new ArrayList<>();
 
-	private StringBuilder yumlDsl=new StringBuilder();
+	private StringBuilder yumlDsl = new StringBuilder();
 
 	@Override
 	public void processLine(String line, LineContext ctx) {
@@ -32,8 +34,14 @@ public class YumlContentDataProcessor extends AbstractContentDataProcessor {
 		} else if (inProcessing && StringUtils.startsWith(line, "```")) {
 			inProcessing = false;
 			ctx.remove();
-			String url = new YumlRemoteRenderer().createUrl(yumlDsl.toString(),
-					style, direction);
+			String url = null;
+			if (diagramType == null) {
+				url = new YumlRemoteRenderer().createUrl(yumlDsl.toString(),
+						style, direction);
+			} else {
+				url = new YumlRemoteRenderer().createUrl(yumlDsl.toString(),
+						diagramType, style, direction);
+			}
 			ctx.insertAfter(String.format("<p><img src='%s'/></p>", url));
 			if (!errors.isEmpty()) {
 				StringBuilder html = new StringBuilder();
@@ -70,6 +78,14 @@ public class YumlContentDataProcessor extends AbstractContentDataProcessor {
 				case "direction":
 					direction = Direction.valueOf(keyValue[1]);
 					break;
+				case "type":
+					if ("usecase".equals(keyValue[1])) {
+						diagramType = DiagramType.useCaseDiagram;
+					} else {
+						diagramType = DiagramType.valueOf(keyValue[1]
+								+ "Diagram");
+					}
+					break;
 				default:
 					errors.add(String.format("Unknown yuml configuration [%s]",
 							keyValueString));
@@ -84,6 +100,7 @@ public class YumlContentDataProcessor extends AbstractContentDataProcessor {
 	private void reset() {
 		style = Style.scruffy;
 		direction = Direction.topDown;
+		diagramType = null;
 		errors = new ArrayList<>();
 		yumlDsl = new StringBuilder();
 	}

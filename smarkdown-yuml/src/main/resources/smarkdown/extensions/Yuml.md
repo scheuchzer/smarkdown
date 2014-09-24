@@ -20,6 +20,22 @@ will be rendered as
 ```
 
 
+[YUML](http://yuml.me) is able to render class, activity and usecase diagrams. 
+
+```yuml
+[Customer]1-0..*[Address]
+```
+
+```yuml
+(start)-><a>[kettle empty]->(Fill Kettle)->(Boil Kettle),<a>[kettle full]->(Boil Kettle)->(end)
+```
+
+```yuml
+[Customer]-(Login), [Customer]-(note: Cust can be registered or not{bg:beige})
+```
+
+
+
 ## Configuration
 
 Inside the code block some parameters can be configured. Use ``## key=value`` to configre these properties.
@@ -68,6 +84,28 @@ Example:
 ## direction=leftToRight
 ## style=plain
 [foo{bg:orange}]^-[bar{bg:green}]
+```
+
+
+### Type
+
+Smarkdown tries to detect the diagram type of the yuml code. If it doesn't render the diagram you expect you
+can provide a ``type`` hint.
+
+	```yuml
+	## type=usecase
+	[foo]
+	```
+
+```yuml
+## type=usecase
+[foo]
+```
+
+
+The same code without a type hin will render:
+```yuml
+[foo]
 ```
 
 
