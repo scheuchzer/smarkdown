@@ -9,7 +9,9 @@
 </h:head>
 <ui:insert name="pre-body"/>
 <h:body>
-	<h:outputStylesheet library="css" name="smarkdown.css" />
+	<ui:repeat var="os" value="${pageOutputStylesheets.stylesheets}">
+		<h:outputStylesheet library="${os.library}" name="${os.name}" />
+	</ui:repeat>
 	<div id="page">
 
 		<div id="header">

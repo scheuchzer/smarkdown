@@ -5,9 +5,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <body>
 	<ui:composition>
-
-		<script src="#{request.contextPath}/js/strapdown/0.2/strapdown.js"></script>
-
+		<ui:repeat var="s" value="${pageScripts.scripts.endOfBodyScripts}">
+			<script  src="${s.src}"></script>
+		</ui:repeat>
 	</ui:composition>
 </body>
 </html>
