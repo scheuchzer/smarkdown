@@ -6,8 +6,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
+
 </h:head>
-<ui:insert name="pre-body"/>
+<ui:insert name="pre-body" />
 <h:body>
 	<ui:repeat var="os" value="${pageOutputStylesheets.stylesheets}">
 		<h:outputStylesheet library="${os.library}" name="${os.name}" />

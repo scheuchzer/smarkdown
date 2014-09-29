@@ -11,6 +11,9 @@
 			<ui:repeat var="s" value="${pageScripts.scripts.headerScripts}">
 				<script src="${s.src}"></script>
 			</ui:repeat>
+			<ui:repeat var="s" value="${pageScripts.scripts.headerScriptsHosted}">
+				<h:outputScript library="${s.library}" name="${s.name}"></h:outputScript>
+			</ui:repeat>
 		</h:head>
 		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
