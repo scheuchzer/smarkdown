@@ -80,10 +80,11 @@ public class Raw extends HttpServlet {
 		final ResourceInfo resource = resourceLoader.loadResource(path);
 		if (resource != null) {
 			log.debug("Resource found.");
+			return resource.getInputStream();
 		} else {
 			log.debug("{} not found.", path);
+			return null;
 		}
-		return resource.getInputStream();
 	}
 
 }

@@ -105,6 +105,11 @@
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>com.java-adventures.smarkdown</groupId>
+				<artifactId>smarkdown-plantuml</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>com.java-adventures.yuml</groupId>
 				<artifactId>yuml-remote-renderer</artifactId>
 				<version>0.2.0</version>

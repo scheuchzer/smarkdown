@@ -13,7 +13,7 @@ public class OutputStylesheetEvent {
 
 	public void registerOutputStylesheet(String library, String name) {
 		final OutputStylesheet os = new OutputStylesheet(library, name);
-		log.info("Registering {}", os);
+		log.debug("Registering {}", os);
 		outputStylesheets.add(os);
 	}
 }

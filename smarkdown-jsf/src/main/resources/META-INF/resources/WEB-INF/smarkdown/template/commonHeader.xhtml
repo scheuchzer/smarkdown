@@ -7,13 +7,19 @@
 <body>
 	<ui:composition>
 		<h:head>
+			<ui:repeat var="os" value="#{pageOutputStylesheets.stylesheets}">
+				<!-- <h:outputStylesheet library="#{os.library}" name="#{os.name}" /> -->
+				<!-- <h:outputStylesheet library="css" name="smarkdown.css" /> -->
+			</ui:repeat>
 			<title><ui:insert name="window-title">#{app.config.applicationName}</ui:insert></title>
-			<ui:repeat var="s" value="${pageScripts.scripts.headerScripts}">
-				<script src="${s.src}"></script>
+			<ui:repeat var="s" value="#{pageScripts.scripts.headerScripts}">
+				<script src="#{s.src}"></script>
 			</ui:repeat>
-			<ui:repeat var="s" value="${pageScripts.scripts.headerScriptsHosted}">
-				<h:outputScript library="${s.library}" name="${s.name}"></h:outputScript>
+			<ui:repeat var="s" value="#{pageScripts.scripts.headerScriptsHosted}">
+				<h:outputScript library="#{s.library}" name="#{s.name}"
+					target="head"></h:outputScript>
 			</ui:repeat>
+			<h:outputStylesheet library="css" name="smarkdown.css" />
 		</h:head>
 		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">

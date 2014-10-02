@@ -6,12 +6,12 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <body>
 	<ui:composition>
-		<ui:repeat var="s" value="${pageScripts.scripts.endOfBodyScripts}">
-			<script src="${s.src}"></script>
+		<ui:repeat var="s" value="#{pageScripts.scripts.endOfBodyScripts}">
+			<script src="#{s.src}"></script>
 		</ui:repeat>
 		<ui:repeat var="s"
-			value="${pageScripts.scripts.endOfBodyScriptsHosted}">
-			<h:outputScript library="${s.library}" name="${s.name}" target="head"></h:outputScript>
+			value="#{pageScripts.scripts.endOfBodyScriptsHosted}">
+			<h:outputScript library="#{s.library}" name="#{s.name}"></h:outputScript>
 		</ui:repeat>
 	</ui:composition>
 </body>

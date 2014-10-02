@@ -17,7 +17,7 @@ public class SmarkdownConfigurationParserTest {
 	@Test
 	public void testRead() {
 		final StringReader in = new StringReader(
-				"{\"applicationName\":\"foobarApp\",\"slides\":{\"theme\":\"barTheme\"},\"locations\":[{\"url\":\"classpath:/\"},{\"url\":\"file:///\",\"config\":{\"mountPoint\":\"test\"}}]}");
+				"{\"applicationName\":\"foobarApp\",\"slides\":{\"theme\":\"barTheme\"},\"locations\":[{\"url\":\"classpath:/\"},{\"url\":\"file:///\",\"config\":{\"mountPoint\":\"test\"}}],\"extensions\":{\"foo\":\"bar\"}}");
 		final SmarkdownConfiguration config = new SmarkdownConfigurationParser()
 				.parse(in);
 		assertThat(config.getApplicationName(), is("foobarApp"));
@@ -38,6 +38,7 @@ public class SmarkdownConfigurationParserTest {
 		assertThat(loc.getUrl(), is("file:///"));
 		assertThat(loc.getConfig().isEmpty(), is(false));
 		assertThat(loc.getConfig().get("mountPoint"), is("test"));
+		assertThat(config.getExtensions().get("foo"), is("bar"));
 	}
 
 	@Test
@@ -53,7 +54,7 @@ public class SmarkdownConfigurationParserTest {
 		final Location loc2 = Location.create("file:///");
 		loc2.getConfig().put("mountPoint", "test");
 		config.getLocations().add(loc2);
-
+		config.getExtensions().put("foo", "bar");
 		parser.write(config, out);
 		final String result = out.toString();
 		System.out.println(result);

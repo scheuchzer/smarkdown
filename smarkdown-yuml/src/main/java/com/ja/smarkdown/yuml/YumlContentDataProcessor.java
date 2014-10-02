@@ -59,8 +59,9 @@ public class YumlContentDataProcessor extends AbstractContentDataProcessor {
 				String keyValueString = StringUtils.trim(StringUtils
 						.substringAfter(line, "##"));
 				readValue(keyValueString);
+			} else {
+				yumlDsl.append(line).append('\n');
 			}
-			yumlDsl.append(line).append('\n');
 			ctx.remove();
 		}
 	}

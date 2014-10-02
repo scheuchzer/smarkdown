@@ -17,6 +17,7 @@ public class PageOutputStylesheets {
 	public List<OutputStylesheet> getStylesheets() {
 		OutputStylesheetEvent event = new OutputStylesheetEvent();
 		events.fire(event);
+		System.out.println("####"+event.getOutputStylesheets());
 		return event.getOutputStylesheets();
 	}
 	

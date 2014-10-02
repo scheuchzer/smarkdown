@@ -2,6 +2,8 @@ package com.ja.smarkdown.model.config;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.enterprise.inject.Alternative;
 
@@ -22,5 +24,7 @@ public class SmarkdownConfiguration {
 	private Collection<Location> locations = new ArrayList<>();
 
 	private Collection<LocationHandler> locationHandlers = new ArrayList<>();
+	
+	private Map<String, String> extensions = new HashMap<String, String>();
 
 }
