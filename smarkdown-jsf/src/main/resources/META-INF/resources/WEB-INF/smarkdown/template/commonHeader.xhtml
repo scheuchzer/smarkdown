@@ -7,10 +7,6 @@
 <body>
 	<ui:composition>
 		<h:head>
-			<ui:repeat var="os" value="#{pageOutputStylesheets.stylesheets}">
-				<!-- <h:outputStylesheet library="#{os.library}" name="#{os.name}" /> -->
-				<!-- <h:outputStylesheet library="css" name="smarkdown.css" /> -->
-			</ui:repeat>
 			<title><ui:insert name="window-title">#{app.config.applicationName}</ui:insert></title>
 			<ui:repeat var="s" value="#{pageScripts.scripts.headerScripts}">
 				<script src="#{s.src}"></script>
