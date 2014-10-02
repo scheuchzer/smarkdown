@@ -373,6 +373,7 @@
 		<module>smarkdown-jsf</module>
 		<module>smarkdown-yuml</module>
 		<module>smarkdown-jekyll</module>
+		<module>smarkdown-plantuml</module>
 		<module>smarkdown-war</module>
 	</modules>
 	<profiles>
