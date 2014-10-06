@@ -124,7 +124,7 @@ public class ClasspathListingProvider extends AbstractListingProvider<Location> 
 		 * forWebInfLib and forWebInfClasses.
 		 */
 		if (servletContext != null && !servletContext.isUnsatisfied()) {
-			log.info("Including ServletContext urls.");
+			log.debug("Including ServletContext urls.");
 			classloaders.addAll(ClasspathHelper.forWebInfLib(servletContext
 					.get()));
 			classloaders.add(ClasspathHelper.forWebInfClasses(servletContext

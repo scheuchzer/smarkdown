@@ -29,7 +29,7 @@ public class ServletRequestInfo implements RequestInfo {
 		}
 		ServletRequestInfo pc = new ServletRequestInfo(path, directory,
 				servletContext.getContextPath(), servletContext);
-		log.info("ServletRequestInfo={}", pc);
+		log.debug("ServletRequestInfo={}", pc);
 		return pc;
 	}
 }

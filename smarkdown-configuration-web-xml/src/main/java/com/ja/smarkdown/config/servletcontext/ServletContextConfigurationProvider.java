@@ -26,7 +26,7 @@ public class ServletContextConfigurationProvider implements
 	public SmarkdownConfiguration getConfiguration() {
 		final String configString = servletContext
 				.getInitParameter(SMARKDOWN_CONFIGURATION);
-		log.info("Configuration from web.xml is: {}", configString);
+		log.debug("Configuration from web.xml is: {}", configString);
 
 		SmarkdownConfiguration config = null;
 		if (StringUtils.isEmpty(configString)) {

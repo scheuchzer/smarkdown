@@ -24,7 +24,7 @@ public class ContentInputStream extends InputStream {
 			if (c == prefixString.charAt(pos)) {
 				pos++;
 				if (pos >= prefixString.length()) {
-					log.info("Start of content reached.");
+					log.debug("Start of content reached.");
 					next = in.read();
 					return;
 				}

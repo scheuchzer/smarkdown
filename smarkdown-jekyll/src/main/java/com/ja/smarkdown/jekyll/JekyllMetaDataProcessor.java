@@ -44,7 +44,7 @@ public class JekyllMetaDataProcessor extends AbstractMetaDataProcessor {
 		if (key.isEmpty() && value.isEmpty()) {
 			return;
 		}
-		log.info("Property key={}, value={}", key, value);
+		log.debug("Property key={}, value={}", key, value);
 		String prefixedKey = String.format("jekyll.%s", key);
 		if (value.startsWith("[")) {
 			for (String v : value.split(",")) {

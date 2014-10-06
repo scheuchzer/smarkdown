@@ -36,7 +36,7 @@ public class PlantUmlContentDataProcessor extends AbstractContentDataProcessor {
 			inProcessing = false;
 			ctx.remove();
 
-			log.info("Processing plantUml={}", plantUml);
+			log.debug("Processing plantUml={}", plantUml);
 			String uml = StringUtils.trimToEmpty(plantUml.toString());
 			if (!uml.startsWith("@start")) {
 				plantUml.insert(0, "@startuml\n");

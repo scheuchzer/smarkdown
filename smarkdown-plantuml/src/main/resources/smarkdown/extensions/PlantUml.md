@@ -17,6 +17,7 @@ will be rendered as
 Bob->Alice : hello
 ```
 
+[more examples...](examples/PlantUml.md)
 
 [PlantUml](http://plantuml.sourceforge.net) is able to render [class](http://plantuml.sourceforge.net/classes.html), [activity](http://plantuml.sourceforge.net/activity2.html), [usecase](http://plantuml.sourceforge.net/usecase.html), [component](http://plantuml.sourceforge.net/component.html), [state](http://plantuml.sourceforge.net/state.html) and [object](http://plantuml.sourceforge.net/objects.html) diagrams and event [wireframes](http://plantuml.sourceforge.net/salt.html). PlantUml can produce different image formats and even Ascii-art is possible!
 
@@ -125,6 +126,19 @@ Activates or deactivates the fallback mode. Default is ``true``.
 The implementation of PlantUml only gives you feedback about the GraphViz capabilities through a rendered image. The first time it tries to access GraphViz a
 huge exception stack trace will be logged to your log file. Smarkdown can't prevent it from doing this because PlantUml simply uses ``e.printStacktrace()``.
 </div>
+
+
+#### GraphViz Check
+
+The following image shows if GraphViz is installed on your server.
+
+```plant
+@startuml
+testdot
+@enduml
+```
+
+If this image shows an error then the fallback server will be used for rendering if enabled.
 
 
 

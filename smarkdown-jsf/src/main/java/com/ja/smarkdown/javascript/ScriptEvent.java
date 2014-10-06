@@ -20,25 +20,25 @@ public class ScriptEvent {
 
 	public void registerHeaderScript(String library, String name) {
 		final Script script = new Script(library, name);
-		log.info("Register headerScript {}", script);
+		log.debug("Register headerScript {}", script);
 		headerScriptsHosted.add(script);
 	}
 
 	public void registerHeaderScript(String src) {
 		final Script script = new Script(src);
-		log.info("Register headerScript {}", script);
+		log.debug("Register headerScript {}", script);
 		headerScripts.add(script);
 	}
 
 	public void registerEndOfBodyScript(String library, String name) {
 		final Script script = new Script(library, name);
-		log.info("Register endOfBodyScript {}", script);
+		log.debug("Register endOfBodyScript {}", script);
 		endOfBodyScriptsHosted.add(script);
 	}
 
 	public void registerEndOfBodyScript(String src) {
 		final Script script = new Script(src);
-		log.info("Register endOfBodyScript {}", script);
+		log.debug("Register endOfBodyScript {}", script);
 		endOfBodyScripts.add(script);
 	}
 }
