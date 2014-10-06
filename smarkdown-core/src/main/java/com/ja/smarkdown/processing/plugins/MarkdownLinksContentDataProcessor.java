@@ -26,7 +26,7 @@ public class MarkdownLinksContentDataProcessor extends
 					"will replace content") {
 				public String apply(final String line, final MetaData md) {
 					if (line != null) {
-						log.info("Replacing .md with .html");
+						log.debug("Replacing .md with .html");
 						return StringUtils.replace(line, ".md", ".html");
 					}
 					return line;

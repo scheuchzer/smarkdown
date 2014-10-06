@@ -40,7 +40,7 @@ public class DefaultLineContext implements LineContext {
 		for (final Action action : actions) {
 			sb.append("- ").append(action).append("\n");
 		}
-		log.info("{}", sb);
+		log.debug("{}", sb);
 
 	}
 

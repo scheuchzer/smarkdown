@@ -42,7 +42,7 @@ public class ImageContentDataProcessor extends AbstractContentDataProcessor {
 					"will replace content") {
 				public String apply(final String line, final MetaData md) {
 					if (line != null) {
-						log.info("Replacing from={}, to={}", from, to);
+						log.debug("Replacing from={}, to={}", from, to);
 						return StringUtils.replace(line, from, to);
 					}
 					return line;

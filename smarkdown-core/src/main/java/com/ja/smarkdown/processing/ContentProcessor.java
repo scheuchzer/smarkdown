@@ -124,7 +124,7 @@ public class ContentProcessor {
 		while (iterator.hasNext()) {
 			processors.add(iterator.next());
 		}
-		log.info("Processor order is: {}", processors);
+		log.debug("Processor order is: {}", processors);
 		return processors;
 	}
 }

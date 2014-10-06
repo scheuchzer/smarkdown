@@ -21,7 +21,7 @@ public abstract class AbstractLocationHandlerConfigurator {
 		final Location location = event.getLocation();
 		if (location.getUrl().startsWith(prefix)) {
 			final LocationHandler handler = getHandler();
-			log.info("I might be able to handle this. {}", this);
+			log.debug("I might be able to handle this. {}", this);
 			handler.add(location);
 			event.setHandler(handler);
 		} else {
