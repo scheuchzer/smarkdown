@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.java-adventures.smarkdown</groupId>
 		<artifactId>smarkdown-parent</artifactId>
-		<version>0.6.1-SNAPSHOT</version>
+		<version>0.7.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<dependencies>
