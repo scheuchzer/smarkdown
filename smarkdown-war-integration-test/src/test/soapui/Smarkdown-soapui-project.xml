@@ -515,7 +515,7 @@
   <con:properties>
     <con:property>
       <con:name>smarkdown_url</con:name>
-      <con:value>http://localhost:8080/smarkdown</con:value>
+      <con:value>http://localhost:18080/smarkdown</con:value>
     </con:property>
   </con:properties>
   <con:wssContainer/>

@@ -6,7 +6,6 @@ import java.util.Arrays;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +20,6 @@ import net.sourceforge.plantuml.FileFormat;
 import net.sourceforge.plantuml.FileFormatOption;
 import net.sourceforge.plantuml.SourceStringReader;
 
-@WebServlet(urlPatterns = { "/raw/plantuml/svg/*" })
 @RequiredArgsConstructor
 @Slf4j
 public abstract class AbstractPlantUmlServlet extends HttpServlet {

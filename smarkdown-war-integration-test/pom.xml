@@ -40,12 +40,25 @@
 							<groupId>${project.groupId}</groupId>
 							<artifactId>smarkdown-war</artifactId>
 							<type>war</type>
-							<pingURL>http://localhost:8080/smarkdown/index.html</pingURL>
+							<pingURL>http://localhost:18080/smarkdown/index.html</pingURL>
 							<properties>
 								<context>smarkdown</context>
 							</properties>
 						</deployable>
 					</deployables>
+					<xmlReplacements>
+						<xmlReplacement>
+							<file>configuration/standalone.xml.xml</file>
+							<xpathExpression>//socket-binding[@name='http']</xpathExpression>
+							<value>18080</value>
+						</xmlReplacement>
+					</xmlReplacements>
+					<configuration>
+						<properties>
+							<cargo.servlet.port>18080</cargo.servlet.port>
+							<!--<cargo.logging>high</cargo.logging>-->
+						</properties>
+					</configuration>
 				</configuration>
 				<executions>
 					<execution>
@@ -186,9 +199,6 @@
 						<groupId>org.codehaus.cargo</groupId>
 						<artifactId>cargo-maven2-plugin</artifactId>
 						<configuration>
-							<properties>
-								<cargo.logging>high</cargo.logging>
-							</properties>
 							<container>
 								<containerId>tomcat7x</containerId>
 							</container>
@@ -197,7 +207,7 @@
 									<groupId>${project.groupId}</groupId>
 									<artifactId>smarkdown-war-tomcat</artifactId>
 									<type>war</type>
-									<pingURL>http://localhost:8080/smarkdown/index.html</pingURL>
+									<pingURL>http://localhost:18080/smarkdown/index.html</pingURL>
 									<properties>
 										<context>smarkdown</context>
 									</properties>
@@ -227,7 +237,7 @@
 									<groupId>${project.groupId}</groupId>
 									<artifactId>smarkdown-war-tomcat</artifactId>
 									<type>war</type>
-									<pingURL>http://localhost:8080/smarkdown/index.html</pingURL>
+									<pingURL>http://localhost:18080/smarkdown/index.html</pingURL>
 									<properties>
 										<context>smarkdown</context>
 									</properties>
