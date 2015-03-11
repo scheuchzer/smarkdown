@@ -19,7 +19,8 @@ After creating some files, go to the [Sitemap](../sitemap.xhtml) page the see th
 
 
 
-## web.xml
+## Configuration location
+### web.xml
 
 If needed, Smarkdown can be configured and customized through the ``context-param`` named 
 ``smarkdown.configuration``.
@@ -32,6 +33,20 @@ If needed, Smarkdown can be configured and customized through the ``context-para
 		<param-value>
 </context-param>
 ```
+
+Thist configuration lookup is provided by the project `smarkdown-configuration-web-xml` and is part of 
+the default war file.
+
+```xml
+<dependency>
+    <groupId>com.java-adventures.smarkdown</groupId>
+    <artifactId>smarkdown-configuration-web-xml</artifactId>
+</dependency>
+```
+
+### Other Configuration Locations
+
+- [Filesystem](configuration/filesystem.md)
 
 
 
@@ -53,7 +68,7 @@ If needed, Smarkdown can be configured and customized through the ``context-para
 		"transition":"default"
 	},
 	"locations":[
-		{"url":"file:///home/celli/smarkdown"},
+		{"url":"file:///home/user/smarkdown"},
 		{"url":"web-inf:smarkdown/md"},
 		{"url":"webapp:smarkdown/md"},
 		{"url":"classpath:"},

@@ -1,4 +1,4 @@
-package com.ja.smarkdown.config.servletcontext;
+package com.ja.smarkdown.model.config;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import com.ja.smarkdown.model.config.Location;
 import com.ja.smarkdown.model.config.SmarkdownConfiguration;
+import com.ja.smarkdown.model.config.SmarkdownConfigurationParser;
 
 public class SmarkdownConfigurationParserTest {
 

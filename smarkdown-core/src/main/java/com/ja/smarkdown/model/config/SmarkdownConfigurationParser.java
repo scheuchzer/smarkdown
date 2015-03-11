@@ -1,7 +1,6 @@
-package com.ja.smarkdown.config.servletcontext;
+package com.ja.smarkdown.model.config;
 
 import com.ja.smarkdown.json.AbstractParser;
-import com.ja.smarkdown.model.config.SmarkdownConfiguration;
 
 public class SmarkdownConfigurationParser extends
 		AbstractParser<SmarkdownConfiguration> {

@@ -1,10 +1,8 @@
-package com.ja.smarkdown.config.servletcontext;
+package com.ja.smarkdown.model.config;
 
 import static com.ja.smarkdown.model.config.Location.create;
 
 import javax.enterprise.inject.Alternative;
-
-import com.ja.smarkdown.model.config.SmarkdownConfiguration;
 
 @Alternative
 public class DefaultSmarkdownConfiguration extends SmarkdownConfiguration {

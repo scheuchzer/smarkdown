@@ -18,6 +18,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.ja.smarkdown.model.config.Location;
 import com.ja.smarkdown.model.config.SmarkdownConfiguration;
+import com.ja.smarkdown.model.config.SmarkdownConfigurationParser;
 
 import de.akquinet.jbosscc.needle.annotation.ObjectUnderTest;
 import de.akquinet.jbosscc.needle.junit.NeedleRule;

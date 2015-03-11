@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>smarkdown-configuration-filesystem</artifactId>
+	<name>Smarkdown - Configuration - Filesystem</name>
+	<description>
+		Reads Smarkdown configuration from the file system. Uses a default configuration if no specific configuration is defined.
+	</description>
+	<parent>
+		<groupId>com.java-adventures.smarkdown</groupId>
+		<artifactId>smarkdown-parent</artifactId>
+		<version>0.7.1-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.java-adventures.smarkdown</groupId>
+			<artifactId>smarkdown-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.akquinet.jbosscc</groupId>
+			<artifactId>jbosscc-needle</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+		</plugins>
+	</build>
+</project>

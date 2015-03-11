@@ -10,7 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import com.ja.smarkdown.config.ConfigurationProvider;
+import com.ja.smarkdown.model.config.DefaultSmarkdownConfiguration;
 import com.ja.smarkdown.model.config.SmarkdownConfiguration;
+import com.ja.smarkdown.model.config.SmarkdownConfigurationParser;
 
 @Slf4j
 public class ServletContextConfigurationProvider implements
