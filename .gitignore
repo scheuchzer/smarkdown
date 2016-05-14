@@ -9,3 +9,8 @@ release.properties
 .idea
 *.iml
 *.log
+pom.xml.versionsBackup
+smarkdown-location-http/pom.xml.versionsBackup
+smarkdown-plantuml/pom.xml.versionsBackup
+smarkdown-war-jetty/pom.xml.versionsBackup
+smarkdown-war-tomcat/pom.xml.versionsBackup
