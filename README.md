@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/scheuchzer/smarkdown.svg?branch=master)](https://travis-ci.org/scheuchzer/smarkdown)
+
 #smarkdown
 
 A simple JEE webapp that renders Markdown files as HTML or HTML slideshow.
